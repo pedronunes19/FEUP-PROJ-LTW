@@ -4,23 +4,23 @@ VALUES
     (2, "Restaurante 2"),
     (3, "Restaurante 3");
 
-INSERT INTO Menu (MenuId, Name, RestaurantId) 
+INSERT INTO Menu (MenuId, Name, Price, RestaurantId) 
 VALUES 
-    (1, "Menu 1", 1),
-    (2, "Menu 2", 1),
-    (3, "Menu 3", 1),
-    (4, "Menu 4", 2),
-    (5, "Menu 5", 2),
-    (6, "Menu 6", 2),
-    (7, "Menu 7", 3),
-    (8, "Menu 8", 3),
-    (9, "Menu 9", 3);
+    (1, "Menu 1", 1.00, 1),
+    (2, "Menu 2", 2.00, 1),
+    (3, "Menu 3", 3.00, 1),
+    (4, "Menu 4", 4.00, 2),
+    (5, "Menu 5", 5.00, 2),
+    (6, "Menu 6", 6.00, 2),
+    (7, "Menu 7", 7.00, 3),
+    (8, "Menu 8", 8.00, 3),
+    (9, "Menu 9", 9.00, 3);
 
-INSERT INTO Dish (DishId, Name, MenuId) 
+INSERT INTO Dish (DishId, Name, Price, MenuId) 
 VALUES 
-    (1, "Prato 1", 1),
-    (2, "Prato 2", 1),
-    (3, "Prato 3", 1);
+    (1, "Prato 1", 1.00, 1),
+    (2, "Prato 2", 2.00, 1),
+    (3, "Prato 3", 3.00, 1);
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Password) 
 VALUES 
@@ -33,7 +33,7 @@ VALUES
     (1, 1, 1),
     (2, 1, 1),
     (3, 1, 1);
-    
+
 INSERT INTO Review (ReviewId, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
     (1, "Review 1", 1, 1),
