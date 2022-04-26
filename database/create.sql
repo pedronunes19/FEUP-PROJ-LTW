@@ -13,7 +13,8 @@ DROP TABLE IF EXISTS Review;
 CREATE TABLE RestaurantOwner
 (
     OwnerId INTEGER NOT NULL,
-    Name NVARCHAR(100) NOT NULL,
+    FirstName NVARCHAR(100) NOT NULL,
+    LastName NVARCHAR(100) NOT NULL,
     Address NVARCHAR(100),
     PhoneNumber NVARCHAR(50),
     Password NVARCHAR(50) NOT NULL,
