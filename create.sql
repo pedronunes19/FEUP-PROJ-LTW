@@ -33,6 +33,7 @@ CREATE TABLE Menu
     MenuId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
+    Category NVARCHAR(100),
     RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_Menu PRIMARY KEY (MenuId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
@@ -43,6 +44,7 @@ CREATE TABLE Dish
     DishId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
+    Category NVARCHAR(100),
     MenuId INTEGER NOT NULL,
     CONSTRAINT PK_Dish PRIMARY KEY (DishId),
     FOREIGN KEY (MenuId) REFERENCES Menu (MenuId)
