@@ -11,7 +11,6 @@
     public string $postal_code;
     public string $phone;
     public string $email;
-    public int $restaurant;
 
     public function __construct(int $id, string $first_name, string $last_name, string $adress, string $city, string $country, string $postal_code, string $phone, string $email)
     {
