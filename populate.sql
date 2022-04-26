@@ -1,3 +1,9 @@
+INSERT INTO RestaurantOwner (OwnerId, Name, Password) 
+VALUES 
+    (1, "Owner 1", "Password 1" ),
+    (2, "Owner 2", "Password 2" ),
+    (3, "Owner 3", "Password 3" );
+
 INSERT INTO Restaurant (RestaurantId, Name) 
 VALUES 
     (1, "Restaurante 1"),
@@ -34,8 +40,8 @@ VALUES
     (2, 1, 1),
     (3, 1, 1);
 
-INSERT INTO Review (ReviewId, ReviewContent, CustomerId, RestaurantId) 
+INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
-    (1, "Review 1", 1, 1),
-    (2, "Review 2", 2, 1),
-    (3, "Review 3", 3, 1);
+    (1, "Review 1", 3, 1, 1),
+    (2, "Review 2", 5, 2, 1),
+    (3, "Review 3", 2, 3, 1);

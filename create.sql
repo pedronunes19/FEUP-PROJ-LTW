@@ -1,5 +1,6 @@
 /*SETUP*/
 
+DROP TABLE IF EXISTS RestaurantOwner;
 DROP TABLE IF EXISTS Restaurant;
 DROP TABLE IF EXISTS Menu;
 DROP TABLE IF EXISTS Dish;
@@ -8,6 +9,16 @@ DROP TABLE IF EXISTS OrderQueue;
 DROP TABLE IF EXISTS Review;
 
 /*CREATE*/
+
+CREATE TABLE RestaurantOwner
+(
+    OwnerId INTEGER NOT NULL,
+    Name NVARCHAR(100) NOT NULL,
+    Address NVARCHAR(100),
+    PhoneNumber NVARCHAR(50),
+    Password NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_RestaurantOwner PRIMARY KEY (RestaurantId)
+);
 
 CREATE TABLE Restaurant
 (
@@ -65,6 +76,7 @@ CREATE TABLE OrderQueue
 CREATE TABLE Review
 (
     ReviewId INTEGER NOT NULL,
+    ReviewScore INTEGER NOT NULL,
     ReviewContent NVARCHAR(200) NOT NULL,
     CustomerId INTEGER NOT NULL,
     RestaurantId INTEGER NOT NULL,
