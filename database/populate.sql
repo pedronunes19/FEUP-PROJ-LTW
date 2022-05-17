@@ -1,14 +1,18 @@
-INSERT INTO RestaurantOwner (OwnerId, Name, Email, Password) 
+INSERT INTO RestaurantOwner (OwnerId, FirstName, LastName, Email, Password) 
 VALUES 
     (1, "Owner"," 1", "email@email.com", "Password 1" ),
     (2, "Owner",  "2", "owner@owner.com", "Password 2" ),
     (3, "Owner", "3", "votae@votae.com", "Password 3" );
 
-INSERT INTO Restaurant (RestaurantId, Name) 
+INSERT INTO Restaurant (RestaurantId, Name, Address) 
 VALUES 
-    (1, "Restaurante 1"),
-    (2, "Restaurante 2"),
-    (3, "Restaurante 3");
+    (1, "Restaurante 1", "Add 1"),
+    (2, "Restaurante 2", "Add 2"),
+    (3, "Restaurante 3", "Add 3"),
+    (4, "Restaurante 4", "Add 4"),
+    (5, "Restaurante 5", "Add 5"),
+    (6, "Restaurante 6", "Add 6"),
+    (7, "Restaurante 7", "Add 7");
 
 INSERT INTO Menu (MenuId, Name, Price, RestaurantId) 
 VALUES 

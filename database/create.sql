@@ -19,14 +19,14 @@ CREATE TABLE RestaurantOwner
     PhoneNumber NVARCHAR(50),
     Email NVARCHAR(50) NOT NULL,
     Password NVARCHAR(50) NOT NULL,
-    CONSTRAINT PK_RestaurantOwner PRIMARY KEY (RestaurantId)
+    CONSTRAINT PK_RestaurantOwner PRIMARY KEY (OwnerId)
 );
 
 CREATE TABLE Restaurant
 (
     RestaurantId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
-    Address NVARCHAR(100),
+    Address NVARCHAR(100) NOT NULL,
     CONSTRAINT PK_Restaurant PRIMARY KEY (RestaurantId)
 );
 
