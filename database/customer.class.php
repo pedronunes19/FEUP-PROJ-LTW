@@ -5,7 +5,7 @@
     public int $id;
     public string $first_name;
     public string $last_name;
-    public string $adress;
+    public string $address;
     public string $city;
     public string $country;
     public string $postal_code;
@@ -17,12 +17,72 @@
       $this->id = $id;
       $this->first_name = $first_name;
       $this->last_name = $last_name;
-      $this->adress = $adress;
+      $this->address = $address;
       $this->city = $city;
       $this->country = $country;
       $this->postal_code = $postal_code;
       $this->phone = $phone;
       $this->email = $email;
+    }
+
+    function name() {
+      return $this->first_name . ' ' . $this->last_name;
+    }
+
+    function save($db) {
+      $stmt = $db->prepare('
+        UPDATE Customer SET FirstName = ?, LastName = ?, Address = ?, PhoneNumber = ?
+        WHERE CustomerId = ?
+      ');
+
+      $stmt->execute(array($this->first_name, $this->last_name, $this->address, $this->phone, $this->id));
+    }
+    
+    static function getCustomerWithPassword(PDO $db, string $email, string $password) : ?Customer {
+      $stmt = $db->prepare('
+        SELECT CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email
+        FROM Customer 
+        WHERE lower(Email) = ? AND Password = ?
+      ');
+
+      $stmt->execute(array(strtolower($email), sha1($password)));
+  
+      if ($customer = $stmt->fetch()) {
+        return new Customer(
+          $customer['CustomerId'],
+          $customer['FirstName'],
+          $customer['LastName'],
+          $customer['Address'],
+          $customer['City'],
+          $customer['Country'],
+          $customer['PostalCode'],
+          $customer['PhoneNumber'],
+          $customer['Email']
+        );
+      } else return null;
+    }
+
+    static function getCustomer(PDO $db, int $id) : Customer {
+      $stmt = $db->prepare('
+        SELECT CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email
+        FROM Customer 
+        WHERE CustomerId = ?
+      ');
+
+      $stmt->execute(array($id));
+      $customer = $stmt->fetch();
+      
+      return new Customer(
+        $customer['CustomerId'],
+        $customer['FirstName'],
+        $customer['LastName'],
+        $customer['Address'],
+        $customer['City'],
+        $customer['Country'],
+        $customer['PostalCode'],
+        $customer['PhoneNumber'],
+        $customer['Email']
+      );
     }
 
   

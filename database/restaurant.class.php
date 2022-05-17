@@ -4,13 +4,13 @@
   class Restaurant {
     public int $id;
     public string $name;
-    public string $adress;
+    public string $address;
 
     public function __construct(int $id, string $name, string $adress)
     {
       $this->id = $id;
       $this->name = $name;
-      $this->adress = $adress;
+      $this->adress = $address;
     }
 
   

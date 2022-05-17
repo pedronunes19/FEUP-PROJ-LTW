@@ -1,8 +1,8 @@
-INSERT INTO RestaurantOwner (OwnerId, Name, Password) 
+INSERT INTO RestaurantOwner (OwnerId, Name, Email, Password) 
 VALUES 
-    (1, "Owner"," 1", "Password 1" ),
-    (2, "Owner",  "2", "Password 2" ),
-    (3, "Owner", "3", "Password 3" );
+    (1, "Owner"," 1", "email@email.com", "Password 1" ),
+    (2, "Owner",  "2", "owner@owner.com", "Password 2" ),
+    (3, "Owner", "3", "votae@votae.com", "Password 3" );
 
 INSERT INTO Restaurant (RestaurantId, Name) 
 VALUES 

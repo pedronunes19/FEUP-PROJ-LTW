@@ -17,6 +17,7 @@ CREATE TABLE RestaurantOwner
     LastName NVARCHAR(100) NOT NULL,
     Address NVARCHAR(100),
     PhoneNumber NVARCHAR(50),
+    Email NVARCHAR(50) NOT NULL,
     Password NVARCHAR(50) NOT NULL,
     CONSTRAINT PK_RestaurantOwner PRIMARY KEY (RestaurantId)
 );
