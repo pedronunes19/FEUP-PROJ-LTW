@@ -35,5 +35,60 @@
       }
       return $restaurants;
     }
+
+    static function getRestaurant(PDO $db, int $id) : Restaurant {
+      $stmt = $db->prepare('
+        SELECT RestaurantId, Name, Address, Category 
+        FROM Restaurant WHERE RestaurantId = ?
+      ');
+      $stmt->execute(array($id));
+  
+      $restaurant = $stmt->fetch();
+  
+      return new Restaurant(
+        $restaurant['RestaurantId'], 
+        $restaurant['Name'],
+        $restaurant['Address'],
+        $restaurant['Category']
+      );
+    }
+
+    static function searchRestaurants(PDO $db, string $search, int $count) : array {
+      $stmt = $db->prepare('
+        SELECT RestaurantId, Name, Address, Category 
+        FROM Restaurant WHERE Name LIKE ? LIMIT ?
+      ');
+      $stmt->execute(array($search . '%', $count));
+  
+      $restaurants = array();
+      while ($restaurant = $stmt->fetch()) {
+        $restaurants[] = new Restaurant(
+          $restaurant['RestaurantId'], 
+          $restaurant['Name'],
+          $restaurant['Address'],
+          $restaurant['Category']
+        );
+      }
+  
+      return $restaurants;
+    }
+
+    static function averageScore(PDO $db): double{
+      int $count = 0;
+      double $total = 0.0;
+
+      $stmt = $db->prepare('
+        SELECT ReviewScore 
+        FROM Review WHERE RestaurantId = ?
+      ');
+      $stmt->execute(array($this->id));
+  
+      while ($score = $stmt->fetch()) {
+        $total += $score;
+        $count += 1;
+      }
+
+      return ($total/$count);
+    }
   }
 ?>
