@@ -5,12 +5,23 @@
     public int $id;
     public string $name;
     public string $address;
+    public string $category;
 
     public function __construct(int $id, string $name, string $address)
     {
       $this->id = $id;
       $this->name = $name;
-      $this->address = $address;
+      $this->adress = $address;
+      $this->category = $category;
+    }
+
+    function save($db) {
+      $stmt = $db->prepare('
+        UPDATE Restaurant SET Name = ?, Address = ?, Category = ?
+        WHERE RestaurantId = ?
+      ');
+
+      $stmt->execute(array($this->name, $this->address, $this->category, $this->id));
     }
 
     static function getRestaurants(PDO $db, int $size) : array {

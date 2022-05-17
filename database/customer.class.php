@@ -85,6 +85,45 @@
       );
     }
 
+    static function isFavorite(PDO $db, int $restaurant) : ?boolean {
+      $stmt = $db->prepare('
+        SELECT FavoriteCustomerRestaurantId
+        FROM FavoriteCustomerRestaurant 
+        WHERE CustomerId = ? AND RestaurantId = ?
+      ');
+
+      $stmt->execute(array($this->id, $restaurant));
   
+      if ($customer = $stmt->fetch()) {
+        return true;
+      }
+      
+      return false;
+
+    }
+
+    function favorite(PDO $db, int $restaurant) : {
+      $stmt = $db->prepare('
+        INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
+        VALUES ?, ?
+      ');
+
+      $stmt->execute(array($this->id, $restaurant));
+  
+
+    }
+
+    function unFavorite(PDO $db, int $restaurant) : {
+      $stmt = $db->prepare('
+        DELETE FROM FavoriteCustomerRestaurant
+        WHERE CustomerId = ?, RestaurantId = ?
+      ');
+
+      $stmt->execute(array($this->id, $restaurant));
+  
+
+    }
+
+
   }
 ?>

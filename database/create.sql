@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS Dish;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS OrderQueue;
 DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS FavoriteCustomerRestaurant;
 
 /*CREATE*/
 
@@ -26,7 +27,8 @@ CREATE TABLE Restaurant
 (
     RestaurantId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
-    Address NVARCHAR(100) NOT NULL,
+    Address NVARCHAR(100),
+    Category NVARCHAR(100),
     CONSTRAINT PK_Restaurant PRIMARY KEY (RestaurantId)
 );
 
@@ -88,3 +90,12 @@ CREATE TABLE Review
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );
+
+CREATE TABLE FavoriteCustomerRestaurant(
+    FavoriteCustomerRestaurantId INTEGER NOT NULL,
+    CustomerId INTEGER NOT NULL,
+    RestaurantId INTEGER NOT NULL,
+    CONSTRAINT PK_Favorite PRIMARY KEY (FavoriteCustomerRestaurantId),
+    FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
+    FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
+)
