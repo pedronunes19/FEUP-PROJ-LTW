@@ -3,13 +3,15 @@
     require_once('database/restaurant.class.php')
 ?>
 <?php function drawRestaurants(array $restaurants) { ?>
-    <h2>Restaurants</h2>
-    <section id="restaurants">
+    <h2>Which restaurant will you try today?</h2>
+    <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
-            <article>
-                <img src="https://picsum.photos/200?<?=$restaurant->id?>">
-                <a href="restaurant.php?id=<?=$restaurant->id?>"><?=$restaurant->name?></a>
-            </article>
+            <a href="restaurant.php?id=<?=$restaurant->id?>">
+                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" class="center">
+                <div class="middletext">
+                    <div class="label"><?=$restaurant->name?></div>
+                </div>
+            </a>
         <?php } ?>
     </section>
 <?php } ?>

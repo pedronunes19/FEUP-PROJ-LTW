@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
     <title>Take-away</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
@@ -27,8 +30,8 @@
 
 <?php function drawLogin() { ?>
     <form action="action_login.php" method="post" class="login">
-        <input type="text" name="username" placeholder="Your username here:">
-        <input type="password" name="password" placeholder="Your password here:">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
         <button type="submit">Login</button>
         <form>
             <button formaction="/">Register</button>
