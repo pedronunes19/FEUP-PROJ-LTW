@@ -85,7 +85,7 @@
       );
     }
 
-    static function isFavorite(PDO $db, int $restaurant) : ?boolean {
+    static function isFavoriteRestaurant(PDO $db, int $restaurant) : ?boolean {
       $stmt = $db->prepare('
         SELECT FavoriteCustomerRestaurantId
         FROM FavoriteCustomerRestaurant 
@@ -94,7 +94,7 @@
 
       $stmt->execute(array($this->id, $restaurant));
   
-      if ($customer = $stmt->fetch()) {
+      if ($favorite = $stmt->fetch()) {
         return true;
       }
       
@@ -102,7 +102,7 @@
 
     }
 
-    function favorite(PDO $db, int $restaurant) : {
+    function favoriteRestaurant(PDO $db, int $restaurant) : {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
         VALUES ?, ?
@@ -113,13 +113,52 @@
 
     }
 
-    function unFavorite(PDO $db, int $restaurant) : {
+    function unFavoriteRestaurant(PDO $db, int $restaurant) : {
       $stmt = $db->prepare('
         DELETE FROM FavoriteCustomerRestaurant
         WHERE CustomerId = ?, RestaurantId = ?
       ');
 
       $stmt->execute(array($this->id, $restaurant));
+  
+
+    }
+
+    static function isFavoriteDish(PDO $db, int $dish) : ?boolean {
+      $stmt = $db->prepare('
+        SELECT FavoriteCustomerDishId
+        FROM FavoriteCustomerDish
+        WHERE CustomerId = ? AND DishId = ?
+      ');
+
+      $stmt->execute(array($this->id, $dish));
+  
+      if ($favorite = $stmt->fetch()) {
+        return true;
+      }
+      
+      return false;
+
+    }
+
+    function favoriteDish(PDO $db, int $dish) : {
+      $stmt = $db->prepare('
+        INSERT INTO FavoriteCustomerDish (CustomerId, DishId)
+        VALUES ?, ?
+      ');
+
+      $stmt->execute(array($this->id, $dish));
+  
+
+    }
+
+    function unFavoriteDish(PDO $db, int $dish) : {
+      $stmt = $db->prepare('
+        DELETE FROM FavoriteCustomerDish
+        WHERE CustomerId = ?, DishId = ?
+      ');
+
+      $stmt->execute(array($this->id, $dish));
   
 
     }
