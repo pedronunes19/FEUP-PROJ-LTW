@@ -29,8 +29,20 @@
       return $menus;
     }
 
+    static function getRestaurantMenus(PDO $db, int $restaurant) : array {
+      $stmt = $db->prepare('SELECT MenuId, Name, Price, Category, RestaurantId FROM Menu WHERE RestaurantId = ?');
+      $stmt-> execute(array($restaurant));
 
-    static function getMenuDishes(PDO $db): array{
+      $menus = array();
+      while ($menu = $stmt->fetch()) {
+        $menus[] = new Menu($menu['MenuId'], $menu['Name'], $menu['Price'], $menu['Category'], $menu['RestaurantId']);
+
+      }
+      return $menus;
+    }
+
+
+    function getMenuDishes(PDO $db): array{
       $stmt = $db->prepare('SELECT DishId, Name, Price, Category, RestaurantId FROM MenuDish, Dish WHERE MenuDish.MenuId = ? and Dish.DishId = MenuDish.DishId');
       $stmt-> execute(array($this->id));
 

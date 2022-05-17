@@ -85,7 +85,7 @@
       );
     }
 
-    static function isFavoriteRestaurant(PDO $db, int $restaurant) : ?boolean {
+    function isFavoriteRestaurant(PDO $db, int $restaurant) : ?boolean {
       $stmt = $db->prepare('
         SELECT FavoriteCustomerRestaurantId
         FROM FavoriteCustomerRestaurant 
@@ -124,7 +124,7 @@
 
     }
 
-    static function isFavoriteDish(PDO $db, int $dish) : ?boolean {
+    function isFavoriteDish(PDO $db, int $dish) : ?boolean {
       $stmt = $db->prepare('
         SELECT FavoriteCustomerDishId
         FROM FavoriteCustomerDish

@@ -73,7 +73,7 @@
       return $restaurants;
     }
 
-    static function averageScore(PDO $db): double{
+    function averageScore(PDO $db): double{
       int $count = 0;
       double $total = 0.0;
 

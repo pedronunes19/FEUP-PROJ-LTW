@@ -29,6 +29,18 @@
       return $dishes;
     }
 
+    static function getRestaurantDishes(PDO $db, int $restaurant) : array {
+      $stmt = $db->prepare('SELECT DishId, Name, Price, Category, RestaurantId FROM Dish WHERE RestaurantId = ?');
+      $stmt-> execute(array($restaurant));
+
+      $dishes = array();
+      while ($dish = $stmt->fetch()) {
+        $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['Category'], $dish['RestaurantId']);
+
+      }
+      return $dishes;
+    }
+
   
   }
 ?>
