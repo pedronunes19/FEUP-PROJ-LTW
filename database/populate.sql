@@ -42,6 +42,6 @@ VALUES
 
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
-    (1, "Review 1", 3, 1, 1),
-    (2, "Review 2", 5, 2, 1),
-    (3, "Review 3", 2, 3, 1);
+    (1, 3, "Review 1", 1, 1),
+    (2, 5, "Review 2", 2, 1),
+    (3, 2, "Review 3", 3, 1);
