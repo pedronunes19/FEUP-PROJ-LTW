@@ -51,7 +51,9 @@ CREATE TABLE Dish
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
     Category NVARCHAR(100),
+    RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_Dish PRIMARY KEY (DishId),
+    FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );
 
 CREATE TABLE Customer

@@ -17,18 +17,32 @@
       $this->restaurant = $restaurant;
     }
 
+    static function getMenus(PDO $db, int $size) : array {
+      $stmt = $db->prepare('SELECT MenuId, Name, Price, Category, RestaurantId FROM Menu LIMIT ?');
+      $stmt-> execute(array($size));
+
+      $menus = array();
+      while ($menu = $stmt->fetch()) {
+        $menus[] = new Menu($menu['MenuId'], $menu['Name'], $menu['Price'], $menu['Category'], $menu['RestaurantId']);
+
+      }
+      return $menus;
+    }
+
 
     static function getMenuDishes(PDO $db): array{
-      $stmt = $db->prepare('SELECT DishId, Name, Price, Category FROM MenuDish, Dish WHERE MenuDish.MenuId = ? and Dish.DishId = MenuDish.DishId');
+      $stmt = $db->prepare('SELECT DishId, Name, Price, Category, RestaurantId FROM MenuDish, Dish WHERE MenuDish.MenuId = ? and Dish.DishId = MenuDish.DishId');
       $stmt-> execute(array($this->id));
 
       $dishes = array();
       while ($dish = $stmt->fetch()) {
-        $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['Category']);
+        $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['Category'], $dish['RestaurantId']);
 
       }
       return $dishes;
     }
+
+
 
   
   }
