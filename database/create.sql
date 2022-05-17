@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS OrderQueue;
 DROP TABLE IF EXISTS Review;
 DROP TABLE IF EXISTS FavoriteCustomerRestaurant;
 DROP TABLE IF EXISTS FavoriteCustomerDish;
+DROP TABLE IF EXISTS MenuDish;
 
 /*CREATE*/
 
@@ -50,9 +51,7 @@ CREATE TABLE Dish
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
     Category NVARCHAR(100),
-    MenuId INTEGER NOT NULL,
     CONSTRAINT PK_Dish PRIMARY KEY (DishId),
-    FOREIGN KEY (MenuId) REFERENCES Menu (MenuId)
 );
 
 CREATE TABLE Customer
@@ -109,5 +108,14 @@ CREATE TABLE FavoriteCustomerDish(
     DishId INTEGER NOT NULL,
     CONSTRAINT PK_FavoriteDish PRIMARY KEY (FavoriteCustomerDishId),
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
+    FOREIGN KEY (DishId) REFERENCES Dish (DishId)
+)
+
+CREATE TABLE MenuDish(
+    MenuDishId INTEGER NOT NULL,
+    MenuId INTEGER NOT NULL,
+    DishId INTEGER NOT NULL,
+    CONSTRAINT PK_MenuDish PRIMARY KEY (MenuDishId),
+    FOREIGN KEY (MenuId) REFERENCES Customer (MenuId),
     FOREIGN KEY (DishId) REFERENCES Dish (DishId)
 )

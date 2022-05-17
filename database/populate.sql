@@ -26,11 +26,11 @@ VALUES
     (8, "Menu 8", 8.00, 3),
     (9, "Menu 9", 9.00, 3);
 
-INSERT INTO Dish (DishId, Name, Price, MenuId) 
+INSERT INTO Dish (DishId, Name, Price) 
 VALUES 
-    (1, "Prato 1", 1.00, 1),
-    (2, "Prato 2", 2.00, 1),
-    (3, "Prato 3", 3.00, 1);
+    (1, "Prato 1", 1.00),
+    (2, "Prato 2", 2.00),
+    (3, "Prato 3", 3.00);
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Password) 
 VALUES 

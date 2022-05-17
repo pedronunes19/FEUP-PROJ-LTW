@@ -6,7 +6,6 @@
     public string $name;
     public double $price;
     public string $category;
-    public int $menu;
 
     public function __construct(int $id, string $name, double $price, string $category, int $menu)
     {
@@ -14,7 +13,6 @@
       $this->name = $name;
       $this->price = $price;
       $this->category = $category;
-      $this->menu = $menu;
     }
 
   
