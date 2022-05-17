@@ -38,11 +38,11 @@ VALUES
     (2, "Cliente", "2", "Email 2", "Password 2"),
     (3, "Cliente", "3", "Email 3", "Password 3");
 
-INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId) 
+INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status) 
 VALUES 
-    (1, 1, 1),
-    (2, 1, 1),
-    (3, 1, 1);
+    (1, 1, 1, "Received"),
+    (2, 1, 1, "Received"),
+    (3, 1, 1, "Received");
 
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
