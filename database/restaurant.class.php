@@ -33,7 +33,7 @@
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant(intval($restaurant['RestaurantId']), $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
       }
       return $restaurants;
     }
