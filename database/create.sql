@@ -95,29 +95,32 @@ CREATE TABLE Review
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );
 
-CREATE TABLE FavoriteCustomerRestaurant(
+CREATE TABLE FavoriteCustomerRestaurant
+(
     FavoriteCustomerRestaurantId INTEGER NOT NULL,
     CustomerId INTEGER NOT NULL,
     RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_FavoriteRes PRIMARY KEY (FavoriteCustomerRestaurantId),
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
-)
+);
 
-CREATE TABLE FavoriteCustomerDish(
+CREATE TABLE FavoriteCustomerDish
+(
     FavoriteCustomerDishId INTEGER NOT NULL,
     CustomerId INTEGER NOT NULL,
     DishId INTEGER NOT NULL,
     CONSTRAINT PK_FavoriteDish PRIMARY KEY (FavoriteCustomerDishId),
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
     FOREIGN KEY (DishId) REFERENCES Dish (DishId)
-)
+);
 
-CREATE TABLE MenuDish(
+CREATE TABLE MenuDish
+(
     MenuDishId INTEGER NOT NULL,
     MenuId INTEGER NOT NULL,
     DishId INTEGER NOT NULL,
     CONSTRAINT PK_MenuDish PRIMARY KEY (MenuDishId),
     FOREIGN KEY (MenuId) REFERENCES Customer (MenuId),
     FOREIGN KEY (DishId) REFERENCES Dish (DishId)
-)
+);

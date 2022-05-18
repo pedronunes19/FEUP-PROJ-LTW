@@ -12,8 +12,14 @@ VALUES
     (4, "Restaurante 4", "Add 4"),
     (5, "Restaurante 5", "Add 5"),
     (6, "Restaurante 6", "Add 6"),
-    (7, "Restaurante 7", "Add 7");
-
+    (7, "Restaurante 7", "Add 7"),
+    (8, "Restaurante 8", "Add 8"),
+    (9, "Restaurante 9", "Add 9"),
+    (10, "Restaurante 10", "Add 10"),
+    (11, "Restaurante 11", "Add 11"),
+    (12, "Restaurante 12", "Add 12"),
+    (13, "Restaurante 13", "Add 13"),
+    (14, "Restaurante 14", "Add 14");
 INSERT INTO Menu (MenuId, Name, Price, RestaurantId) 
 VALUES 
     (1, "Menu 1", 1.00, 1),

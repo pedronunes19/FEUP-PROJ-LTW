@@ -7,8 +7,11 @@
     public string $address;
     public string $category;
 
-    public function __construct(int $id, string $name, string $address)
+    public function __construct(int $id, string $name, string $address, $category)
     {
+      if (!is_string($category)) {
+        $category = 'Unspecified';
+      }
       $this->id = $id;
       $this->name = $name;
       $this->adress = $address;
@@ -30,8 +33,7 @@
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address']);
-
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
       }
       return $restaurants;
     }
@@ -73,9 +75,9 @@
       return $restaurants;
     }
 
-    function averageScore(PDO $db): double{
-      int $count = 0;
-      double $total = 0.0;
+    function averageScore(PDO $db): double {
+      $count = 0;
+      $total = 0.0;
 
       $stmt = $db->prepare('
         SELECT ReviewScore 
