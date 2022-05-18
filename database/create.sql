@@ -76,7 +76,7 @@ CREATE TABLE OrderQueue
     OrderId INTEGER NOT NULL,
     CustomerId INTEGER NOT NULL,
     RestaurantId INTEGER NOT NULL,
-    Status NVARCHAR(50) NOT NULL,
+    Status NVARCHAR(50) NOT NULL DEFAULT "Received",
     CONSTRAINT PK_Order PRIMARY KEY (OrderId),
     CONSTRAINT OrderStatus CHECK(Status = "Received" or Status = "Preparing" or Status = "Ready" or Status = "Delivered"),
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),

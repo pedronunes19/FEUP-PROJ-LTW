@@ -8,11 +8,11 @@
 
     $db = getDatabaseConnection();
 
-    $restaurants = Restaurant::getRestaurants($db, 14);
-
-    $menus = Menu::getMenus($db, 14);
+    $restaurant = Restaurant::getRestaurant($db, intval($_GET['id']));
+    $menus = Menu::getRestaurantMenus($db, intval($_GET['id']));
+    $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));
 
     drawHeader();
-    drawRestaurants($restaurants);
+    drawRestaurant($restaurant, $menus, $dishes);
     drawFooter();
 ?>

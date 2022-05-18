@@ -4,11 +4,11 @@
   class Menu {
     public int $id;
     public string $name;
-    public double $price;
+    public float $price;
     public string $category;
     public int $restaurant;
 
-    public function __construct(int $id, string $name, double $price, string $category, int $restaurant)
+    public function __construct(int $id, string $name, float $price, $category, int $restaurant)
     {
       if (!is_string($category)) {
         $category = 'Unspecified';

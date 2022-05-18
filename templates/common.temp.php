@@ -23,7 +23,7 @@
     </main>
     <footer>
         <p class="left">Amazing take-away website for LTW, 2022</p>
-        <p class="right">All rights reserved</p>
+        <p class="right">All rights reserved &copy</p>
     </footer>
   </body>
 </html>
