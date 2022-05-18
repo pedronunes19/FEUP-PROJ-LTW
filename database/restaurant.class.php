@@ -28,12 +28,12 @@
     }
 
     static function getRestaurants(PDO $db, int $size) : array {
-      $stmt = $db->prepare('SELECT RestaurantId, Name, Address FROM Restaurant LIMIT ?');
+      $stmt = $db->prepare('SELECT RestaurantId, Name, Address, Category FROM Restaurant LIMIT ?');
       $stmt-> execute(array($size));
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
+        $restaurants[] = new Restaurant(intval($restaurant['RestaurantId']), $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
       }
       return $restaurants;
     }
