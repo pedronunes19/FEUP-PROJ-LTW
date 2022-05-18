@@ -78,7 +78,7 @@ CREATE TABLE OrderQueue
     RestaurantId INTEGER NOT NULL,
     Status NVARCHAR(50) NOT NULL,
     CONSTRAINT PK_Order PRIMARY KEY (OrderId),
-    CONSTRAINT OrderStatus CHECK(Status = "Received" or Status = "Preparing" or Status = "Ready" or Status = "Delivered" or Status = "Unspecified"),
+    CONSTRAINT OrderStatus CHECK(Status = "Received" or Status = "Preparing" or Status = "Ready" or Status = "Delivered"),
     FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );

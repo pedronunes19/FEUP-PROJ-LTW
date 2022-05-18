@@ -10,6 +10,9 @@
 
     public function __construct(int $id, string $name, double $price, string $category, int $restaurant)
     {
+      if (!is_string($category)) {
+        $category = 'Unspecified';
+      }
       $this->id = $id;
       $this->name = $name;
       $this->price = $price;

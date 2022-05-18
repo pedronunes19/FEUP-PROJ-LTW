@@ -75,7 +75,7 @@
       return $restaurants;
     }
 
-    function averageScore(PDO $db): double {
+    function averageScore(PDO $db): float {
       $count = 0;
       $total = 0.0;
 

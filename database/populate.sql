@@ -48,7 +48,13 @@ INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status)
 VALUES 
     (1, 1, 1, "Received"),
     (2, 1, 1, "Received"),
-    (3, 1, 1, "Received");
+    (3, 1, 1, "Received"),
+    (4, 1, 5, "Received"),
+    (5, 2, 5, "Received"),
+    (6, 1, 5, "Received"),
+    (7, 1, 5, "Received"),
+    (8, 3, 5, "Received"),
+    (9, 3, 5, "Received");
 
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
