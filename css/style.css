@@ -1,10 +1,14 @@
-  * {
+  html {
     --main-color: #990f0f;
     --header-color: #ce1515;
     --text-color: #ffffff;
     --accent-color: #eecaca;
     --box-color: #000000;
     font-family: 'Nunito', sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
   
   ::-webkit-scrollbar {
@@ -37,15 +41,20 @@
 
   body {
     overflow: overlay;
-    margin: 0em auto;
+    margin: 0;
+    padding: 0;
     background-color: var(--main-color);
     font-weight: 400;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   body > header {
     position: sticky;
     z-index: 1;
-    top: 0em;
+    top: 0;
     display: flex;
     padding-left: 2em;
     padding-right: 2em;
@@ -64,20 +73,12 @@
     text-shadow:4px 3px var(--box-color);
   }
   
-  body > header form.login {
-    display: grid;
-    grid-template-columns: 7em 7em;
-    gap: 0.5em;
-  }
-  
-  body > header form.login input {
-    grid-column-end: span 2;
-  }
-  
   main {
+    flex: 1 0 auto;
     margin-left: 2em;
     margin-right: 2em;
     padding: 0em;
+    padding-bottom: 2em;
   }
 
   .sub-header {
@@ -102,6 +103,7 @@
 
   #restaurant-image-blocks {
     position: relative;
+    border-radius: 1em;
   }
 
   .restaurants img.center {
@@ -109,6 +111,7 @@
     width: 100%;
     height: auto;
     transition: .3s ease;
+    border-radius: 1em;
   }
 
   .restaurants .middle-text {
@@ -129,6 +132,7 @@
   .restaurants a:hover img.center {
     -webkit-filter: blur(0.2em);
     filter: blur(0.2em);
+    transform: scale(101%)
   }
 
   .restaurants .label {
@@ -141,16 +145,19 @@
   }
 
   footer {
+    bottom: 0;
+    margin-top: auto;
     display: flex;
+    flex-shrink: 0;
     background-color: var(--box-color);
-    padding: 0.5em;
     color: white;
   }
 
   footer p.left {
-    
+    flex-grow: 1;
+    padding-left: 2em;
   }
 
   footer p.right {
-
+    padding-right: 2em;
   }

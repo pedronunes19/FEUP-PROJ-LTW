@@ -3,7 +3,9 @@
 
     require_once('../templates/common.temp.php');
     require_once('../database/connection.db.php');
-    
-    drawHeader();
+
+?>
+
+<?php
     drawFooter();
 ?>
