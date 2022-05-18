@@ -1,6 +1,6 @@
 <?php 
     declare(strict_types = 1);
-    require_once('database/restaurant.class.php')
+    require_once('../database/restaurant.class.php')
 ?>
 <?php function drawRestaurants(array $restaurants) { ?>
     <h2 class="sub-header">Which restaurant will you try today?</h2>

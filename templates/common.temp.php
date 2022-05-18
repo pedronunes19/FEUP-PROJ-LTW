@@ -6,14 +6,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/eee7326786.js" crossorigin="anonymous"></script>
     <title>Take-away</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     <header>
-        <h1><a href="/">TAKE-AWAY</a></h1>
-        <?php drawLogin(); ?>
+        <h1><a class="no-select" href=".">TAKE-AWAY</a></h1>
+        <?php drawButtonsNoLogin(); ?>
     </header>
     <main>
 <?php } ?>
@@ -28,13 +29,8 @@
 </html>
 <?php } ?>
 
-<?php function drawLogin() { ?>
-    <form action="action_login.php" method="post" class="login">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <button type="submit">Login</button>
-        <form>
-            <button formaction="/">Register</button>
-        </form>
-    </form>
+<?php function drawButtonsNoLogin() { ?>
+    <a class="icon" href="/pages/login.php">
+        <i class="fa-solid fa-right-to-bracket"></i>
+    </a>
 <?php } ?>
