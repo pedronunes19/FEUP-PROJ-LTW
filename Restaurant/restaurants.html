@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang ="en-US">
+    <head>
+        <title>Restaurants</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="restaurants_style.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1><b>Takeaway</b> </h1>
+            <h2>Restaurants</h2>
+            <div class="topnav">
+                <a class="active" href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <div class="search-container">
+                  <form action="restaurants.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                  </form>
+                </div>
+            </div>
+            
+            
+        </header>
+        <h3>Discover where we are!</h3>
+        <section id = "suggestions" >
+          <h2 class = "title">
+            Sugestões
+          </h2>
+          <div class = "slideshow-container">
+            <div class = "slide-fading">
+              <div class = "number-text">1/5</div>
+              <img src="https://picsum.photos/200" style = "width: 100%;">
+              <div class = "img-text">
+                Restaurant's Name
+              </div>
+            </div>
+            <div class = "slide-fading">
+              <div class = "number-text">2/5</div>
+              <img src = "https://www.clubeparacachorros.com.br/wp-content/uploads/2018/07/cachorros-mais-fofos-do-mundo-lulu-da-pomerania-filhote.jpg" style="width:100% ;">
+              <div class = "img-text">
+                Restaurant's Name
+              </div>
+            </div>
+            <div class = "slide-fading">
+              <div class = "number-text">3/5</div>
+              <img src = "https://picsum.photos/200" style="width:100% ;">
+              <div class = "img-text">
+                Restaurant's Name
+              </div>
+            </div>
+            <div class = "slide-fading">
+              <div class = "number-text">4/5</div>
+              <img src = "https://picsum.photos/200" style="width:100% ;">
+              <div class = "img-text">
+                Restaurant's Name
+              </div>
+            </div>
+            <div class = "slide-fading">
+              <div class = "number-text">5/5</div>
+              <img src = "https://picsum.photos/200" style="width:100% ;">
+              <div class = "img-text">
+                Restaurant's Name
+              </div>
+            </div>
+            <a class = "prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class = "next" onclick="plusSlides(1)">&#10095;</a>
+          </div>
+          <br>
+          
+          <div style="text-align:center">
+            <span class = "dot" onclick="currentSlide(1)"></span>
+            <span class = "dot" onclick="currentSlide(2)"></span>
+            <span class = "dot" onclick="currentSlide(3)"></span>
+            <span class = "dot" onclick="currentSlide(4)"></span>
+            <span class = "dot" onclick="currentSlide(5)"></span>
+
+          </div>
+          <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            function plusSlides(n){
+                showSlides(slideIndex += n);
+            }
+            function currentSlide(n){
+                showSlides(slideIndex = n);
+            }
+            function showSlides(n){
+                let i;
+                let slides = document.getElementsByClassName("slide-fading");
+                let dots = document.getElementsByClassName("dot");
+                if(n > slides.length) {slideIndex = 1}
+                if(n < 1) {slideIndex = slides.length}
+                for( i = 0;i<slides.length;i++){
+                    slides[i].style.display = "none";
+                }
+                for (i = 0; i < dots.length;i++){
+                    dots[i].className = dots[i].className.replace(" active","");
+                }
+                slides[slideIndex-1].style.display = "block";
+                dots[slideIndex-1].className += " active";
+            }</script>
+        </section>
+        <section id = "nearby restaurants">
+          <div class = "container">
+            <h2 class = "nr name">
+                Nearby Restaurants
+            </h2>
+          </div>
+
+        </section>
+        
+    </body>
+
+</html>
