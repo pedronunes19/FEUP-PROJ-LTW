@@ -18,17 +18,13 @@
     </section>
 <?php } ?>
 
-<?php function drawRestaurant(Restaurant $restaurant, array $menus, array $dishes) { ?>
+<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes) { ?>
   <h2><?=$restaurant->name?></h2>
   <section id="menus">
     <h2>MENUS</h2>
-    <?php foreach ($menus as $menu) { ?>
-    <article>
-      <img src="https://picsum.photos/200/250?<?=$menu->id?>">
-      <p class="name"><?=$menu->name?></p>
-      <p class="info"><?=$menu->price?> € <?php if ($menu->category !== "Unspecified") {echo "/" . $menu->category;} ?></p>
-    </article>
-    <?php } ?>
+    <?php foreach ($menus as $menu) { 
+      drawMenu($db, $menu);
+    } ?>
   </section>
   <section id="dishes">
     <h2>DISHES</h2>
@@ -40,4 +36,13 @@
     </article>
     <?php } ?>
   </section>
+<?php } ?>
+
+<?php function drawMenu(PDO $db, Menu $menu) { 
+  $menu_dishes = $menu->getMenuDishes($db) ?>
+    <article>
+      <img src="https://picsum.photos/200/250?<?=$menu->id?>">
+      <p class="name"><?=$menu->name?> - <?php foreach ($menu_dishes as $dish){echo $dish->name . " / "; }?></p>
+      <p class="info"><?=$menu->price?> € <?php if ($menu->category !== "Unspecified") {echo "/" . $menu->category;} ?></p>
+    </article>
 <?php } ?>

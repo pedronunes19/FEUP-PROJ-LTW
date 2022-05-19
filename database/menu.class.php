@@ -46,7 +46,7 @@
 
 
     function getMenuDishes(PDO $db): array{
-      $stmt = $db->prepare('SELECT DishId, Name, Price, Category, RestaurantId FROM MenuDish, Dish WHERE MenuDish.MenuId = ? and Dish.DishId = MenuDish.DishId');
+      $stmt = $db->prepare('SELECT Dish.DishId, Name, Price, Category, RestaurantId FROM MenuDish, Dish WHERE MenuDish.MenuId = ? and Dish.DishId = MenuDish.DishId');
       $stmt-> execute(array($this->id));
 
       $dishes = array();

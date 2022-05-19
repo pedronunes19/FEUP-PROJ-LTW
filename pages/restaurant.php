@@ -13,6 +13,6 @@
     $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));
 
     drawHeader();
-    drawRestaurant($restaurant, $menus, $dishes);
+    drawRestaurant($db, $restaurant, $menus, $dishes);
     drawFooter();
 ?>
