@@ -13,7 +13,7 @@
 </head>
 <body>
     <header>
-        <h1><a class="no-select" href=".">TAKE-AWAY</a></h1>
+        <h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
         <?php drawButtonsNoLogin(); ?>
     </header>
     <main>

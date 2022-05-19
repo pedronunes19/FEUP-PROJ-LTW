@@ -1,0 +1,56 @@
+#login-form {
+    width: 30em;
+    margin: 20vh auto;
+    padding: 3em;
+    background: var(--red);
+    border-radius: 1em;
+    box-shadow: 0.1em 0.1em var(--black);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.text-field {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.logo-wrapper {
+    text-align: center;
+}
+
+#logo {
+    font-size: 1.2em;
+}
+
+.text-field input {
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    background: var(--white);
+    color: var(--black);
+    border-radius: 1em;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: 0.1em 0.1em var(--black);
+}
+
+label {
+    padding-left: 0.5em;
+    display: block;
+    font-size: 1em;
+    color: var(--white);
+}
+
+#button-register-wrapper {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 1;
+    text-align: end;
+    align-items: center;
+}
