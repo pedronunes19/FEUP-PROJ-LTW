@@ -128,11 +128,9 @@ CREATE TABLE MenuDish
 );
 
 CREATE TRIGGER sameRestaurantMenuDish
-(
     AFTER INSERT ON MenuDish FOR EACH ROW
     WHEN 
     (SELECT RestaurantId FROM Menu WHERE new.MenuId = Menu.MenuId) != (SELECT RestaurantId FROM Dish WHERE new.DishId = Dish.DishId)
     BEGIN
-	DELETE FROM MenuDish WHERE new.MenuDishId = MenuDish.MenuDishId
+	DELETE FROM MenuDish WHERE new.MenuDishId = MenuDish.MenuDishId;
     END;
-);
