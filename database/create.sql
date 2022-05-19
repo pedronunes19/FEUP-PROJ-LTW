@@ -11,6 +11,8 @@ DROP TABLE IF EXISTS FavoriteCustomerRestaurant;
 DROP TABLE IF EXISTS FavoriteCustomerDish;
 DROP TABLE IF EXISTS MenuDish;
 
+DROP TRIGGER IF EXISTS sameRestaurantMenuDish;
+
 /*CREATE*/
 
 CREATE TABLE RestaurantOwner
@@ -123,4 +125,14 @@ CREATE TABLE MenuDish
     CONSTRAINT PK_MenuDish PRIMARY KEY (MenuDishId),
     FOREIGN KEY (MenuId) REFERENCES Customer (MenuId),
     FOREIGN KEY (DishId) REFERENCES Dish (DishId)
+);
+
+CREATE TRIGGER sameRestaurantMenuDish
+(
+    AFTER INSERT ON MenuDish FOR EACH ROW
+    WHEN 
+    (SELECT RestaurantId FROM Menu WHERE new.MenuId = Menu.MenuId) != (SELECT RestaurantId FROM Dish WHERE new.DishId = Dish.DishId)
+    BEGIN
+	DELETE FROM MenuDish WHERE new.MenuDishId = MenuDish.MenuDishId
+    END;
 );
