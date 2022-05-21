@@ -4,6 +4,7 @@ html {
     --white: #ffffff;
     --light-green: #66ff0d;
     --black: #000000;
+    --black-translucid: #000000c0;
     font-family: 'Nunito', sans-serif;
     height: 100%;
     width: 100%;
@@ -96,13 +97,13 @@ html {
 
 .menus {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     column-gap: 0.5em;
     row-gap: 0.5em;
   }
 
-  #restaurant-image-blocks {
+  #menu-image-blocks {
     position: relative;
     border-radius: 1em;
   }
@@ -138,7 +139,7 @@ html {
   }
 
   .menus .label {
-    background-color: var(--black);
+    background-color: var(--black-translucid);
     z-index: 2;
     position: relative;
     text-align: center;
@@ -148,7 +149,7 @@ html {
 
   .dishes {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     column-gap: 0.5em;
     row-gap: 0.5em;
@@ -190,7 +191,7 @@ html {
   }
 
   .dishes .label {
-    background-color: var(--black);
+    background-color: var(--black-translucid);
     z-index: 2;
     position: relative;
     text-align: center;
