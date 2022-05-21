@@ -19,30 +19,32 @@
 <?php } ?>
 
 <?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes) { ?>
-  <h2><?=$restaurant->name?></h2>
-  <section id="menus">
-    <h2>MENUS</h2>
+  <h2 class="sub-header"><?=$restaurant->name?></h2>
+  <h3>MENUS</h3>
+  <section class="menus">
     <?php foreach ($menus as $menu) { 
       drawMenu($db, $menu);
     } ?>
   </section>
-  <section id="dishes">
-    <h2>DISHES</h2>
+  <h3>DISHES</h3>
+  <section class="dishes">
     <?php foreach ($dishes as $dish) { ?>
-    <article>
-      <img src="https://picsum.photos/200/250?<?=$dish->id?>">
-      <p class="name"><?=$dish->name?></p>
-      <p class="info"><?=$dish->price?> € <?php if ($dish->category !== "Unspecified") {echo  "/" . $dish->category;} ?></p>
-    </article>
+    <a id = "dish-image-blocks">
+      <img src="https://picsum.photos/200?<?=$dish->id?>" class = "center">
+      <div class="middle-text">
+        <div class="label"><?=$menu->name?></div>
+      </div>
+    </a>
     <?php } ?>
   </section>
 <?php } ?>
 
 <?php function drawMenu(PDO $db, Menu $menu) { 
   $menu_dishes = $menu->getMenuDishes($db) ?>
-    <article>
-      <img src="https://picsum.photos/200/250?<?=$menu->id?>">
-      <p class="name"><?=$menu->name?> - <?php foreach ($menu_dishes as $dish){echo $dish->name . " / "; }?></p>
-      <p class="info"><?=$menu->price?> € <?php if ($menu->category !== "Unspecified") {echo "/" . $menu->category;} ?></p>
-    </article>
+    <a id = "menu-image-blocks">
+      <img src="https://picsum.photos/200?<?=$menu->id?>" class = "center">
+      <div class="middle-text">
+        <div class="label"><?=$menu->name?></div>
+      </div>
+    </a>
 <?php } ?>

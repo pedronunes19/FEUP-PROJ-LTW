@@ -12,7 +12,7 @@
     $menus = Menu::getRestaurantMenus($db, intval($_GET['id']));
     $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));
 
-    drawHeader();
+    drawHeader("../css/restaurant.css");
     drawRestaurant($db, $restaurant, $menus, $dishes);
     drawFooter();
 ?>

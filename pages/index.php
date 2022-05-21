@@ -12,7 +12,7 @@
 
     $menus = Menu::getMenus($db, 14);
 
-    drawHeader();
+    drawHeader("../css/style.css");
     drawRestaurants($restaurants);
     drawFooter();
 ?>

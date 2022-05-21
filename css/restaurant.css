@@ -1,0 +1,227 @@
+html {
+    --dark-red: #990f0f;
+    --red: #ce1515;
+    --white: #ffffff;
+    --light-green: #66ff0d;
+    --black: #000000;
+    font-family: 'Nunito', sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  ::-webkit-scrollbar-track {
+    opacity: 0.5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--white);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    transition: 0.3s ease;
+    background-color: greenyellow;
+  }
+
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .icon {
+    color: var(--white);
+    align-self: center;
+    
+  }
+
+  body {
+    overflow: overlay;
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark-red);
+    font-weight: 400;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    display: flex;
+    padding-left: 2em;
+    padding-right: 2em;
+    background-color: var(--red);
+  }
+  
+  .logo-wrapper {
+    flex-grow: 1;
+  }
+  
+  #logo {
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.5em;
+    font-weight: 900;
+    text-shadow:0.1em 0.1em var(--black);
+  }
+  
+  main {
+    flex: 1 0 auto;
+    margin-left: 2em;
+    margin-right: 2em;
+    padding: 0em;
+    padding-bottom: 2em;
+  }
+
+  .sub-header {
+    font-weight: 700;
+    text-align: center;
+    color: var(--white)
+  }
+  
+  main a {
+    font-weight: 400;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+
+.menus {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+  }
+
+  #restaurant-image-blocks {
+    position: relative;
+    border-radius: 1em;
+  }
+
+
+  .menus img.center {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transition: .3s ease;
+    border-radius: 1em;
+  }
+
+  .menus .middle-text {
+    transition: 0.3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .menus a:hover .middle-text{
+    opacity: 1;
+  }
+
+  .menus a:hover img.center {
+    -webkit-filter: blur(0.2em);
+    filter: blur(0.2em);
+    transform: scale(101%)
+  }
+
+  .menus .label {
+    background-color: var(--black);
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding: 1em;
+  }
+
+  .dishes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+  }
+
+  #dish-image-blocks {
+    position: relative;
+    border-radius: 1em;
+  }
+
+
+  .dishes img.center {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transition: .3s ease;
+    border-radius: 1em;
+  }
+
+  .dishes .middle-text {
+    transition: 0.3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .dishes a:hover .middle-text{
+    opacity: 1;
+  }
+
+  .dishes a:hover img.center {
+    -webkit-filter: blur(0.2em);
+    filter: blur(0.2em);
+    transform: scale(101%)
+  }
+
+  .dishes .label {
+    background-color: var(--black);
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding: 1em;
+  }
+
+  button {
+    padding: 0.5em;
+    width: 100%;
+    background: var(--dark-red);
+    box-shadow: 0.1em 0.1em var(--black);
+    border: none;
+    border-radius: 1em;
+    color: var(--white);
+  }
+
+  footer {
+    bottom: 0;
+    margin-top: auto;
+    display: flex;
+    flex-shrink: 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+
+  footer p.left {
+    flex-grow: 1;
+    padding-left: 2em;
+  }
+
+  footer p.right {
+    padding-right: 2em;
+  }

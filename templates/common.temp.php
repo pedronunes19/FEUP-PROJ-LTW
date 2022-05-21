@@ -1,5 +1,5 @@
 <?php declare(strict_types = 1); ?>
-<?php function drawHeader() { ?>
+<?php function drawHeader(string $css) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/eee7326786.js" crossorigin="anonymous"></script>
     <title>Take-away</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href=<?=$css?>>
 </head>
 <body>
     <header>
