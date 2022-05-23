@@ -87,6 +87,12 @@ html {
     text-align: center;
     color: var(--white)
   }
+
+  h3 {
+    font-weight: 700;
+    text-align: left;
+    color: var(--white)
+  }
   
   main a {
     font-weight: 400;
@@ -98,9 +104,11 @@ html {
 .menus {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: auto; 
     column-gap: 0.5em;
     row-gap: 0.5em;
+    padding-top : 1em;
+    padding-bottom: 2em;
   }
 
   #menu-image-blocks {
@@ -147,12 +155,23 @@ html {
     padding: 1em;
   }
 
+  .menus .secondary-label {
+    background-color: var(--black-translucid);
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding-bottom: 0.5em;
+  }
+
   .dishes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: auto; 
     column-gap: 0.5em;
     row-gap: 0.5em;
+    padding-top : 1em;
+    padding-bottom: 2em;
   }
 
   #dish-image-blocks {

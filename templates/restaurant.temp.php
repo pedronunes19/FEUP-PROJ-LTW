@@ -32,8 +32,7 @@
     <a id = "dish-image-blocks">
       <img src="https://picsum.photos/200?<?=$dish->id?>" class = "center">
       <div class="middle-text">
-        <div class="label"><?=$dish->name?></div>
-        <div class="label"><?=$dish->price?>€</div>
+        <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
       </div>
     </a>
     <?php } ?>
@@ -45,8 +44,10 @@
     <a id = "menu-image-blocks">
       <img src="https://picsum.photos/200?<?=$menu->id?>" class = "center">
       <div class="middle-text">
-        <div class="label"><?=$menu->name?></div>
-        <div class="label"><?=$menu->price?>€</div>
+        <div class="label"><?=$menu->name?> - <?=$menu->price?>€</div>
+        <?php foreach($menu_dishes as $dish) {?>
+          <div class="secondary-label"><?=$dish->name?></div>
+        <?php }?>
       </div>
     </a>
 <?php } ?>
