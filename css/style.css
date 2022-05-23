@@ -4,6 +4,8 @@
     --white: #ffffff;
     --light-green: #66ff0d;
     --black: #000000;
+    --grey-light: #ddd;
+    --grey: #ccc;
     font-family: 'Nunito', sans-serif;
     height: 100%;
     width: 100%;
@@ -93,6 +95,50 @@
     text-decoration: none;
   }
 
+  
+  .topnav{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding-right: 2em;
+  }
+
+  .topnav .search-container {
+    float: right;
+    
+  }
+
+  .search-form{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    column-gap: 0.5em;
+  }
+  
+  .topnav input[type=text] {
+    position: relative;
+    padding: 0.5em;
+    font-size: 17px;
+    border: none;
+    border-radius: 1em;
+  }
+  
+  .topnav .search-container button {
+    position: relative;
+    padding: 0.5em;
+    width: 4em;
+    color: var(--grey);
+    background-color: var(--white);
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .topnav .search-container button:hover {
+    background-color: var(--grey);
+    color: var(--white);
+  }
+
   .restaurants {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -148,7 +194,7 @@
     padding: 0.5em;
     width: 100%;
     background: var(--dark-red);
-    box-shadow: 0.1em 0.1em var(--black);
+    box-shadow: 0.05em 0.05em var(--black);
     border: none;
     border-radius: 1em;
     color: var(--white);
