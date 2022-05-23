@@ -17,7 +17,7 @@
         <div class="topnav">
             <div class="search-container">
                 <form action="restaurants.php"  class="search-form">
-                <input type="text" placeholder="Search.." name="search">
+                <input type="text" placeholder="Search..." name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>

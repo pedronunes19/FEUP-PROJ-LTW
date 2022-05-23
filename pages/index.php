@@ -13,6 +13,7 @@
     $menus = Menu::getMenus($db, 14);
 
     drawHeader("../css/style.css");
+    drawRestaurantsSlideshow(Restaurant::getRestaurants($db, 5));
     drawRestaurants($restaurants);
     drawFooter();
 ?>

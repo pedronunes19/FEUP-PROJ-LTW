@@ -18,6 +18,35 @@
     </section>
 <?php } ?>
 
+<?php function drawRestaurantsSlideshow(array $restaurants) { ?>
+    <section class="suggestions">
+    <div class = "slideshow-container">
+        <?php $slide_counter = 1;
+        foreach($restaurants as $restaurant) { ?> 
+            <div class = "slide-fading">
+              <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" style = "width: 100%;">
+              <div class = "img-text">
+                <?=$restaurant->name?>
+              </div>
+            </div>
+        <?php $slide_counter +=1;} ?>
+    </div> 
+    <a class = "prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class = "next" onclick="plusSlides(1)">&#10095;</a>   
+
+    <div style="text-align:center">
+            <span class = "dot" onclick="currentSlide(1)"></span>
+            <span class = "dot" onclick="currentSlide(2)"></span>
+            <span class = "dot" onclick="currentSlide(3)"></span>
+            <span class = "dot" onclick="currentSlide(4)"></span>
+            <span class = "dot" onclick="currentSlide(5)"></span>
+    </div>
+
+    <script src="../javascript/restaurants.js"></script>
+
+    </section>
+<?php } ?>
+
 <?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes) { ?>
   <h2 class="sub-header"><?=$restaurant->name?></h2>
   <h3>MENUS</h3>
@@ -30,7 +59,7 @@
   <section class="dishes">
     <?php foreach ($dishes as $dish) { ?>
     <a id = "dish-image-blocks">
-      <img src="https://picsum.photos/200?<?=$dish->id?>" class = "center">
+      <img src="https://picsum.photos/200?<?=($dish->id * 50)?>" class = "center">
       <div class="middle-text">
         <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
       </div>
