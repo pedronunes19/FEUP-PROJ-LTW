@@ -8,7 +8,7 @@
 
     $db = getDatabaseConnection();
 
-    $restaurants = Restaurant::getRestaurants($db, 14);
+    $restaurants = Restaurant::getRestaurants($db, 100);
 
     $menus = Menu::getMenus($db, 14);
 
