@@ -123,6 +123,12 @@
     font-size: 17px;
     border: none;
     border-radius: 1em;
+    outline: none;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    z-index: 2;
   }
   
   .topnav .search-container button {
@@ -134,6 +140,11 @@
     font-size: 17px;
     border: none;
     cursor: pointer;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    z-index: 3;
   }
   
   .topnav .search-container button:hover {
@@ -274,7 +285,6 @@
     padding: 0.5em;
     width: 100%;
     background: var(--dark-red);
-    box-shadow: 0.05em 0.05em var(--black);
     border: none;
     border-radius: 1em;
     color: var(--white);
