@@ -19,32 +19,31 @@
 <?php } ?>
 
 <?php function drawRestaurantsSlideshow(array $restaurants) { ?>
-    <section class="suggestions">
-    <div class = "slideshow-container">
-        <?php $slide_counter = 1;
-        foreach($restaurants as $restaurant) { ?> 
-            <div class = "slide-fading">
-              <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" style = "width: 100%;">
-              <div class = "img-text">
-                <?=$restaurant->name?>
-              </div>
-            </div>
-        <?php $slide_counter +=1;} ?>
-    </div> 
-    <a class = "prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class = "next" onclick="plusSlides(1)">&#10095;</a>   
+  <section class="suggestions">
+  <div class = "slideshow-container">
+    <a class = "prev" onclick="plusSlides(-1)">&#10094;</a>  
+    <?php $slide_counter = 1;
+    foreach($restaurants as $restaurant) { ?> 
+        <div class = "slide-fading">
+          <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" style = "width: 100%;">
+          <div class = "img-text">
+            <?=$restaurant->name?>
+          </div>
+        </div>
+    <?php $slide_counter +=1;} ?>
+    <a class = "next" onclick="plusSlides(1)">&#10095;</a> 
+  </div>
+  <div style="text-align:center">
+          <span class = "dot" onclick="currentSlide(1)"></span>
+          <span class = "dot" onclick="currentSlide(2)"></span>
+          <span class = "dot" onclick="currentSlide(3)"></span>
+          <span class = "dot" onclick="currentSlide(4)"></span>
+          <span class = "dot" onclick="currentSlide(5)"></span>
+  </div>
 
-    <div style="text-align:center">
-            <span class = "dot" onclick="currentSlide(1)"></span>
-            <span class = "dot" onclick="currentSlide(2)"></span>
-            <span class = "dot" onclick="currentSlide(3)"></span>
-            <span class = "dot" onclick="currentSlide(4)"></span>
-            <span class = "dot" onclick="currentSlide(5)"></span>
-    </div>
+  <script src="../javascript/restaurants.js"></script>
 
-    <script src="../javascript/restaurants.js"></script>
-
-    </section>
+  </section>
 <?php } ?>
 
 <?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes) { ?>
