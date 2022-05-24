@@ -27,7 +27,7 @@
         <div class = "slide-fading">
           <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" style = "width: 100%;">
           <div class = "img-text">
-            <?=$restaurant->name?>
+            <a href="restaurant.php?id=<?=$restaurant->id?>"> <?=$restaurant->name?> </a>
           </div>
         </div>
     <?php $slide_counter +=1;} ?>
