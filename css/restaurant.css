@@ -125,6 +125,7 @@ html {
   .topnav input[type=text] {
     position: relative;
     padding: 0.5em;
+    padding-right: 4.3em;
     font-size: 17px;
     border: none;
     border-radius: 1em;
