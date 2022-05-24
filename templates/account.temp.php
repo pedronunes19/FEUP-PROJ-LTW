@@ -32,7 +32,7 @@
 <div id="button-page-swap-wrapper">
     <button type="submit">Login</button>
     <span>
-        <a class="account-page-switch" href="../pages/login.php">Don't have an account? Click here!</span>
+        <a class="account-page-switch" href="../pages/register.php">Don't have an account? Click here!</span>
     </span>
 </div>
 </form>
