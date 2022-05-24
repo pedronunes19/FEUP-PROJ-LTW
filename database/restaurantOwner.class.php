@@ -7,6 +7,7 @@
     public string $last_name;
     public string $address;
     public string $phone;
+    public string $email;
 
     public function __construct(int $id, string $first_name, string $last_name, string $adress, string $phone)
     {
@@ -15,6 +16,7 @@
       $this->last_name = $last_name;
       $this->address = $address;
       $this->phone = $phone;
+      $this->email = $email;
     }
 
     function name() {
