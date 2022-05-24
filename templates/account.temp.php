@@ -1,5 +1,5 @@
 <?php declare(strict_types = 1); ?>
-<?php function drawLoginWrapper() { ?>
+<?php function drawFormWrapper() { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -10,7 +10,7 @@
     <title>Take-away</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/account.css">
 </head>
 <body>
 <main>
@@ -31,7 +31,33 @@
 
 <div id="button-register-wrapper">
     <button type="submit">Login</button>
-    <a href=".">Don't have an account? Click here!</a>
+    <a href="../pages/register.php">Don't have an account? Click here!</a>
 </div>
 </form>
 <?php } ?>
+
+<?php function drawRegisterForm() { ?>
+<form action="#!" id="login-form">
+<h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
+<div class="text-field">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="jamesdoe">
+</div>
+
+<div class="text-field">
+    <label for="email">Email</label>
+    <input type="text" id="email" placeholder="jamesdoe@goodmail.com">
+</div>
+
+<div class="text-field">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="123">
+</div>
+
+<div id="button-register-wrapper">
+    <button type="submit">Login</button>
+    <a href="../pages/login.php">Already have an account? Click here!</a>
+</div>
+</form>
+<?php } ?>
+

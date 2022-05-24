@@ -10,6 +10,6 @@
 
 <?php
     drawFormWrapper();
-    drawLoginForm();
+    drawRegisterForm();
     drawFooter();
 ?>
