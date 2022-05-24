@@ -150,6 +150,7 @@
   .topnav .search-container button:hover {
     background-color: var(--dark-red);
     color: var(--white);
+    transform: scale(101%)
   }
 
   .suggestions{
