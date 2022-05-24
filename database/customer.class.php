@@ -1,7 +1,7 @@
 <?php
   declare(strict_types = 1);
 
-  class Costumer {
+  class Customer {
     public int $id;
     public string $first_name;
     public string $last_name;
@@ -12,7 +12,7 @@
     public string $phone;
     public string $email;
 
-    public function __construct(int $id, string $first_name, string $last_name, string $adress, string $city, string $country, string $postal_code, string $phone, string $email)
+    public function __construct(int $id, string $first_name, string $last_name, string $address, string $city, string $country, string $postal_code, string $phone, string $email)
     {
       $this->id = $id;
       $this->first_name = $first_name;
@@ -85,7 +85,7 @@
       );
     }
 
-    function isFavoriteRestaurant(PDO $db, int $restaurant) : ?boolean {
+    function isFavoriteRestaurant(PDO $db, int $restaurant) : ?bool {
       $stmt = $db->prepare('
         SELECT FavoriteCustomerRestaurantId
         FROM FavoriteCustomerRestaurant 
@@ -102,7 +102,7 @@
 
     }
 
-    function favoriteRestaurant(PDO $db, int $restaurant) : {
+    function favoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
         VALUES ?, ?
@@ -113,7 +113,7 @@
 
     }
 
-    function unFavoriteRestaurant(PDO $db, int $restaurant) : {
+    function unFavoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         DELETE FROM FavoriteCustomerRestaurant
         WHERE CustomerId = ?, RestaurantId = ?
@@ -124,7 +124,7 @@
 
     }
 
-    function isFavoriteDish(PDO $db, int $dish) : ?boolean {
+    function isFavoriteDish(PDO $db, int $dish) : ?bool {
       $stmt = $db->prepare('
         SELECT FavoriteCustomerDishId
         FROM FavoriteCustomerDish
@@ -141,7 +141,7 @@
 
     }
 
-    function favoriteDish(PDO $db, int $dish) : {
+    function favoriteDish(PDO $db, int $dish)  {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerDish (CustomerId, DishId)
         VALUES ?, ?
@@ -152,7 +152,7 @@
 
     }
 
-    function unFavoriteDish(PDO $db, int $dish) : {
+    function unFavoriteDish(PDO $db, int $dish) {
       $stmt = $db->prepare('
         DELETE FROM FavoriteCustomerDish
         WHERE CustomerId = ?, DishId = ?

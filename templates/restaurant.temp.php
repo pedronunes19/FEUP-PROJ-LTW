@@ -1,8 +1,10 @@
 <?php 
     declare(strict_types = 1);
     require_once('../database/restaurant.class.php');
+    require_once('../database/customer.class.php');
     require_once('../database/menu.class.php');
     require_once('../database/dish.class.php');
+    require_once('../database/review.class.php');
 ?>
 <?php function drawRestaurants(array $restaurants) { ?>
     <h2 class="sub-header">Which restaurant will you try today?</h2>
@@ -46,7 +48,7 @@
   </section>
 <?php } ?>
 
-<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes) { ?>
+<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews) { ?>
   <h2 class="sub-header"><?=$restaurant->name?></h2>
   <h3>MENUS</h3>
   <section class="menus">
@@ -65,6 +67,7 @@
     </a>
     <?php } ?>
   </section>
+  <?php drawReviews($db, $reviews) ?>
 <?php } ?>
 
 <?php function drawMenu(PDO $db, Menu $menu) { 
@@ -78,4 +81,13 @@
         <?php }?>
       </div>
     </a>
+<?php } ?>
+
+<?php function drawReviews(PDO $db, array $reviews) { ?>
+  <h3>REVIEWS</h3>
+  <section class="reviews">
+    <?php foreach ($reviews as $review) { ?>
+      <p> - <?=Customer::getCustomer($db, $review->customer)->first_name?> <?=Customer::getCustomer($db, $review->customer)->last_name?> - <?=$review->score?>/5 - <?=$review->content?> </p>
+    <?php } ?>
+  </section>
 <?php } ?>

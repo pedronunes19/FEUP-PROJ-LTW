@@ -11,8 +11,9 @@
     $restaurant = Restaurant::getRestaurant($db, intval($_GET['id']));
     $menus = Menu::getRestaurantMenus($db, intval($_GET['id']));
     $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));
+    $reviews = Review::getReviews($db, intval($_GET['id']));
 
     drawHeader("../css/restaurant.css");
-    drawRestaurant($db, $restaurant, $menus, $dishes);
+    drawRestaurant($db, $restaurant, $menus, $dishes, $reviews);
     drawFooter();
 ?>

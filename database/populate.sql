@@ -38,11 +38,13 @@ VALUES
     (2, "Prato 2", 2.00, 1),
     (3, "Prato 3", 3.00, 1);
 
-INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Password) 
+/*INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Password) 
 VALUES 
-    (1, "Cliente", "1", "Email 1", "Password 1"),
     (2, "Cliente", "2", "Email 2", "Password 2"),
-    (3, "Cliente", "3", "Email 3", "Password 3");
+    (3, "Cliente", "3", "Email 3", "Password 3");*/
+
+INSERT INTO Customer (CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email, Password) 
+VALUES (1, "Cliente", "1","aaaaaaaaaa", "aaaa", " aaa", "1234", "999999999", "Email 1", "Password 1");    
 
 INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status) 
 VALUES 
@@ -59,5 +61,5 @@ VALUES
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 
     (1, 3, "Review 1", 1, 1),
-    (2, 5, "Review 2", 2, 1),
-    (3, 2, "Review 3", 3, 1);
+    (2, 5, "Review 2", 1, 1),
+    (3, 2, "Review 3", 1, 1);
