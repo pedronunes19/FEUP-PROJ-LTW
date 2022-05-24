@@ -29,9 +29,11 @@
     <input type="password" id="password" placeholder="123">
 </div>
 
-<div id="button-register-wrapper">
+<div id="button-page-swap-wrapper">
     <button type="submit">Login</button>
-    <a href="../pages/register.php">Don't have an account? Click here!</a>
+    <span>
+        <a class="account-page-switch" href="../pages/login.php">Don't have an account? Click here!</span>
+    </span>
 </div>
 </form>
 <?php } ?>
@@ -54,9 +56,11 @@
     <input type="password" id="password" placeholder="123">
 </div>
 
-<div id="button-register-wrapper">
+<div id="button-page-swap-wrapper">
     <button type="submit">Login</button>
-    <a href="../pages/login.php">Already have an account? Click here!</a>
+    <span>
+        <a class="account-page-switch" href="../pages/login.php">Already have an account? Click here!</span>
+    </span>
 </div>
 </form>
 <?php } ?>
