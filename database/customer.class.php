@@ -55,7 +55,7 @@
         WHERE lower(Email) = ? AND Password = ?
       ');
 
-      $stmt->execute(array(strtolower($email), $password));
+      $stmt->execute(array(strtolower($email), sha1($password)));
   
       if ($customer = $stmt->fetch()) {
         return new Customer(
