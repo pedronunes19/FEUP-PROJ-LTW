@@ -17,51 +17,57 @@
 <?php } ?>
 
 <?php function drawLoginForm() { ?>
-<form action="#!" id="login-form">
-<h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
-<div class="text-field">
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="jamesdoe">
-</div>
+<form action="../actions/action.login.php" method="post" id="login-form">
+    <h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
+    <div class="text-field">
+        <label for="email">Email</label>
+        <input id="login_email" type="text" name="email" placeholder="jamesdoe@goodmail.com" required>
+    </div>
 
-<div class="text-field">
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="123">
-</div>
+    <div class="text-field">
+        <label for="password">Password</label>
+        <input id="login_password" type="password" name="password" placeholder="123" required minlength=10>
+    </div>
 
-<div id="button-page-swap-wrapper">
-    <button type="submit">Login</button>
-    <span>
-        <a class="account-page-switch" href="../pages/register.php">Don't have an account? Click here!</span>
-    </span>
-</div>
+    <div id="button-page-swap-wrapper">
+        <button type="submit" onClick="return check_empty_login()">Login</button>
+        <span>
+            <a class="account-page-switch" href="../pages/register.php">Don't have an account? Click here!</span>
+        </span>
+    </div>
 </form>
 <?php } ?>
 
 <?php function drawRegisterForm() { ?>
-<form action="#!" id="login-form">
-<h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
-<div class="text-field">
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="jamesdoe">
-</div>
+<form action="#!" id="login-form" method="post">
+    <h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
 
-<div class="text-field">
-    <label for="email">Email</label>
-    <input type="text" id="email" placeholder="jamesdoe@goodmail.com">
-</div>
+    <div class="text-field">
+        <label for="first-name">First Name</label>
+        <input class="register_required" type="text" name="first-name" placeholder="James" required>
+    </div>
 
-<div class="text-field">
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="123">
-</div>
+    <div class="text-field">
+        <label for="last-name">Last Name</label>
+        <input class="register_required" type="text" name="last-name" placeholder="Doe" required>
+    </div>
 
-<div id="button-page-swap-wrapper">
-    <button type="submit">Login</button>
-    <span>
-        <a class="account-page-switch" href="../pages/login.php">Already have an account? Click here!</span>
-    </span>
-</div>
+    <div class="text-field">
+        <label for="email">Email</label>
+        <input class="register_required" type="text" name="email" placeholder="jamesdoe@goodmail.com" required>
+    </div>
+
+    <div class="text-field">
+        <label for="password">Password</label>
+        <input class="register_required" type="password" name="password" placeholder="123" required minlength=10>
+    </div>
+
+    <div id="button-page-swap-wrapper">
+        <button type="submit" onClick="return check_empty_register()">Register</button>
+        <span>
+            <a class="account-page-switch" href="../pages/login.php">Already have an account? Click here!</span>
+        </span>
+    </div>
 </form>
 <?php } ?>
 

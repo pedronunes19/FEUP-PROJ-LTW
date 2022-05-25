@@ -286,6 +286,7 @@
   }
 
   button {
+    cursor: pointer;
     padding: 0.5em;
     width: 100%;
     background: var(--dark-red);

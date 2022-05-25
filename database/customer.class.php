@@ -12,17 +12,27 @@
     public string $phone;
     public string $email;
 
-    public function __construct(int $id, string $first_name, string $last_name, string $address, string $city, string $country, string $postal_code, string $phone, string $email)
+    public function __construct(int $id, string $first_name, string $last_name, ?string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email)
     {
       $this->id = $id;
       $this->first_name = $first_name;
       $this->last_name = $last_name;
-      $this->address = $address;
-      $this->city = $city;
-      $this->country = $country;
-      $this->postal_code = $postal_code;
-      $this->phone = $phone;
       $this->email = $email;
+
+      $arr = [
+        "address" => $address, 
+        "city" => $city, 
+        "country" => $country, 
+        "postal_code" => $postal_code, 
+        "phone" => $phone
+      ];
+
+      foreach ($arr as $field) {
+        if (isset($field)) { 
+          $field_name = key($arr);
+          $this->$field_name = $field;
+        }
+      }
     }
 
     function name() {
@@ -45,7 +55,7 @@
         WHERE lower(Email) = ? AND Password = ?
       ');
 
-      $stmt->execute(array(strtolower($email), sha1($password)));
+      $stmt->execute(array(strtolower($email), $password));
   
       if ($customer = $stmt->fetch()) {
         return new Customer(
@@ -141,7 +151,7 @@
 
     }
 
-    function favoriteDish(PDO $db, int $dish)  {
+    function favoriteDish(PDO $db, int $dish) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerDish (CustomerId, DishId)
         VALUES ?, ?

@@ -1,5 +1,8 @@
-<?php declare(strict_types = 1); ?>
-<?php function drawHeader(string $css) { ?>
+<?php declare(strict_types = 1); 
+require_once('../session/session.php');
+?>
+
+<?php function drawHeader(string $css, Session $session) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -24,6 +27,13 @@
             </div>
         <?php drawButtonsNoLogin(); ?>
     </header>
+    <section id="messages">
+      <?php foreach ($session->getMessages() as $message) { ?>
+        <article class="<?=$message['type']?>">
+          <?=$message['text']?>
+        </article>
+      <?php } ?>
+    </section>
     <main>
 <?php } ?>
 
