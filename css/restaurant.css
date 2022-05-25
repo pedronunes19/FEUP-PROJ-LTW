@@ -92,6 +92,15 @@ html {
     color: var(--white)
   }
 
+  .sub-header .favorite-button{
+    padding: 0em;
+  }
+
+  .sub-header .favorite{
+    font-size: 30px;
+  }
+
+
   h3 {
     font-weight: 700;
     text-align: left;

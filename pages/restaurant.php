@@ -17,6 +17,6 @@
     $reviews = Review::getReviews($db, intval($_GET['id']));
 
     drawHeader("../css/restaurant.css", $session);
-    drawRestaurant($db, $restaurant, $menus, $dishes, $reviews);
+    drawRestaurant($db, $restaurant, $menus, $dishes, $reviews, $session);
     drawFooter();
 ?>

@@ -5,6 +5,7 @@
     require_once('../database/menu.class.php');
     require_once('../database/dish.class.php');
     require_once('../database/review.class.php');
+    require_once('../session/session.php');
 ?>
 <?php function drawRestaurants(array $restaurants) { ?>
     <h2 class="sub-header">Which restaurant will you try today?</h2>
@@ -48,8 +49,19 @@
   </section>
 <?php } ?>
 
-<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews) { ?>
-  <h2 class="sub-header"><?=$restaurant->name?></h2>
+<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews, Session $session) { ?>
+  <h2 class="sub-header"><?=$restaurant->name?> 
+    <?php if($session->isLoggedIn()){
+      echo "<button class='favorite-button'> <span class='favorite'>";
+      if((Customer::getCustomer($db, $session->getId())->isFavoriteRestaurant($db, $restaurant->id))){
+          echo "&#10084;;";
+        } else {
+          echo "&#9825;";
+        }
+    echo "</span></button>" .
+    "<script src='../javascript/favorite.js'></script>";
+    }?>
+  </h2>
   <h3>MENUS</h3>
   <section class="menus">
     <?php foreach ($menus as $menu) { 
