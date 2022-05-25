@@ -92,7 +92,7 @@
         <p id="review-content"><?=$review->content?></p>
         <p id="review-score"><?php if($review->score >= 4) {echo "<span id='positive'>" . $review->score . "</span>";} 
                                    else if($review->score == 3) {echo "<span id='mid'>" . $review->score . "</span>";}
-                                   else {echo "<span id='negative'>" . $review->score . "</span>";}?>/5</p>
+                                   else {echo "<span id='negative'>" . $review->score . "</span>";}?>/5<span id="star">&#9733</span></p>
       </div>
     <?php } ?>
   </section>

@@ -310,6 +310,7 @@ html {
 
   .review #review-content{
     flex: 8 8 auto;
+    align-self: center;
   }
 
   .review #review-score{
@@ -328,6 +329,12 @@ html {
 
   .review #negative{
     color: var(--score-red);
+  }
+
+  .review #star{
+    position: absolute;
+    font-size: 20px;
+    transform: translate(2px, -6px);
   }
 
   button {
