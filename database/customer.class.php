@@ -6,33 +6,18 @@
     public string $first_name;
     public string $last_name;
     public string $address;
-    public string $city;
-    public string $country;
-    public string $postal_code;
-    public string $phone;
+    public ?string $city;
+    public ?string $country;
+    public ?string $postal_code;
+    public ?string $phone;
     public string $email;
 
-    public function __construct(int $id, string $first_name, string $last_name, ?string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email)
+    public function __construct(int $id, string $first_name, string $last_name, string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email)
     {
       $this->id = $id;
       $this->first_name = $first_name;
       $this->last_name = $last_name;
       $this->email = $email;
-
-      $arr = [
-        "address" => $address, 
-        "city" => $city, 
-        "country" => $country, 
-        "postal_code" => $postal_code, 
-        "phone" => $phone
-      ];
-
-      foreach ($arr as $field) {
-        if (isset($field)) { 
-          $field_name = key($arr);
-          $this->$field_name = $field;
-        }
-      }
     }
 
     function name() {
