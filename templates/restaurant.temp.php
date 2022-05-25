@@ -87,7 +87,13 @@
   <h3>REVIEWS</h3>
   <section class="reviews">
     <?php foreach ($reviews as $review) { ?>
-      <p> - <?=Customer::getCustomer($db, $review->customer)->first_name?> <?=Customer::getCustomer($db, $review->customer)->last_name?> - <?=$review->score?>/5 - <?=$review->content?> </p>
+      <div class = "review">
+        <p id="review-customer"><?=Customer::getCustomer($db, $review->customer)->first_name?> <?=Customer::getCustomer($db, $review->customer)->last_name?></p>
+        <p id="review-content"><?=$review->content?></p>
+        <p id="review-score"><?php if($review->score >= 4) {echo "<span id='positive'>" . $review->score . "</span>";} 
+                                   else if($review->score == 3) {echo "<span id='mid'>" . $review->score . "</span>";}
+                                   else {echo "<span id='negative'>" . $review->score . "</span>";}?>/5</p>
+      </div>
     <?php } ?>
   </section>
 <?php } ?>

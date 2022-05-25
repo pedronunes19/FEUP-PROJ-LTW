@@ -1,8 +1,10 @@
 html {
     --dark-red: #990f0f;
     --red: #ce1515;
+    --score-red: #ff0e0e;
     --white: #ffffff;
     --light-green: #66ff0d;
+    --yellow: #ffeb39;
     --black: #000000;
     --black-translucid: #000000c0;
     --grey-light: #ddd;
@@ -275,6 +277,57 @@ html {
     text-align: center;
     align-self: center;
     padding: 1em;
+  }
+
+  .reviews{
+    display: flex;
+    flex-direction: column; 
+    flex-wrap: wrap;
+    padding-top : 1em;
+    padding-bottom: 2em;
+  }
+
+  .review{
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    padding-top : 1em;
+    padding-bottom: 1em;
+    color: var(--white);
+    background-color: var(--black);
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    border-radius: 1em;
+  }
+
+  .review #review-customer{
+    flex: 1 0 auto;
+    align-self: center;
+    text-align: left;
+    padding-left: 0.5em;
+  }
+
+  .review #review-content{
+    flex: 8 8 auto;
+  }
+
+  .review #review-score{
+    flex: 1 0 auto;
+    align-self: center;
+    text-align: center;
+  }
+
+  .review #positive{
+    color: var(--light-green);
+  }
+
+  .review #mid{
+    color: var(--yellow);
+  }
+
+  .review #negative{
+    color: var(--score-red);
   }
 
   button {

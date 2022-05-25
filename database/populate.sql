@@ -40,6 +40,7 @@ VALUES
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Address, Password) 
 VALUES 
+    (1, "Cliente", "1", "Email 1", "Address 1", "Password 1"),
     (2, "Cliente", "2", "Email 2", "Address 1", "Password 2"),
     (3, "Cliente", "3", "Email 3", "Address 2", "Password 3"),
     (4, "Cliente", "4", "email@email.com", "Address 3", "01b307acba4f54f55aafc33bb06bbbf6ca803e9a");
