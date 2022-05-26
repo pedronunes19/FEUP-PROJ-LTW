@@ -100,7 +100,7 @@
     function favoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
-        VALUES ?, ?
+        VALUES (?, ?)
       ');
 
       $stmt->execute(array($this->id, $restaurant));
@@ -111,7 +111,7 @@
     function unFavoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         DELETE FROM FavoriteCustomerRestaurant
-        WHERE CustomerId = ?, RestaurantId = ?
+        WHERE CustomerId = ? AND RestaurantId = ?
       ');
 
       $stmt->execute(array($this->id, $restaurant));

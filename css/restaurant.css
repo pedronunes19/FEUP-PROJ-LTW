@@ -89,11 +89,15 @@ html {
   .sub-header {
     font-weight: 700;
     text-align: center;
-    color: var(--white)
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
   }
 
   .sub-header .favorite-button{
     padding: 0em;
+    max-width: fit-content;
+    align-self: center;
   }
 
   .sub-header .favorite{

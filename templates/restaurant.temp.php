@@ -44,7 +44,7 @@
           <span class = "dot" onclick="currentSlide(5)"></span>
   </div>
 
-  <script src="../javascript/restaurants.js"></script>
+  <script src="../scripts/restaurants.js"></script>
 
   </section>
 <?php } ?>
@@ -52,14 +52,7 @@
 <?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews, Session $session) { ?>
   <h2 class="sub-header"><?=$restaurant->name?> 
     <?php if($session->isLoggedIn()){
-      echo "<button class='favorite-button'> <span class='favorite'>";
-      if((Customer::getCustomer($db, $session->getId())->isFavoriteRestaurant($db, $restaurant->id))){
-          echo "&#10084;;";
-        } else {
-          echo "&#9825;";
-        }
-    echo "</span></button>" .
-    "<script src='../javascript/favorite.js'></script>";
+      drawFavoriteButton($db, $restaurant, $session);
     }?>
   </h2>
   <h3>MENUS</h3>
@@ -81,6 +74,18 @@
   </section>
   <?php drawReviews($db, $reviews) ?>
 <?php } ?>
+
+<?php function drawFavoriteButton(PDO $db, Restaurant $restaurant, Session $session) { ?>
+  <button class='favorite-button'> <span class='favorite'>
+      <?php if((Customer::getCustomer($db, $session->getId())->isFavoriteRestaurant($db, $restaurant->id))){
+          echo "&#10084;";
+        } else {
+          echo "&#9825;";
+        }?>
+    </span></button>
+    <script>let res = <?= $restaurant->id ?>;</script>
+    <script src="../scripts/favorite.js"></script>
+<?php } ?>  
 
 <?php function drawMenu(PDO $db, Menu $menu) { 
   $menu_dishes = $menu->getMenuDishes($db) ?>
