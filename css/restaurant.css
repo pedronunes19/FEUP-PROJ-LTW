@@ -312,6 +312,11 @@ html {
     margin-top: 0.3em;
     margin-bottom: 0.3em;
     border-radius: 1em;
+    z-index:4;
+  }
+
+  .reviews .review:hover{
+    transform: scale(101%);
   }
 
   .review #review-customer{

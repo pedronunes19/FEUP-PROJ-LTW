@@ -277,7 +277,7 @@
   }
 
   .restaurants .label {
-    background-color: var(--black);
+    background-color: var(--black-translucid);
     z-index: 2;
     position: relative;
     text-align: center;
