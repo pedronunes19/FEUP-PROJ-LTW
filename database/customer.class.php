@@ -17,6 +17,11 @@
       $this->id = $id;
       $this->first_name = $first_name;
       $this->last_name = $last_name;
+      $this->address = $address;
+      $this->city = $city;
+      $this->country = $country;
+      $this->postal_code = $postal_code;
+      $this->phone = $phone;
       $this->email = $email;
     }
 
@@ -32,15 +37,47 @@
 
       $stmt->execute(array($this->first_name, $this->last_name, $this->address, $this->phone, $this->id));
     }
+
+    static function create($db, string $first_name, string $last_name, string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email, string $password) {
+      $stmt = $db->prepare('
+        INSERT INTO Customer (CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email, Password) 
+        VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+
+      $stmt->execute(array($first_name, $last_name, $address, $city, $country, $postal_code, $phone, strtolower($email), password_hash($password, PASSWORD_BCRYPT)));
+    }
     
     static function getCustomerWithPassword(PDO $db, string $email, string $password) : ?Customer {
       $stmt = $db->prepare('
-        SELECT CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email
+        SELECT CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email, Password
         FROM Customer 
-        WHERE lower(Email) = ? AND Password = ?
+        WHERE lower(Email) = ?
       ');
 
-      $stmt->execute(array(strtolower($email), sha1($password)));
+      $stmt->execute(array(strtolower($email)));
+  
+      if (($customer = $stmt->fetch()) && password_verify($password, $customer['Password'])) {
+        return new Customer(
+          $customer['CustomerId'],
+          $customer['FirstName'],
+          $customer['LastName'],
+          $customer['Address'],
+          $customer['City'],
+          $customer['Country'],
+          $customer['PostalCode'],
+          $customer['PhoneNumber'],
+          $customer['Email']
+        );
+      } else return null;
+    }
+
+    static function getCustomerWithEmail(PDO $db, string $email) : ?Customer {
+      $stmt = $db->prepare('
+        SELECT CustomerId, FirstName, LastName, Address, City, Country, PostalCode, PhoneNumber, Email
+        FROM Customer 
+        WHERE lower(Email) = ?
+      ');
+
+      $stmt->execute(array(strtolower($email)));
   
       if ($customer = $stmt->fetch()) {
         return new Customer(
