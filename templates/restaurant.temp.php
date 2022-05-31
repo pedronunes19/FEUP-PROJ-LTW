@@ -21,6 +21,20 @@
     </section>
 <?php } ?>
 
+<?php function drawRestaurantSearch(array $restaurants, string $search) { ?>
+    <h2 class="sub-header">Search results for "<?=$search?>"</h2>
+    <section class="restaurants">
+        <?php foreach($restaurants as $restaurant) { ?> 
+            <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
+                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" class="center">
+                <div class="middle-text">
+                    <div class="label"><?=$restaurant->name?></div>
+                </div>
+            </a>
+        <?php } ?>
+    </section>
+<?php } ?>
+
 <?php function drawRestaurantsSlideshow(array $restaurants) { ?>
   <section class="suggestions">
   <div class = "slideshow-container">

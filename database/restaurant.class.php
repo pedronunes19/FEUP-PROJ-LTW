@@ -5,42 +5,37 @@
     public int $id;
     public string $name;
     public string $address;
-    public string $category;
 
-    public function __construct(int $id, string $name, string $address, $category)
+    public function __construct(int $id, string $name, string $address)
     {
-      if (!is_string($category)) {
-        $category = 'Unspecified';
-      }
       $this->id = $id;
       $this->name = $name;
       $this->adress = $address;
-      $this->category = $category;
     }
 
     function save($db) {
       $stmt = $db->prepare('
-        UPDATE Restaurant SET Name = ?, Address = ?, Category = ?
+        UPDATE Restaurant SET Name = ?, Address = ?
         WHERE RestaurantId = ?
       ');
 
-      $stmt->execute(array($this->name, $this->address, $this->category, $this->id));
+      $stmt->execute(array($this->name, $this->address, $this->id));
     }
 
     static function getRestaurants(PDO $db, int $size) : array {
-      $stmt = $db->prepare('SELECT RestaurantId, Name, Address, Category FROM Restaurant LIMIT ?');
+      $stmt = $db->prepare('SELECT RestaurantId, Name, Address FROM Restaurant LIMIT ?');
       $stmt-> execute(array($size));
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['Category']);
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address']);
       }
       return $restaurants;
     }
 
     static function getRestaurant(PDO $db, int $id) : Restaurant {
       $stmt = $db->prepare('
-        SELECT RestaurantId, Name, Address, Category 
+        SELECT RestaurantId, Name, Address 
         FROM Restaurant WHERE RestaurantId = ?
       ');
       $stmt->execute(array($id));
@@ -50,17 +45,16 @@
       return new Restaurant(
         $restaurant['RestaurantId'], 
         $restaurant['Name'],
-        $restaurant['Address'],
-        $restaurant['Category']
+        $restaurant['Address']
       );
     }
 
     static function searchRestaurants(PDO $db, string $search, int $count) : array {
       $stmt = $db->prepare('
-        SELECT RestaurantId, Name, Address, Category 
+        SELECT RestaurantId, Name, Address
         FROM Restaurant WHERE Name LIKE ? LIMIT ?
       ');
-      $stmt->execute(array($search . '%', $count));
+      $stmt->execute(array('%' . $search . '%', $count));
   
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
@@ -75,7 +69,22 @@
       return $restaurants;
     }
 
-    function averageScore(PDO $db): float {
+    function hasScore(PDO $db, int $id): bool {
+
+      $stmt = $db->prepare('
+        SELECT ReviewScore 
+        FROM Review WHERE RestaurantId = ?
+      ');
+      $stmt->execute(array($id));
+  
+      if($score = $stmt->fetch()) {
+        return true;
+      }
+
+      return false;
+    }
+
+    function averageScore(PDO $db, int $id): float {
       $count = 0;
       $total = 0.0;
 
@@ -83,7 +92,7 @@
         SELECT ReviewScore 
         FROM Review WHERE RestaurantId = ?
       ');
-      $stmt->execute(array($this->id));
+      $stmt->execute(array($id));
   
       while ($score = $stmt->fetch()) {
         $total += $score;

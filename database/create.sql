@@ -35,7 +35,6 @@ CREATE TABLE Restaurant
     RestaurantId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Address NVARCHAR(100),
-    Category NVARCHAR(100),
     CONSTRAINT PK_Restaurant PRIMARY KEY (RestaurantId)
 );
 
@@ -44,7 +43,6 @@ CREATE TABLE Menu
     MenuId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
-    Category NVARCHAR(100),
     RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_Menu PRIMARY KEY (MenuId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
@@ -55,7 +53,6 @@ CREATE TABLE Dish
     DishId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
-    Category NVARCHAR(100),
     RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_Dish PRIMARY KEY (DishId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
@@ -127,6 +124,43 @@ CREATE TABLE MenuDish
     DishId INTEGER NOT NULL,
     CONSTRAINT PK_MenuDish PRIMARY KEY (MenuDishId),
     FOREIGN KEY (MenuId) REFERENCES Customer (MenuId),
+    FOREIGN KEY (DishId) REFERENCES Dish (DishId)
+);
+
+CREATE TABLE Category
+(
+    CategoryId INTEGER NOT NULL,
+    Name NVARCHAR(100),
+    CONSTRAINT PK_Category PRIMARY KEY (CategoryId),
+);
+
+CREATE TABLE CategoryRestaurant
+(
+    CategoryRestaurantId INTEGER NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    RestaurantId INTEGER NOT NULL,
+    CONSTRAINT PK_CategoryRestaurant PRIMARY KEY (CategoryRestaurantId),
+    FOREIGN KEY (CategoryId) REFERENCES Category (CategoryId),
+    FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
+);
+
+CREATE TABLE CategoryMenu
+(
+    CategoryMenuId INTEGER NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    MenuId INTEGER NOT NULL,
+    CONSTRAINT PK_CategoryMenu PRIMARY KEY (CategoryMenuId),
+    FOREIGN KEY (CategoryId) REFERENCES Category (CategoryId),
+    FOREIGN KEY (MenuId) REFERENCES Menu (MenuId)
+);
+
+CREATE TABLE CategoryDish
+(
+    CategoryDishId INTEGER NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    DishId INTEGER NOT NULL,
+    CONSTRAINT PK_CategoryDish PRIMARY KEY (CategoryDishId),
+    FOREIGN KEY (CategoryId) REFERENCES Category (CategoryId),
     FOREIGN KEY (DishId) REFERENCES Dish (DishId)
 );
 
