@@ -40,6 +40,14 @@
             <input id="login_password" type="password" name="password" placeholder="123" required minlength=10>
         </div>
 
+        <div class="input-field">
+            <label for="account-type">Account Type</label>
+            <select id="account-type" name="account-type" required>
+                <option value="customer">Customer</option>
+                <option value="owner">Owner</option>
+            </select>
+        </div>
+
         <div class="button-page-swap-wrapper">
             <button type="submit">Login</button>
             <span>

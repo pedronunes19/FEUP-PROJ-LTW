@@ -48,14 +48,14 @@
     
     static function getOwnerWithPassword(PDO $db, string $email, string $password) : ?RestaurantOwner {
       $stmt = $db->prepare('
-        SELECT OwnerId, FirstName, LastName, Address, PhoneNumber, Email
+        SELECT OwnerId, FirstName, LastName, Address, PhoneNumber, Email, Password
         FROM RestaurantOwner
-        WHERE lower(Email) = ? AND Password = ?
+        WHERE lower(Email) = ?
       ');
 
-      $stmt->execute(array(strtolower($email), sha1($password)));
+      $stmt->execute(array(strtolower($email)));
   
-      if ($owner = $stmt->fetch()) {
+      if (($owner = $stmt->fetch()) && password_verify($password, $owner['Password'])) {
         return new RestaurantOwner(
           $owner['OwnerId'],
           $owner['FirstName'],
