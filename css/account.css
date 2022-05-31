@@ -1,4 +1,4 @@
-#login-form {
+.login-register-form {
     width: 30em;
     margin: 20vh auto;
     padding: 3em;
@@ -14,7 +14,7 @@ h2 {
     color: var(--white);
 }
 
-.text-field {
+.input-field, .asterisk-info {
     display: block;
     margin-bottom: 1em;
 }
@@ -23,11 +23,11 @@ h2 {
     text-align: center;
 }
 
-#logo {
+.logo {
     font-size: 1.2em;
 }
 
-.text-field input {
+.input-field input, .input-field select {
     padding: 0.5em;
     width: 100%;
     font-size: 1em;
@@ -47,7 +47,12 @@ label {
     color: var(--white);
 }
 
-#button-page-swap-wrapper {
+.text-info {
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.button-page-swap-wrapper {
     display: grid;
     grid-template-columns: 25% 75%;
     grid-template-rows: 1;

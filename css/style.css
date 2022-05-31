@@ -63,12 +63,26 @@
     padding-right: 2em;
     background-color: var(--red);
   }
+
+  #session-messages {
+    text-align: center;
+    position: relative;
+    background-color: var(--white);
+  }
+
+  .error {
+    color: var(--red);
+  }
+
+  .success {
+    color: var(--black);
+  }
   
   .logo-wrapper {
     flex-grow: 1;
   }
   
-  #logo {
+  .logo {
     color: var(--white);
     text-decoration: none;
     letter-spacing: 0.5em;
