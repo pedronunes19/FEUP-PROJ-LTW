@@ -39,9 +39,15 @@ html {
   }
 
   .icon {
+    text-decoration: none;
+    background: var(--dark-red);
+    border: none;
+    border-radius: 1em;
     color: var(--white);
     align-self: center;
-    
+    display: flex;
+    padding: 0.5em;
+    margin: 0.5em;
   }
 
   body {
@@ -356,7 +362,7 @@ html {
     transform: translate(2px, -6px);
   }
 
-  button {
+  .button {
     padding: 0.5em;
     width: 100%;
     background: var(--dark-red);

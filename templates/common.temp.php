@@ -21,11 +21,14 @@ require_once('../session/session.php');
             <div class="search-container">
                 <form action="search.php"  class="search-form">
                 <input type="text" placeholder="Search..." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <button class="button" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
             </div>
-        <?php drawButtonsNoLogin(); ?>
+            <?php 
+        if ($session->isLoggedIn()) drawButtonsLogin($session);
+        else drawButtonsNoLogin();
+      ?>
     </header>
     <section id="session-messages">
       <?php foreach ($session->getMessages() as $message) { ?>
@@ -48,7 +51,22 @@ require_once('../session/session.php');
 <?php } ?>
 
 <?php function drawButtonsNoLogin() { ?>
-    <a class="icon" href="/pages/login.php">
-        <i class="fa-solid fa-right-to-bracket"></i>
-    </a>
+    <form class="icon" action="../pages/login.php">
+        <button class="icon" type="submit">
+            <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+    </form>
+<?php } ?>
+
+<?php function drawButtonsLogin() { ?>
+    <form class="icon" action="../pages/index.php">
+        <button class="icon">
+            <i class="fa-solid fa-circle-user"></i>
+        </button>
+    </form>
+    <form class="icon" action="../actions/action.logout.php" method="post">
+        <button class="icon" type="submit">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </form>
 <?php } ?>

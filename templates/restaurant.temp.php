@@ -90,7 +90,7 @@
 <?php } ?>
 
 <?php function drawFavoriteButton(PDO $db, Restaurant $restaurant, Session $session) { ?>
-  <button class='favorite-button'> <span class='favorite'>
+  <button class='button favorite-button'> <span class='favorite'>
       <?php if((Customer::getCustomer($db, $session->getId())->isFavoriteRestaurant($db, $restaurant->id))){
           echo "&#10084;";
         } else {
