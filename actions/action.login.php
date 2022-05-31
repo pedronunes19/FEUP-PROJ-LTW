@@ -6,17 +6,25 @@
   
   require_once('../database/connection.db.php');
   require_once('../database/customer.class.php');
+  require_once('../database/restaurantOwner.class.php');
 
   $db = getDatabaseConnection();
   $customer = Customer::getCustomerWithPassword($db, $_POST['email'], $_POST['password']);
-  
-  if ($customer) {
+  $owner = RestaurantOwner::getOwnerWithPassword($db, $_POST['email'], $_POST['password']);
+  $type = $_POST['account-type'];
+
+  if ($customer && ($type == "customer")) {
     $session->setId($customer->id);
     $session->setName($customer->name());
-    $session->addMessage('success', "You're in!");
+    $session->addMessage('success', "You're in! Welcome customer " . $customer->name() . "!");
+    header('Location: ../pages/index.php');
+  } else if ($owner && ($type == "owner")) {
+    $session->setId($owner->id);
+    $session->setName($owner->name());
+    $session->addMessage('success', "You're in! Welcome owner " . $owner->name() . "!");
+    header('Location: ../pages/index.php');
   } else {
     $session->addMessage('error', "Wrong email or password...");
+    header('Location: ../pages/login.php');
   }
-
-  header('Location: ../pages/index.php');
 ?>

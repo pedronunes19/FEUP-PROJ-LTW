@@ -70,7 +70,7 @@ html {
     flex-grow: 1;
   }
   
-  #logo {
+  .logo {
     color: var(--white);
     text-decoration: none;
     letter-spacing: 0.5em;

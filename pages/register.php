@@ -3,6 +3,7 @@
 
     require_once('../session/session.php');
     $session = new Session();
+    
     require_once('../templates/common.temp.php');
     require_once('../templates/account.temp.php');
     require_once('../database/connection.db.php');
