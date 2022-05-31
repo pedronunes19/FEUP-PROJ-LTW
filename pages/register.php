@@ -9,7 +9,7 @@
 
     $db = getDatabaseConnection();
 
-    drawFormWrapper();
+    drawFormWrapper($session);
     drawRegisterForm();
     drawFooter();
 ?>

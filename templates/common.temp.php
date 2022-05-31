@@ -16,7 +16,7 @@ require_once('../session/session.php');
 </head>
 <body>
     <header>
-        <h1 class="logo-wrapper"><a class="no-select" id="logo" href=".">TAKE-AWAY</a></h1>
+        <h1 class="logo-wrapper"><a class="no-select logo" href=".">TAKE-AWAY</a></h1>
         <div class="topnav">
             <div class="search-container">
                 <form action="search.php"  class="search-form">
@@ -27,7 +27,7 @@ require_once('../session/session.php');
             </div>
         <?php drawButtonsNoLogin(); ?>
     </header>
-    <section id="messages">
+    <section id="session-messages">
       <?php foreach ($session->getMessages() as $message) { ?>
         <article class="<?=$message['type']?>">
           <?=$message['text']?>

@@ -9,6 +9,7 @@
 
   $db = getDatabaseConnection();
   $customer = Customer::getCustomerWithPassword($db, $_POST['email'], $_POST['password']);
+  
   if ($customer) {
     $session->setId($customer->id);
     $session->setName($customer->name());
