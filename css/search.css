@@ -37,9 +37,15 @@ html {
   }
 
   .icon {
+    cursor: pointer;
+    text-decoration: none;
+    background: var(--dark-red);
+    border: none;
+    border-radius: 1em;
     color: var(--white);
     align-self: center;
-    
+    display: flex;
+    margin: 0.5em;
   }
 
   body {
@@ -218,7 +224,7 @@ html {
     padding: 1em;
   }
 
-  button {
+  .button {
     cursor: pointer;
     padding: 0.5em;
     width: 100%;

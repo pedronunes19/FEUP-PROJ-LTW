@@ -1,7 +1,7 @@
 html {
     --dark-red: #990f0f;
     --red: #ce1515;
-    --score-red: #ff0e0e;
+    --score-red: #ff0000;
     --white: #ffffff;
     --light-green: #66ff0d;
     --yellow: #ffeb39;
@@ -39,6 +39,7 @@ html {
   }
 
   .icon {
+    cursor: pointer;
     text-decoration: none;
     background: var(--dark-red);
     border: none;
@@ -46,7 +47,6 @@ html {
     color: var(--white);
     align-self: center;
     display: flex;
-    padding: 0.5em;
     margin: 0.5em;
   }
 
@@ -346,14 +346,17 @@ html {
 
   .review #positive{
     color: var(--light-green);
+    font-weight: 600;
   }
 
   .review #mid{
     color: var(--yellow);
+    font-weight: 600;
   }
 
   .review #negative{
     color: var(--score-red);
+    font-weight: 600;
   }
 
   .review #star{
