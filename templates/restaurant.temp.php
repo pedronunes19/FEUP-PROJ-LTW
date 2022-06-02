@@ -22,6 +22,18 @@
 <?php } ?>
 
 <?php function drawRestaurantSearch(array $restaurants, string $search) { ?>
+
+    <script src="../scripts/sidemenu.js"></script>
+  
+    <div id="search-menu" class="search-menu">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#"></a>
+      <a href="#">Services</a>
+      <a href="#">Clients</a>
+      <a href="#">Contact</a>
+    </div>
+    <button class="openbtn" onclick="openNav()"><i class="fas fa-search"></i></button>
+
     <h2 class="sub-header">Search results for "<?=$search?>"</h2>
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
