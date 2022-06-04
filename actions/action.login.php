@@ -16,11 +16,13 @@
   if ($customer && ($type == "customer")) {
     $session->setId($customer->id);
     $session->setName($customer->name());
+    $session->setType($type);
     $session->addMessage('success', "You're in! Welcome customer " . $customer->name() . "!");
     header('Location: ../pages/index.php');
   } else if ($owner && ($type == "owner")) {
     $session->setId($owner->id);
     $session->setName($owner->name());
+    $session->setType($type);
     $session->addMessage('success', "You're in! Welcome owner " . $owner->name() . "!");
     header('Location: ../pages/index.php');
   } else {

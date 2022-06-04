@@ -77,7 +77,7 @@
 
 <?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews, Session $session) { ?>
   <h2 class="sub-header"><?=$restaurant->name?> 
-    <?php if($session->isLoggedIn()){
+    <?php if($session->isLoggedIn() && $session->getType()=="customer"){
       drawFavoriteButton($db, $restaurant, $session);
     }?>
   </h2>

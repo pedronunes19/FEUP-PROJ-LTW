@@ -25,12 +25,20 @@
       return isset($_SESSION['name']) ? $_SESSION['name'] : null;
     }
 
+    public function getType() : ?string {
+      return isset($_SESSION['type']) ? $_SESSION['type'] : null;
+    }
+
     public function setId(int $id) {
       $_SESSION['id'] = $id;
     }
 
     public function setName(string $name) {
       $_SESSION['name'] = $name;
+    }
+
+    public function setType(string $type) {
+      $_SESSION['type'] = $type;
     }
 
     public function addMessage(string $type, string $text) {
