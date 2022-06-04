@@ -134,6 +134,16 @@
 
     }
 
+    function getfavouriteRestaurants(PDO $db,int $customer){
+      $stmt = $db->prepare('SELECT RestaurantId
+        FROM FavoriteCustomerRestaurant
+        WHERE CustomerId = ?
+      ');
+      $stmt->execute(array($this->id,$customer));
+      
+
+    }
+
     function favoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
