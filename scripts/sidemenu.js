@@ -1,9 +1,22 @@
-/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function clickNav(){
+  if (nav==0){
+    openNav();
+    nav=1;
+  }
+  else{
+    closeNav();
+    nav=0;
+  }
+}
+
+
 function openNav() {
-    document.getElementById("search-menu").style.width = "20em";;
+    document.getElementById("search-menu").style.width = "20em";
+    document.getElementsByClassName("openbtn")[0].style.marginLeft = "16em";
   }
   
-  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-  function closeNav() {
-    document.getElementById("search-menu").style.width = "0";
-  }
+
+function closeNav() {
+  document.getElementById("search-menu").style.width = "0";
+  document.getElementsByClassName("openbtn")[0].style.marginLeft = "0em";
+}
