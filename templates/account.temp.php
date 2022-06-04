@@ -3,7 +3,7 @@
     require_once('../session/session.php'); 
 ?>
 
-<?php function drawFormWrapper(Session $session) { ?>
+<?php function drawFormWrapper(string $css, Session $session) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -14,7 +14,7 @@
     <title>Take-away</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/account.css">
+    <link rel="stylesheet" href=<?=$css?>>
 </head>
 <body>
     <section id="session-messages">

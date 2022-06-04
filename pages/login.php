@@ -10,7 +10,7 @@
 
     $db = getDatabaseConnection();
 
-    drawFormWrapper($session);
+    drawFormWrapper("../css/account.css", $session);
     drawLoginForm();
     drawFooter();
 ?>

@@ -11,7 +11,7 @@
 
     $db = getDatabaseConnection();
 
-    $customer = Customer::getCustomer($db,intval($_GET['id']));
+    $customer = Customer::getCustomer($db, $session->getID());
 
     drawHeader("../css/user.css",$session);
     drawUserPage($customer);

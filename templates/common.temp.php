@@ -12,6 +12,7 @@ require_once('../session/session.php');
     <script src="https://kit.fontawesome.com/eee7326786.js" crossorigin="anonymous"></script>
     <title>Take-away</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href=<?=$css?>>
 </head>
 <body>
@@ -59,7 +60,7 @@ require_once('../session/session.php');
 <?php } ?>
 
 <?php function drawButtonsLogin() { ?>
-    <form class="icon" action="../pages/index.php">
+    <form class="icon" action="../pages/user.php">
         <button class="icon">
             <i class="fa-solid fa-circle-user"></i>
         </button>
