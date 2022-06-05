@@ -13,7 +13,7 @@
     word-wrap: break-word;
     background-color: var(--red);
     background-clip: border-box;
-    border: 0.1em solid var(--black-translucid);
+    border: 0.1em solid var(--black);
     border-radius: 1em;
 }
 

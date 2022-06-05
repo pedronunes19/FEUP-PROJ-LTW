@@ -315,9 +315,10 @@ html {
     padding-top : 1em;
     padding-bottom: 1em;
     color: var(--white);
-    background-color: var(--black);
     margin-top: 0.3em;
     margin-bottom: 0.3em;
+    background-color: var(--red);
+    background-clip: border-box;
     border-radius: 1em;
     z-index:4;
   }
@@ -344,25 +345,14 @@ html {
     text-align: center;
   }
 
-  .review #positive{
-    color: var(--light-green);
-    font-weight: 600;
-  }
-
-  .review #mid{
-    color: var(--yellow);
-    font-weight: 600;
-  }
-
-  .review #negative{
-    color: var(--score-red);
+  .review #user-score{
     font-weight: 600;
   }
 
   .review #star{
     position: absolute;
-    font-size: 20px;
-    transform: translate(2px, -6px);
+    font-size: 18px;
+    transform: translate(2px, -3px);
   }
 
   .button {
