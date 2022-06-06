@@ -7,23 +7,41 @@
 ?>
 
 <?php function drawUserPage($customer) { ?>
-    <h1 class = "header"> Welcome <?=$customer->first_name?> <?=$customer->last_name?>!</h1>
+    <h1 class = "greeting"> Hello <?=$customer->first_name?> <?=$customer->last_name?>!</h1>
     <div class ='container'>
-        <div class = 'main-body'>
+        <div class="card picture-card">
+            <img class="profile-img" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User">
+        </div>
+        <div class="card intro-card">
+            <div class="user-info-1">
+                <h4><?=$customer->first_name?> <?=$customer->last_name?></h4>
+                <p><?=$customer->address?></p>
+            </div>
+            <div class="user-info-2">
+                <h4><?=$customer->first_name?> <?=$customer->last_name?></h4>
+                <p><?=$customer->address?></p>
+            </div>
+        </div>
+    </div>
+
+<?php } ?>
+
+<!--
+    <div class = 'main-body'>
             <div class="row gutters-sm">
                     <div class="col-md-4 mb-3">
                     <div class="card">
                         <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <div class="intro-card">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User" class="rounded-circle" width="150">
                             <div class="mt-3">
-                            <h4><?=$customer->first_name?> <?=$customer->last_name?></h4>
-                            <p class="text-muted font-size-sm"><?=$customer->adress?></p>
+                            <h4><=$customer->first_name?> <=$customer->last_name?></h4>
+                            <p class="text-muted font-size-sm"><=$customer->address?></p>
                             </div>
                         </div>
                         </div>
                     </div>
-                    <div class="card mt-3">
+                    <div class="card">
                         <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Favourite Restaurants</h6>
@@ -44,7 +62,7 @@
                             <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            <?=$customer->first_name?> <?=$customer->last_name?>
+                            <=$customer->first_name?> <=$customer->last_name?>
                             </div>
                         </div>
                         <hr>
@@ -53,7 +71,7 @@
                             <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            <?=$customer->email?>
+                            <=$customer->email?>
                             </div>
                         </div>
                         <hr>
@@ -62,7 +80,7 @@
                             <h6 class="mb-0">Mobile</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            <?=$customer->phone?>
+                            <=$customer->phone?>
                             </div>
                         </div>
                         <hr>
@@ -71,7 +89,7 @@
                             <h6 class="mb-0">Address</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                            <?=$customer->adress?>
+                            <=$customer->adress?>
                             </div>
                         </div>
                         <hr>
@@ -83,6 +101,4 @@
                         </div>
                     </div>
             </div>
-    </div>
-
-<?php } ?>
+-->

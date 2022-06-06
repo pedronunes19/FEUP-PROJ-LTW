@@ -21,15 +21,15 @@ require_once('../session/session.php');
         <div class="topnav">
             <div class="search-container">
                 <form action="search.php"  class="search-form">
-                <input type="text" placeholder="Search..." name="search">
-                <button class="button" type="submit"><i class="fa fa-search"></i></button>
+                    <input type="text" placeholder="Search..." name="search">
+                    <button class="button" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-            </div>
-            <?php 
-        if ($session->isLoggedIn()) drawButtonsLogin($session);
-        else drawButtonsNoLogin();
-      ?>
+        </div>
+        <?php 
+            if ($session->isLoggedIn()) drawButtonsLogin($session);
+            else drawButtonsNoLogin();
+        ?>
     </header>
     <section id="session-messages">
       <?php foreach ($session->getMessages() as $message) { ?>
@@ -52,22 +52,28 @@ require_once('../session/session.php');
 <?php } ?>
 
 <?php function drawButtonsNoLogin() { ?>
-    <form class="icon" action="../pages/login.php">
-        <button class="icon" type="submit">
-            <i class="fa-solid fa-right-to-bracket"></i>
-        </button>
-    </form>
+    <div class="icon-wrapper">
+        <form class="icon" action="../pages/login.php">
+            <button class="icon" type="submit">
+                <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+        </form>
+    </div>
 <?php } ?>
 
 <?php function drawButtonsLogin() { ?>
-    <form class="icon" action="../pages/user.php">
-        <button class="icon">
-            <i class="fa-solid fa-circle-user"></i>
-        </button>
-    </form>
-    <form class="icon" action="../actions/action.logout.php" method="post">
-        <button class="icon" type="submit">
-            <i class="fa-solid fa-right-from-bracket"></i>
-        </button>
-    </form>
+    <div class="icon-wrapper">
+        <div class="icon">
+            <a class = "icon-area" href="../pages/user.php">
+                <button class="icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </button>
+            </a>
+        </div>
+        <form class="icon" action="../actions/action.logout.php" method="post">
+            <button class="icon" type="submit">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </button>
+        </form>
+    </div>
 <?php } ?>

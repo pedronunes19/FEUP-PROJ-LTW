@@ -1,177 +1,3 @@
-html {
-    --dark-red: #990f0f;
-    --red: #ce1515;
-    --white: #ffffff;
-    --light-green: #66ff0d;
-    --black: #000000;
-    --black-translucid: #000000c0;
-    --grey-light: #ddd;
-    --grey: #ccc;
-    font-family: 'Nunito', sans-serif;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
-  ::-webkit-scrollbar {
-    width: 0.5em;
-  }
-
-  ::-webkit-scrollbar-track {
-    opacity: 0.5;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--white);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    transition: 0.3s ease;
-    background-color: greenyellow;
-  }
-
-  .no-select {
-    -webkit-user-select: none;
-    user-select: none;
-  }
-
-  .icon {
-    cursor: pointer;
-    text-decoration: none;
-    background: var(--dark-red);
-    border: none;
-    border-radius: 1em;
-    color: var(--white);
-    align-self: center;
-    display: flex;
-    margin: 0.5em;
-  }
-
-  body {
-    overflow: overlay;
-    margin: 0;
-    padding: 0;
-    background-color: var(--dark-red);
-    font-weight: 400;
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  header {
-    position: sticky;
-    z-index: 1;
-    top: 0;
-    display: flex;
-    padding-left: 2em;
-    padding-right: 2em;
-    background-color: var(--red);
-  }
-
-  #session-messages {
-    text-align: center;
-    position: relative;
-    background-color: var(--white);
-  }
-
-  .error {
-    color: var(--red);
-  }
-
-  .success {
-    color: var(--black);
-  }
-  
-  .logo-wrapper {
-    flex-grow: 1;
-  }
-  
-  .logo {
-    color: var(--white);
-    text-decoration: none;
-    letter-spacing: 0.5em;
-    font-weight: 900;
-    text-shadow:0.1em 0.1em var(--black);
-  }
-  
-  main {
-    flex: 1 0 auto;
-    margin-left: 2em;
-    margin-right: 2em;
-    padding: 0em;
-    padding-bottom: 2em;
-  }
-
-  .sub-header {
-    font-weight: 700;
-    text-align: center;
-    color: var(--white);
-  }
-  
-  main a {
-    font-weight: 400;
-    color: var(--white);
-    text-decoration: none;
-  }
-
-  
-  .topnav{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    padding-right: 2em;
-  }
-
-  .topnav .search-container {
-    float: right;
-    
-  }
-
-  .search-form{
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto;
-    column-gap: 0.5em;
-  }
-  
-  .topnav input[type=text] {
-    position: relative;
-    padding: 0.5em;
-    padding-right: 4.25em;
-    font-size: 17px;
-    border: none;
-    border-radius: 1em;
-    outline: none;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    z-index: 2;
-  }
-  
-  .topnav .search-container button {
-    position: relative;
-    padding: 0.5em;
-    width: 4em;
-    color: var(--dark-red);
-    background-color: var(--white);
-    font-size: 17px;
-    cursor: pointer;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    z-index: 3;
-  }
-  
-  .topnav .search-container button:hover {
-    background-color: var(--dark-red);
-    color: var(--white);
-    transform: scale(101%)
-  }
-
   .restaurants {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -223,36 +49,55 @@ html {
     padding: 1em;
   }
 
-  .button {
-    cursor: pointer;
-    padding: 0.5em;
-    width: 100%;
-    background: var(--dark-red);
-    border: none;
-    border-radius: 1em;
-    color: var(--white);
+  .search-menu {
+    height: 100%; 
+    width: 0; 
+    position: fixed; 
+    z-index: 1; 
+    margin-top: 0em;
+    left: 0;
+    background-color: var(--black); 
+    overflow-x: hidden; 
+    padding-top: 2em; 
+    transition: 0.5s; 
   }
 
-  footer {
-    bottom: 0;
-    margin-top: auto;
-    display: flex;
-    flex-shrink: 0;
+
+  .search-menu a {
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--white);
+    display: block;
+    transition: 0.3s;
+  }
+
+
+  .search-menu a:hover {
+    color: var(--grey);
+  }
+
+  .search-menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
     background-color: var(--black);
     color: var(--white);
+    padding: 10px 15px;
+    border: none;
+    transform: translateX(-1.55em);
+    border-radius: 1em;
   }
 
-  footer p.left {
-    flex-grow: 1;
-    padding-left: 2em;
-  }
-
-  footer p.right {
-    padding-right: 2em;
-  }
-
-
-
+<<<<<<< Updated upstream
 .search-menu {
   height: 100%; 
   width: 0; 
@@ -307,3 +152,8 @@ html {
 .openbtn:hover {
   color: var(--dark-red);
 }
+=======
+  .openbtn:hover {
+    background-color: var(--grey);
+  }
+>>>>>>> Stashed changes

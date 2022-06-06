@@ -16,14 +16,22 @@
   if ($customer && ($type == "customer")) {
     $session->setId($customer->id);
     $session->setName($customer->name());
+<<<<<<< Updated upstream
     $session->setType($type);
     $session->addMessage('success', "You're in! Welcome customer " . $customer->name() . "!");
+=======
+    $session->addMessage('success', "You're in! Welcome, customer " . $customer->name() . "!");
+>>>>>>> Stashed changes
     header('Location: ../pages/index.php');
   } else if ($owner && ($type == "owner")) {
     $session->setId($owner->id);
     $session->setName($owner->name());
+<<<<<<< Updated upstream
     $session->setType($type);
     $session->addMessage('success', "You're in! Welcome owner " . $owner->name() . "!");
+=======
+    $session->addMessage('success', "You're in! Welcome, owner " . $owner->name() . "!");
+>>>>>>> Stashed changes
     header('Location: ../pages/index.php');
   } else {
     $session->addMessage('error', "Wrong email or password...");

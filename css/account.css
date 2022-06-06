@@ -1,6 +1,6 @@
 .login-register-form {
-    width: 30em;
-    margin: 20vh auto;
+    max-width: 30em;
+    margin: 12em auto;
     padding: 3em;
     background: var(--red);
     border-radius: 1em;
@@ -24,7 +24,7 @@ h2 {
 }
 
 .logo {
-    font-size: 1.2em;
+    font-size: clamp(0.1em, 6vw, 1.2em)
 }
 
 .input-field input, .input-field select {
