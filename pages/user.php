@@ -11,9 +11,12 @@
 
     $db = getDatabaseConnection();
 
-    $customer = Customer::getCustomer($db, $session->getID());
+    if ($session->getType() == "customer") $user = Customer::getCustomer($db, $session->getID());
+    else $user = RestaurantOwner::getOwner($db, $session->getID());
+
+    $orders = Order::getOrders($db, $user->id);
 
     drawHeader("../css/user.css",$session);
-    drawUserPage($customer);
+    drawUserPage($db, $user, $orders);
     drawFooter();
 ?>    

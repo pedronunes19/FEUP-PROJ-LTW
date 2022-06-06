@@ -43,7 +43,8 @@ VALUES
     (1, "Cliente", "1", "Email 1", "Address 1", "Password 1"),
     (2, "Cliente", "2", "Email 2", "Address 1", "Password 2"),
     (3, "Cliente", "3", "Email 3", "Address 2", "Password 3"),
-    (4, "Cliente", "4", "email@email.com", "Address 3", "01b307acba4f54f55aafc33bb06bbbf6ca803e9a");
+    (4, "Cliente", "4", "email@email.com", "Address 3", "01b307acba4f54f55aafc33bb06bbbf6ca803e9a"),
+    (5, "João", "Genérico", "joaogenerico@gmail.com", "Rua dos Genéricos, 20", "$2y$10$SXdWFvjbGAbe/N8vgInw2uf0jgYC8FtUGElEAAHRa0IM.OqHNPE0q");
 
 INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status) 
 VALUES 
@@ -55,7 +56,13 @@ VALUES
     (6, 1, 5, "Received"),
     (7, 1, 5, "Received"),
     (8, 3, 5, "Received"),
-    (9, 3, 5, "Received");
+    (9, 3, 5, "Received"),
+    (10, 5, 1, "Received"),
+    (11, 5, 2, "Received"),
+    (12, 5, 3, "Received"),
+    (13, 5, 4, "Received"),
+    (14, 5, 5, "Received");
+
 
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId) 
 VALUES 

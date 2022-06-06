@@ -83,10 +83,14 @@
     align-self: center;
     text-align: center;
     position: relative;
+    padding-left: 1em;
     background-color: var(--white);
     width: fit-content;
     min-width: 20%;
-    padding: 0.2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .error {
@@ -328,22 +332,21 @@
     color: var(--white);
   }
 
+  .close-button {
+    background: var(--black);
+    border-radius: 0;
+  }
+
   footer {
     bottom: 0;
     margin-top: auto;
+    padding-right: 1em;
+    padding-left: 1em;
     display: flex;
-    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: var(--black);
     color: var(--white);
-  }
-
-  footer p.left {
-    flex-grow: 1;
-    padding-left: 2em;
-  }
-
-  footer p.right {
-    padding-right: 2em;
   }
 
   .icon-area {
@@ -354,6 +357,15 @@
     header {
       display: block;
       text-align: center;
+    }
+
+    .logo {
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.5em;
+      font-weight: 900;
+      text-shadow:0.1em 0.1em var(--black);
+      font-size: 6vw;
     }
 
     .topnav {

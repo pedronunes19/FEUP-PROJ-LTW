@@ -7,6 +7,10 @@ DROP TABLE IF EXISTS Dish;
 DROP TABLE IF EXISTS Customer;
 DROP TABLE IF EXISTS OrderQueue;
 DROP TABLE IF EXISTS Review;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS CategoryRestaurant;
+DROP TABLE IF EXISTS CategoryMenu;
+DROP TABLE IF EXISTS CategoryDish;
 DROP TABLE IF EXISTS FavoriteCustomerRestaurant;
 DROP TABLE IF EXISTS FavoriteCustomerDish;
 DROP TABLE IF EXISTS MenuDish;
@@ -131,7 +135,7 @@ CREATE TABLE Category
 (
     CategoryId INTEGER NOT NULL,
     Name NVARCHAR(100),
-    CONSTRAINT PK_Category PRIMARY KEY (CategoryId),
+    CONSTRAINT PK_Category PRIMARY KEY (CategoryId)
 );
 
 CREATE TABLE CategoryRestaurant

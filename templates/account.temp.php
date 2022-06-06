@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eee7326786.js" crossorigin="anonymous"></script>
+    <script src="../scripts/close.js" defer></script>
     <title>Take-away</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
@@ -18,11 +19,12 @@
 </head>
 <body>
     <section id="session-messages">
-      <?php foreach ($session->getMessages() as $message) { ?>
+        <?php foreach ($session->getMessages() as $message) { ?>
         <article class="<?=$message['type']?>">
-          <?=$message['text']?>
+            <?=$message['text']?>
         </article>
-      <?php } ?>
+        <button class="button close-button">close</button>
+        <?php } ?>
     </section>
     <main>
 <?php } ?>

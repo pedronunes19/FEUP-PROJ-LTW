@@ -10,6 +10,7 @@ require_once('../session/session.php');
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/eee7326786.js" crossorigin="anonymous"></script>
+    <script src="../scripts/close.js" defer></script>
     <title>Take-away</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/style.css">
@@ -32,11 +33,12 @@ require_once('../session/session.php');
         ?>
     </header>
     <section id="session-messages">
-      <?php foreach ($session->getMessages() as $message) { ?>
+        <?php foreach ($session->getMessages() as $message) { ?>
         <article class="<?=$message['type']?>">
-          <?=$message['text']?>
+            <?=$message['text']?>
         </article>
-      <?php } ?>
+        <button class="button close-button">close</button>
+        <?php } ?>
     </section>
     <main>
 <?php } ?>
@@ -44,8 +46,8 @@ require_once('../session/session.php');
 <?php function drawFooter() { ?>
     </main>
     <footer>
-        <p class="left">Amazing take-away website for LTW, 2022</p>
-        <p class="right">All rights reserved &copy</p>
+        <p>Amazing take-away website for LTW, 2022</p>
+        <p>All rights reserved &copy</p>
     </footer>
   </body>
 </html>
@@ -53,11 +55,13 @@ require_once('../session/session.php');
 
 <?php function drawButtonsNoLogin() { ?>
     <div class="icon-wrapper">
-        <form class="icon" action="../pages/login.php">
-            <button class="icon" type="submit">
-                <i class="fa-solid fa-right-to-bracket"></i>
-            </button>
-        </form>
+        <div class="icon">
+            <a class = "icon-area" href="../pages/login.php">
+                <button class="icon">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                </button>
+            </a>
+        </div>
     </div>
 <?php } ?>
 

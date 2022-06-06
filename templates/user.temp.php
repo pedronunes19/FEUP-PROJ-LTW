@@ -1,26 +1,73 @@
 <?php
     declare(strict_types = 1);
     require_once('../database/customer.class.php');
+    require_once('../database/restaurantOwner.class.php');
     require_once('../database/dish.class.php');
     require_once('../database/restaurant.class.php');
+    require_once('../database/order.class.php');
     require_once('../database/review.class.php');
 ?>
 
-<?php function drawUserPage($customer) { ?>
-    <h1 class = "greeting"> Hello <?=$customer->first_name?> <?=$customer->last_name?>!</h1>
+<?php function drawUserPage($db, $user, array $orders) { ?>
+    <h1 class = "greeting"> Hello, <?=$user->first_name?> <?=$user->last_name?>!</h1>
     <div class ='container'>
         <div class="card picture-card">
             <img class="profile-img" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User">
         </div>
         <div class="card intro-card">
-            <div class="user-info-1">
-                <h4><?=$customer->first_name?> <?=$customer->last_name?></h4>
-                <p><?=$customer->address?></p>
+            <div class="user-info">
+                <h4 class="section-title">Name</h4>
+                <div class="section-text"><?=$user->first_name?> <?=$user->last_name?></div>
             </div>
-            <div class="user-info-2">
-                <h4><?=$customer->first_name?> <?=$customer->last_name?></h4>
-                <p><?=$customer->address?></p>
+            <div class="user-info">
+                <h4 class="section-title">Address</h4>
+                <?php $user->address == "" ? $address = "Address: None" : $address = $user->address?>
+                <?php $user->postal_code == "" ? $postal_code = "Postal code: None" : $postal_code = $user->postal_code?>
+                <?php $user->city == "" ? $city = "City: None" : $city = $user->city?>
+                <?php $user->country == "" ? $country = "Country: None" : $country = $user->country?>
+                <div class="section-text"><?=$address?></div>
+                <div class="section-text"><?=$city?></div>
+                <div class="section-text"><?=$postal_code?></div>
+                <div class="section-text"><?=$country?></div>
             </div>
+            <div class="user-info">
+                <h4 class="section-title">Email</h4>
+                <div class="section-text"><?=$user->email?></div>
+            </div>
+            <div class="user-info">
+                <h4 class="section-title">Phone Number</h4>
+                <?php $user->phone == "" ? $phone = "None" : $phone = $user->phone?>
+                <div class="section-text"><?=$phone?></div>
+            </div>
+            <div class="user-info">
+                <h4 class="section-title">Name</h4>
+                <div class="section-text"><?=$user->first_name?> <?=$user->last_name?></div>
+            </div>
+            <div class="user-info">
+                <h4 class="section-title">Address</h4>
+                <?php $user->address == "" ? $address = "None" : $address = $user->address?>
+                <div class="section-text"><?=$address?></div>
+            </div>
+        </div>
+        <div class="card order-card">
+            <h4 class="section-title order-title">Order history</h4>
+            <table class="order-table">
+                <thead class="table-header-list">
+                    <tr>
+                        <th class="table-header">Status</th>
+                        <th class="table-header">Restaurant Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order) { 
+                        $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
+                        <tr>
+                            <td class="table-cell"><?=$order->status?></td>
+                            <td class="table-cell"><?=$restaurant->name?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
     </div>
 
