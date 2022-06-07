@@ -17,6 +17,6 @@
     $orders = Order::getOrders($db, $user->id);
 
     drawHeader("../css/user.css",$session);
-    drawUserPage($db, $user, $orders);
+    drawUserPage($db, $session, $user, $orders);
     drawFooter();
 ?>    

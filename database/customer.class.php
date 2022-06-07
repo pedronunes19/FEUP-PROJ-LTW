@@ -29,13 +29,13 @@
       return $this->first_name . ' ' . $this->last_name;
     }
 
-    function save($db) {
+    function save($db, string $first_name, string $last_name, string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email, string $password) {
       $stmt = $db->prepare('
-        UPDATE Customer SET FirstName = ?, LastName = ?, Address = ?, PhoneNumber = ?
+        UPDATE Customer SET FirstName = ?, LastName = ?, Address = ?, City = ?, Country = ?, PostalCode = ?, PhoneNumber = ?, Email = ?, Password = ?
         WHERE CustomerId = ?
       ');
 
-      $stmt->execute(array($this->first_name, $this->last_name, $this->address, $this->phone, $this->id));
+      $stmt->execute(array($first_name, $last_name, $address, $city, $country, $postal_code, $phone, strtolower($email), password_hash($password, PASSWORD_BCRYPT), $this->id));
     }
 
     static function create($db, string $first_name, string $last_name, string $address, ?string $city, ?string $country, ?string $postal_code, ?string $phone, string $email, string $password) {

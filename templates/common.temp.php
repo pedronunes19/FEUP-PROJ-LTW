@@ -74,8 +74,8 @@ require_once('../session/session.php');
                 </button>
             </a>
         </div>
-        <form class="icon" action="../actions/action.logout.php" method="post">
-            <button class="icon" type="submit">
+        <form class="icon logout-form" action="../actions/action.logout.php" method="post">
+            <button class="icon logout-icon" type="submit">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </button>
         </form>

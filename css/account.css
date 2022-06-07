@@ -7,6 +7,32 @@
     box-shadow: 0.1em 0.1em var(--black);
 }
 
+.input-field input, .input-field select {
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    background: var(--white);
+    color: var(--black);
+    border-radius: 1em;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: 0.1em 0.1em var(--black);
+}
+
+label {
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+    display: block;
+    font-size: 1em;
+    color: var(--white);
+}
+
+.text-info {
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
 h2 {
     text-align: center;
     font-size: 2em;
@@ -27,35 +53,26 @@ h2 {
     font-size: clamp(0.1em, 6vw, 1.2em)
 }
 
-.input-field input, .input-field select {
-    padding: 0.5em;
+.button-page-swap-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.button {
     width: 100%;
-    font-size: 1em;
-    background: var(--white);
-    color: var(--black);
-    border-radius: 1em;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    box-shadow: 0.1em 0.1em var(--black);
-}
-
-label {
-    padding-left: 0.5em;
-    display: block;
-    font-size: 1em;
-    color: var(--white);
-}
-
-.text-info {
-    padding: 0.5em;
+    padding: 1em;
     margin-bottom: 1em;
 }
 
-.button-page-swap-wrapper {
-    display: grid;
-    grid-template-columns: 25% 75%;
-    grid-template-rows: 1;
-    text-align: end;
-    align-items: center;
+@media screen and (max-width: 400px) {
+    .button-page-swap-wrapper {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
 }

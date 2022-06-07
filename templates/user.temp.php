@@ -8,7 +8,7 @@
     require_once('../database/review.class.php');
 ?>
 
-<?php function drawUserPage($db, $user, array $orders) { ?>
+<?php function drawUserPage($db, $session, $user, array $orders) { ?>
     <h1 class = "greeting"> Hello, <?=$user->first_name?> <?=$user->last_name?>!</h1>
     <div class ='container'>
         <div class="card picture-card">
@@ -26,8 +26,8 @@
                 <?php $user->city == "" ? $city = "City: None" : $city = $user->city?>
                 <?php $user->country == "" ? $country = "Country: None" : $country = $user->country?>
                 <div class="section-text"><?=$address?></div>
-                <div class="section-text"><?=$city?></div>
                 <div class="section-text"><?=$postal_code?></div>
+                <div class="section-text"><?=$city?></div>
                 <div class="section-text"><?=$country?></div>
             </div>
             <div class="user-info">
@@ -39,36 +39,94 @@
                 <?php $user->phone == "" ? $phone = "None" : $phone = $user->phone?>
                 <div class="section-text"><?=$phone?></div>
             </div>
-            <div class="user-info">
-                <h4 class="section-title">Name</h4>
-                <div class="section-text"><?=$user->first_name?> <?=$user->last_name?></div>
-            </div>
-            <div class="user-info">
-                <h4 class="section-title">Address</h4>
-                <?php $user->address == "" ? $address = "None" : $address = $user->address?>
-                <div class="section-text"><?=$address?></div>
-            </div>
         </div>
-        <div class="card order-card">
-            <h4 class="section-title order-title">Order history</h4>
-            <table class="order-table">
-                <thead class="table-header-list">
-                    <tr>
-                        <th class="table-header">Status</th>
-                        <th class="table-header">Restaurant Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($orders as $order) { 
-                        $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
-                        <tr>
-                            <td class="table-cell"><?=$order->status?></td>
-                            <td class="table-cell"><?=$restaurant->name?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+        <?php if ($session->getType() == "customer") drawUserOrders($db, $orders); ?>
+        <div class="card edit-card">
+            <h4 class="section-title order-title">Edit profile</h4>
+            <form action="../actions/action.edit_profile.php" method="post">
+                <div class="input-field">
+                    <label for="first-name">First Name *</label>
+                    <input class="register_required" type="text" name="first-name" placeholder="James" value="<?=$user->first_name?>" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="last-name">Last Name *</label>
+                    <input class="register_required" type="text" name="last-name" placeholder="Doe" value="<?=$user->last_name?>" required>
+                </div>
+
+                <div class="input-field">
+                <?php if ($session->getType() == "customer") { ?>
+                    <label for="address">Address *</label>
+                    <input class="register_required" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>" required>
+                <?php } else { ?>
+                    <label for="address">Address</label>
+                    <input class="register_optional" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>">
+                <?php } ?>
+                </div>
+
+                <div class="input-field">
+                    <label for="postal-code">Postal Code</label>
+                    <input class="register_optional" type="text" name="postal-code" placeholder="4470-123" minlength="8" maxlength="8" value="<?=$user->postal_code?>">
+                </div>
+
+                <div class="input-field">
+                    <label for="city">City</label>
+                    <input class="register_optional" type="text" name="city" placeholder="Doe City" value="<?=$user->city?>">
+                </div>
+
+                <div class="input-field">
+                    <label for="country">Country</label>
+                    <input class="register_optional" type="text" name="country" placeholder="Doeland" value="<?=$user->country?>">
+                </div>
+
+                <div class="input-field">
+                    <label for="phone-number">Phone Number</label>
+                    <input class="register_optional" type="tel" name="phone-number" placeholder="912345678" minlength="9" maxlength="9" value="<?=$user->phone?>">
+                </div>
+
+                <div class="input-field">
+                    <label for="email">Email *</label>
+                    <input class="register_required" type="text" name="email" placeholder="jamesdoe@goodmail.com" value="<?=$user->email?>" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="password">Password *</label>
+                    <input class="register_required" type="password" name="password" placeholder="123" required minlength=10>
+                </div>
+
+                <div class="asterisk-info">
+                    <a class="text-info">* - Required field<br></a>
+                </div> 
+                <div class="button-wrapper">
+                    <button class="button edit-button" type="submit">Edit information</button>
+                </div>
+            </form>
         </div>
+    </div>
+
+<?php } ?>
+
+
+<?php function drawUserOrders($db, array $orders) { ?>
+    <div class="card order-card">
+        <h4 class="section-title order-title">Order history</h4>
+        <table class="order-table">
+            <thead class="table-header-list">
+                <tr>
+                    <th class="table-header">Status</th>
+                    <th class="table-header">Restaurant Name</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($orders as $order) { 
+                $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
+                <tr>
+                    <td class="table-cell"><?=$order->status?></td>
+                    <td class="table-cell"><?=$restaurant->name?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
     </div>
 
 <?php } ?>

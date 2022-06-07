@@ -22,20 +22,25 @@
     border: 0.1em solid var(--black);
     border-radius: 1em;
     overflow-wrap: break-word;
-    flex-grow: 1;
+    min-width: 30%;
 }
 
 .intro-card {
     max-width: 100%;
+    max-height: 50%;
     display: flex;
-    flex-flow: row wrap;
-    flex-grow: 1;
+    flex-wrap: wrap;
+    flex-direction: row;
     gap: 2em;
     justify-content: space-around;
 }
 
 .order-card {
     min-width: 30%;
+}
+
+.edit-card {
+
 }
 
 .profile-img {
@@ -48,6 +53,7 @@
     font-size: 1.5em;
     text-align: center;
     word-wrap: break-word;
+    color: var(--white);
 }
 
 .section-text {
@@ -85,15 +91,69 @@
     background-color: var(--black);
 }
 
+.login-register-form {
+    max-width: 30em;
+    margin: 12em auto;
+    padding: 3em;
+    background: var(--red);
+    border-radius: 1em;
+    box-shadow: 0.1em 0.1em var(--black);
+}
+
+
+.input-field input, .input-field select {
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    background: var(--white);
+    color: var(--black);
+    border-radius: 1em;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: 0.1em 0.1em var(--black);
+}
+
+label {
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+    display: block;
+    font-size: 1em;
+    color: var(--white);
+}
+
+.text-info {
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.edit-button {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
 @media screen and (max-width: 420px) {
     .greeting {
         font-size: 8vw;
     }
 }
 
-@media screen and (max-width: 220px) {
+@media screen and (max-width: 300px) {
     .section-title {
         word-wrap: none;
+        word-break: break-all;
+    }
+
+    .button-wrapper {
         word-break: break-all;
     }
 }

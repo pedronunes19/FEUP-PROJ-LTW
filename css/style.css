@@ -333,6 +333,7 @@
   }
 
   .close-button {
+    margin-left: 1em;
     background: var(--black);
     border-radius: 0;
   }
