@@ -8,18 +8,18 @@
     require_once('../database/review.class.php');
 ?>
 
-<?php function drawUserPage($db, $session, $user, array $orders) { ?>
+<?php function drawUserPage($db, $session, $user) { ?>
     <h1 class = "greeting"> Hello, <?=$user->first_name?> <?=$user->last_name?>!</h1>
     <div class ='container'>
         <div class="card picture-card">
             <img class="profile-img" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User">
         </div>
         <div class="card intro-card">
-            <div class="user-info">
+            <div class="section-wrapper">
                 <h4 class="section-title">Name</h4>
                 <div class="section-text"><?=$user->first_name?> <?=$user->last_name?></div>
             </div>
-            <div class="user-info">
+            <div class="section-wrapper">
                 <h4 class="section-title">Address</h4>
                 <?php $user->address == "" ? $address = "Address: None" : $address = $user->address?>
                 <?php $user->postal_code == "" ? $postal_code = "Postal code: None" : $postal_code = $user->postal_code?>
@@ -30,105 +30,164 @@
                 <div class="section-text"><?=$city?></div>
                 <div class="section-text"><?=$country?></div>
             </div>
-            <div class="user-info">
+            <div class="section-wrapper">
                 <h4 class="section-title">Email</h4>
                 <div class="section-text"><?=$user->email?></div>
             </div>
-            <div class="user-info">
+            <div class="section-wrapper">
                 <h4 class="section-title">Phone Number</h4>
                 <?php $user->phone == "" ? $phone = "None" : $phone = $user->phone?>
                 <div class="section-text"><?=$phone?></div>
             </div>
         </div>
-        <?php if ($session->getType() == "customer") drawUserOrders($db, $orders); ?>
-        <div class="card edit-card">
-            <h4 class="section-title order-title">Edit profile</h4>
-            <form action="../actions/action.edit_profile.php" method="post">
-                <div class="input-field">
-                    <label for="first-name">First Name *</label>
-                    <input class="register_required" type="text" name="first-name" placeholder="James" value="<?=$user->first_name?>" required>
-                </div>
+<?php } ?>
+        
+<?php function drawEditProfile($db, $session, $user) { ?>
+    <div class="card edit-card">
+        <h4 class="section-title order-title">Edit profile</h4>
+        <form action="../actions/action.edit_profile.php" method="post">
+            <div class="input-field">
+                <label for="first-name">First Name *</label>
+                <input class="register_required" type="text" name="first-name" placeholder="James" value="<?=$user->first_name?>" required>
+            </div>
 
-                <div class="input-field">
-                    <label for="last-name">Last Name *</label>
-                    <input class="register_required" type="text" name="last-name" placeholder="Doe" value="<?=$user->last_name?>" required>
-                </div>
+            <div class="input-field">
+                <label for="last-name">Last Name *</label>
+                <input class="register_required" type="text" name="last-name" placeholder="Doe" value="<?=$user->last_name?>" required>
+            </div>
 
-                <div class="input-field">
-                <?php if ($session->getType() == "customer") { ?>
-                    <label for="address">Address *</label>
-                    <input class="register_required" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>" required>
-                <?php } else { ?>
-                    <label for="address">Address</label>
-                    <input class="register_optional" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>">
-                <?php } ?>
-                </div>
+            <div class="input-field">
+            <?php if ($session->getType() == "customer") { ?>
+                <label for="address">Address *</label>
+                <input class="register_required" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>" required>
+            <?php } else { ?>
+                <label for="address">Address</label>
+                <input class="register_optional" type="text" name="address" placeholder="Doe Street, 77" value="<?=$user->address?>">
+            <?php } ?>
+            </div>
 
-                <div class="input-field">
-                    <label for="postal-code">Postal Code</label>
-                    <input class="register_optional" type="text" name="postal-code" placeholder="4470-123" minlength="8" maxlength="8" value="<?=$user->postal_code?>">
-                </div>
+            <div class="input-field">
+                <label for="postal-code">Postal Code</label>
+                <input class="register_optional" type="text" name="postal-code" placeholder="4470-123" minlength="8" maxlength="8" value="<?=$user->postal_code?>">
+            </div>
 
-                <div class="input-field">
-                    <label for="city">City</label>
-                    <input class="register_optional" type="text" name="city" placeholder="Doe City" value="<?=$user->city?>">
-                </div>
+            <div class="input-field">
+                <label for="city">City</label>
+                <input class="register_optional" type="text" name="city" placeholder="Doe City" value="<?=$user->city?>">
+            </div>
 
-                <div class="input-field">
-                    <label for="country">Country</label>
-                    <input class="register_optional" type="text" name="country" placeholder="Doeland" value="<?=$user->country?>">
-                </div>
+            <div class="input-field">
+                <label for="country">Country</label>
+                <input class="register_optional" type="text" name="country" placeholder="Doeland" value="<?=$user->country?>">
+            </div>
 
-                <div class="input-field">
-                    <label for="phone-number">Phone Number</label>
-                    <input class="register_optional" type="tel" name="phone-number" placeholder="912345678" minlength="9" maxlength="9" value="<?=$user->phone?>">
-                </div>
+            <div class="input-field">
+                <label for="phone-number">Phone Number</label>
+                <input class="register_optional" type="tel" name="phone-number" placeholder="912345678" minlength="9" maxlength="9" value="<?=$user->phone?>">
+            </div>
 
-                <div class="input-field">
-                    <label for="email">Email *</label>
-                    <input class="register_required" type="text" name="email" placeholder="jamesdoe@goodmail.com" value="<?=$user->email?>" required>
-                </div>
+            <div class="input-field">
+                <label for="email">Email *</label>
+                <input class="register_required" type="text" name="email" placeholder="jamesdoe@goodmail.com" value="<?=$user->email?>" required>
+            </div>
 
-                <div class="input-field">
-                    <label for="password">Password *</label>
-                    <input class="register_required" type="password" name="password" placeholder="123" required minlength=10>
-                </div>
+            <div class="input-field">
+                <label for="password">Password *</label>
+                <input class="register_required" type="password" name="password" placeholder="123" required minlength=10>
+            </div>
 
-                <div class="asterisk-info">
-                    <a class="text-info">* - Required field<br></a>
-                </div> 
-                <div class="button-wrapper">
-                    <button class="button edit-button" type="submit">Edit information</button>
-                </div>
-            </form>
-        </div>
+            <div class="asterisk-info">
+                <a class="text-info">* - Required field<br></a>
+            </div> 
+            <div class="button-wrapper">
+                <button class="button edit-button" type="submit">Edit information</button>
+            </div>
+        </form>
     </div>
-
+</div>
 <?php } ?>
 
+<?php function drawTables($db, $session, array $restaurants, array $orders, array $reviews) { ?>
+    <div class="card table-card">
+        <?php if ($session->getType() == "customer") {
+            drawUserOrders($db, $orders);
+            drawFavoriteRestaurants($db, $restaurants);
+            drawReviewsByUser($db, $reviews);
+        } ?>
+    </div>
+<?php } ?>
+
+<?php function drawReviewsByUser($db, array $reviews) { ?>
+    <h4 class="section-title">Your Reviews</h4>
+    <?php if (count($reviews) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No reviews yet. Your opinion is valuable!</div>
+        </div>
+    <?php } 
+    else { ?>
+    <table class="table restaurant-table">
+        <thead class="table-header-list">
+            <tr>
+                <th class="table-header">Restaurant Name</th>
+                <th class="table-header">Review Content</th>
+                <th class="table-header">Review Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($reviews as $review) { 
+            $restaurant = Restaurant::getRestaurant($db, $review->restaurant);
+            $restaurant_name = $restaurant->name;
+        ?>
+            <tr>
+                <td class="table-cell"><?=$restaurant_name?></td>
+                <td class="table-cell"><?=$review->content?></td>
+                <td class="table-cell"><?=$review->score?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <?php } ?>
+<?php } ?> 
+
+<?php function drawFavoriteRestaurants($db, array $restaurants) { ?>
+    <h4 class="section-title">Favorite Restaurants</h4>
+    <table class="table restaurant-table">
+        <thead class="table-header-list">
+            <tr>
+                <th class="table-header">Restaurant Name</th>
+                <th class="table-header">Restaurant Address</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($restaurants as $restaurant) { ?>
+            <tr>
+                <td class="table-cell"><?=$restaurant->name?></td>
+                <td class="table-cell"><?=$restaurant->address?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+<?php } ?>
 
 <?php function drawUserOrders($db, array $orders) { ?>
-    <div class="card order-card">
-        <h4 class="section-title order-title">Order history</h4>
-        <table class="order-table">
-            <thead class="table-header-list">
-                <tr>
-                    <th class="table-header">Status</th>
-                    <th class="table-header">Restaurant Name</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($orders as $order) { 
-                $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
-                <tr>
-                    <td class="table-cell"><?=$order->status?></td>
-                    <td class="table-cell"><?=$restaurant->name?></td>
-                </tr>
-            <?php } ?>
-            </tbody>
-        </table>
-    </div>
-
+    <h4 class="section-title">Order history</h4>
+    <table class="table order-table">
+        <thead class="table-header-list">
+            <tr>
+                <th class="table-header">Restaurant Name</th>
+                <th class="table-header">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($orders as $order) { 
+            $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
+            <tr>
+                <td class="table-cell"><?=$restaurant->name?></td>
+                <td class="table-cell"><?=$order->status?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
 <?php } ?>
 
 <!--

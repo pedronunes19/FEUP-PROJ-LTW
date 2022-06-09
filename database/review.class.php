@@ -19,8 +19,19 @@
     }
 
     static function getReviews(PDO $db, int $restaurant) : array {
-      $stmt = $db->prepare('SELECT ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId FROM Review WHERE RestaurantId = ?');
+      $stmt = $db->prepare('SELECT ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId FROM Review WHERE RestaurantId = ? ORDER BY ReviewScore DESC');
       $stmt-> execute(array($restaurant));
+
+      $reviews = array();
+      while ($review = $stmt->fetch()) {
+        $reviews[] = new Review($review['ReviewId'], $review['ReviewScore'], $review['ReviewContent'], $review['CustomerId'], $review['RestaurantId']);
+      }
+      return $reviews;
+    }
+
+    static function getReviewsByUser(PDO $db, int $id) : array {
+      $stmt = $db->prepare('SELECT ReviewId, ReviewScore, ReviewContent, CustomerId, RestaurantId FROM Review WHERE CustomerId = ?');
+      $stmt-> execute(array($id));
 
       $reviews = array();
       while ($review = $stmt->fetch()) {

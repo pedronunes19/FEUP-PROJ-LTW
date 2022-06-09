@@ -10,7 +10,7 @@
     {
       $this->id = $id;
       $this->name = $name;
-      $this->adress = $address;
+      $this->address = $address;
     }
 
     function save($db) {

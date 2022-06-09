@@ -15,7 +15,7 @@
       $this->status = $status;
     }
 
-    static function getOrders(PDO $db, int $id) : array {
+    static function getOrdersByUser(PDO $db, int $id) : array {
       $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status
       FROM OrderQueue
       WHERE CustomerId = ? 

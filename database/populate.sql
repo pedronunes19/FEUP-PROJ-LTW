@@ -68,4 +68,15 @@ INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, CustomerId, Restaurant
 VALUES 
     (1, 3, "Review 1", 1, 1),
     (2, 5, "Review 2", 1, 1),
-    (3, 2, "Review 3", 1, 1);
+    (3, 2, "Review 3", 1, 1),
+    (4, 5, "Review text", 5, 1),
+    (5, 4, "Review text", 5, 4),
+    (6, 1, "Review text", 5, 2),
+    (7, 3, "Review text", 5, 6);
+
+INSERT INTO FavoriteCustomerRestaurant (FavoriteCustomerRestaurantId, CustomerId, RestaurantId)
+VALUES 
+    (1, 5, 1),
+    (2, 5, 4),
+    (3, 5, 10);
+    
