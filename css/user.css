@@ -157,6 +157,14 @@ label {
     .greeting {
         font-size: 8vw;
     }
+
+    .card {
+        margin: 0;
+    }
+
+    main {
+        margin: 0;
+    }
 }
 
 @media screen and (max-width: 300px) {

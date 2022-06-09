@@ -111,9 +111,14 @@
     <div class="card table-card">
         <?php if ($session->getType() == "customer") {
             drawUserOrders($db, $orders);
-            drawFavoriteRestaurants($db, $restaurants);
+            drawFavoriteRestaurants($restaurants);
             drawReviewsByUser($db, $reviews);
-        } ?>
+        } else {
+            drawOwnedRestaurants($db, $restaurants);
+            drawReviewsByRestaurant($db, $reviews);
+            //drawReviewsByUser($db, $reviews);
+        } 
+        ?>
     </div>
 <?php } ?>
 
@@ -136,10 +141,9 @@
         <tbody>
         <?php foreach ($reviews as $review) { 
             $restaurant = Restaurant::getRestaurant($db, $review->restaurant);
-            $restaurant_name = $restaurant->name;
         ?>
             <tr>
-                <td class="table-cell"><?=$restaurant_name?></td>
+                <td class="table-cell"><?=$restaurant->name?></td>
                 <td class="table-cell"><?=$review->content?></td>
                 <td class="table-cell"><?=$review->score?></td>
             </tr>
@@ -149,7 +153,7 @@
     <?php } ?>
 <?php } ?> 
 
-<?php function drawFavoriteRestaurants($db, array $restaurants) { ?>
+<?php function drawFavoriteRestaurants(array $restaurants) { ?>
     <h4 class="section-title">Favorite Restaurants</h4>
     <table class="table restaurant-table">
         <thead class="table-header-list">
@@ -189,6 +193,64 @@
         </tbody>
     </table>
 <?php } ?>
+
+<?php function drawOwnedRestaurants($db, array $restaurants) { ?>
+    <h4 class="section-title">Owned Restaurants</h4>
+    <table class="table restaurant-table">
+        <thead class="table-header-list">
+            <tr>
+                <th class="table-header">Restaurant Name</th>
+                <th class="table-header">Restaurant Address</th>
+                <th class="table-header">Average Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($restaurants as $restaurant) { 
+            $score = Restaurant::averageScore($db, $restaurant->id);
+            if ($score < 0) $score = "No reviews";?>
+            <tr>
+                <td class="table-cell"><?=$restaurant->name?></td>
+                <td class="table-cell"><?=$restaurant->address?></td>
+                <td class="table-cell"><?=$score?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>    
+<?php } ?>
+
+<?php function drawReviewsByRestaurant($db, array $reviews) { ?>
+    <h4 class="section-title">Your Restaurants' Reviews</h4>
+    <?php if (count($reviews) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No reviews yet. Be patient!</div>
+        </div>
+    <?php } 
+    else { ?>
+    <table class="table restaurant-table">
+        <thead class="table-header-list">
+            <tr>
+                <th class="table-header">Restaurant Name</th>
+                <th class="table-header">Reviewer</th>
+                <th class="table-header">Review Content</th>
+                <th class="table-header">Review Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($reviews as $review) { 
+            $restaurant = Restaurant::getRestaurant($db, $review->restaurant);
+            $reviewer = Customer::getCustomer($db, $review->customer);
+        ?>
+            <tr>
+                <td class="table-cell"><?=$restaurant->name?></td>
+                <td class="table-cell"><?=$reviewer->name()?></td>
+                <td class="table-cell"><?=$review->content?></td>
+                <td class="table-cell"><?=$review->score?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <?php } ?>
+<?php } ?> 
 
 <!--
     <div class = 'main-body'>

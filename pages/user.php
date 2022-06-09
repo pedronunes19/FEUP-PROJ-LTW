@@ -10,22 +10,32 @@
     
 
     $db = getDatabaseConnection();
-    drawHeader("../css/user.css",$session);
+
     if ($session->getType() == "customer") {
         $user = Customer::getCustomer($db, $session->getID());
         $orders = Order::getOrdersByUser($db, $user->id);
         $restaurants = Customer::getfavoriteRestaurants($db, $user->id);
         $reviews = Review::getReviewsByUser($db, $user->id);
-
-        drawUserPage($db, $session, $user);
-        drawTables($db, $session, $restaurants, $orders, $reviews);
     }
-    
     else {
         $user = RestaurantOwner::getOwner($db, $session->getID());
         $orders = Order::getOrdersByRestaurant($db, $user->id);
-        $reviews = Review::getReviews($db, $user->id);
+        $restaurants = Restaurant::getRestaurantsByOwner($db, $user->id);
+        $reviews = array();
+        $review_aux = array();
+        foreach ($restaurants as $restaurant) {
+            $review_aux = Review::getReviews($db, $restaurant->id);
+            if (count($review_aux) != 0) {
+                foreach ($review_aux as $review) {
+                    array_push($reviews, $review);
+                }
+            }
+        }
     }
+
+    drawHeader("../css/user.css",$session);
+    drawUserPage($db, $session, $user);
+    drawTables($db, $session, $restaurants, $orders, $reviews);
     drawEditProfile($db, $session, $user);
     drawFooter();
 ?>    
