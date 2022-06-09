@@ -5,37 +5,50 @@
     public int $id;
     public string $name;
     public string $address;
+    public int $owner;
 
-    public function __construct(int $id, string $name, string $address)
+    public function __construct(int $id, string $name, string $address, int $owner)
     {
       $this->id = $id;
       $this->name = $name;
       $this->address = $address;
+      $this->owner = $owner;
     }
 
     function save($db) {
       $stmt = $db->prepare('
-        UPDATE Restaurant SET Name = ?, Address = ?
+        UPDATE Restaurant SET Name = ?, Address = ?, OwnerId = ?
         WHERE RestaurantId = ?
       ');
 
-      $stmt->execute(array($this->name, $this->address, $this->id));
+      $stmt->execute(array($this->name, $this->address, $this->id, $this->owner));
     }
 
     static function getRestaurants(PDO $db, int $size) : array {
-      $stmt = $db->prepare('SELECT RestaurantId, Name, Address FROM Restaurant LIMIT ?');
+      $stmt = $db->prepare('SELECT RestaurantId, Name, Address, OwnerId FROM Restaurant LIMIT ?');
       $stmt-> execute(array($size));
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address']);
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId']);
+      }
+      return $restaurants;
+    }
+
+    static function getRestaurantsByOwner(PDO $db, int $id) : array {
+      $stmt = $db->prepare('SELECT RestaurantId, Name, Address, OwnerId FROM Restaurant WHERE OwnerId = ?');
+      $stmt-> execute(array($id));
+
+      $restaurants = array();
+      while ($restaurant = $stmt->fetch()) {
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId']);
       }
       return $restaurants;
     }
 
     static function getRestaurant(PDO $db, int $id) : Restaurant {
       $stmt = $db->prepare('
-        SELECT RestaurantId, Name, Address 
+        SELECT RestaurantId, Name, Address, OwnerId
         FROM Restaurant WHERE RestaurantId = ?
       ');
       $stmt->execute(array($id));
@@ -45,7 +58,8 @@
       return new Restaurant(
         $restaurant['RestaurantId'], 
         $restaurant['Name'],
-        $restaurant['Address']
+        $restaurant['Address'],
+        $restaurant['OwnerId'],
       );
     }
 
@@ -84,7 +98,7 @@
       return false;
     }
 
-    function averageScore(PDO $db, int $id): float {
+    static function averageScore(PDO $db, int $id): float {
       $count = 0;
       $total = 0.0;
 
@@ -95,10 +109,11 @@
       $stmt->execute(array($id));
   
       while ($score = $stmt->fetch()) {
-        $total += $score;
+        $total += $score['ReviewScore'];
         $count += 1;
       }
 
+      if ($count == 0) return -1;
       return ($total/$count);
     }
   }

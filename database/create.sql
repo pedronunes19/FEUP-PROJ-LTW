@@ -39,6 +39,8 @@ CREATE TABLE Restaurant
     RestaurantId INTEGER NOT NULL,
     Name NVARCHAR(100) NOT NULL,
     Address NVARCHAR(100),
+    OwnerId INTEGER NOT NULL,
+    FOREIGN KEY (OwnerId) REFERENCES RestaurantOwner (OwnerId)
     CONSTRAINT PK_Restaurant PRIMARY KEY (RestaurantId)
 );
 

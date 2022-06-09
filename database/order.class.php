@@ -28,6 +28,20 @@
       }
       return $orders;
     }
+
+    static function getOrdersByRestaurant(PDO $db, int $id) : array {
+      $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status
+      FROM OrderQueue
+      WHERE RestaurantId = ? 
+      ORDER BY OrderId DESC');
+      $stmt-> execute(array($id));
+
+      $orders = array();
+      while ($order = $stmt->fetch()) {
+        $orders[] = new Order($order["OrderId"], $order['CustomerId'], $order['RestaurantId'], $order['Status']);
+      }
+      return $orders;
+    }
   
   }
 ?>
