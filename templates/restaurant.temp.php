@@ -21,7 +21,7 @@
     </section>
 <?php } ?>
 
-<?php function drawRestaurantSearch(array $restaurants, string $search) { ?>
+<?php function drawRestaurantSearch(array $restaurants, array $dishes, string $search) { ?>
 
     <script>var nav = 0;</script>
     <script src="../scripts/sidemenu.js"></script>
@@ -38,9 +38,19 @@
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
             <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
-                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>.png" class="center">
+              <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center">
                 <div class="middle-text">
                     <div class="label"><?=$restaurant->name?></div>
+                </div>
+            </a>
+        <?php } ?>
+    </section>
+    <section class="dishes">
+        <?php foreach($dishes as $dish) { ?> 
+            <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->id?>">
+                <img src="https://picsum.photos/200?<?=$dish->id * 50?>.png" class="center">
+                <div class="middle-text">
+                    <div class="label"><?=$dish->name?></div>
                 </div>
             </a>
         <?php } ?>

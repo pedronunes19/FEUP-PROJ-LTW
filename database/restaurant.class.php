@@ -76,8 +76,7 @@
           $restaurant['RestaurantId'], 
           $restaurant['Name'],
           $restaurant['Address'],
-          $restaurant['OwnerId'],
-          $restaurant['Category']
+          $restaurant['OwnerId']
         );
       }
   

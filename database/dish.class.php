@@ -41,6 +41,27 @@
       }
       return $dishes;
     }
+
+    static function searchDishes(PDO $db, string $search, int $count) : array {
+      $stmt = $db->prepare('
+        SELECT DishId, Name, Price, RestaurantId
+        FROM Dish WHERE Name LIKE ? LIMIT ?
+      ');
+      $stmt->execute(array($search, $count));
+  
+      $dishes = array();
+      while ($dish = $stmt->fetch()) {
+        $dishes[] = new Dish(
+          $dish['DishId'], 
+          $dish['Name'],
+          $dish['Price'],
+          $dish['RestaurantId']
+        );
+      }
+  
+      return $dishes;
+    }
+
   
   }
 ?>
