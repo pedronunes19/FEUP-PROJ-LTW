@@ -11,6 +11,14 @@
 
     $db = getDatabaseConnection();
 
+    $restaurant_list = Restaurant::getRestaurants($db, 999999);
+
+    if (!isset($_SESSION['id']) || (intval($_GET['id']) <= 0) || (intval($_GET['id']) > count($restaurant_list))) {
+        http_response_code(404);
+        require("error.php");
+        die();
+    }
+
     $restaurant = Restaurant::getRestaurant($db, intval($_GET['id']));
     $menus = Menu::getRestaurantMenus($db, intval($_GET['id']));
     $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));

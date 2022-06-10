@@ -46,8 +46,7 @@ require_once('../session/session.php');
 <?php function drawFooter() { ?>
     </main>
     <footer>
-        <p>Amazing take-away website for LTW, 2022</p>
-        <p>All rights reserved &copy</p>
+        <p>Amazing take-away website for LTW, 2022. All rights reserved &copy</p>
     </footer>
   </body>
 </html>

@@ -12,7 +12,7 @@
     <h1 class = "greeting"> Hello, <?=$user->first_name?> <?=$user->last_name?>!</h1>
     <div class ='container'>
         <div class="card picture-card">
-            <img class="profile-img" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User">
+            <img class="profile-img" src="../images/<?=$session->getType()?>s/<?=$user->id?>.png" alt="User">
         </div>
         <div class="card intro-card">
             <div class="section-wrapper">
@@ -45,7 +45,7 @@
 <?php function drawEditProfile($db, $session, $user) { ?>
     <div class="card edit-card">
         <h4 class="section-title order-title">Edit profile</h4>
-        <form action="../actions/action.edit_profile.php" method="post">
+        <form action="../actions/action.edit_profile.php" method="post" enctype="multipart/form-data">
             <div class="input-field">
                 <label for="first-name">First Name *</label>
                 <input class="register_required" type="text" name="first-name" placeholder="James" value="<?=$user->first_name?>" required>
@@ -96,6 +96,11 @@
                 <input class="register_required" type="password" name="password" placeholder="123" required minlength=10>
             </div>
 
+            <div class="input-field">
+                <label for="image">Profile picture</label>
+                <input class="register_optional" type="file" name="image">
+            </div>
+
             <div class="asterisk-info">
                 <a class="text-info">* - Required field<br></a>
             </div> 
@@ -107,22 +112,45 @@
 </div>
 <?php } ?>
 
-<?php function drawTables($db, $session, array $restaurants, array $orders, array $reviews) { ?>
-    <div class="card table-card">
-        <?php if ($session->getType() == "customer") {
-            drawUserOrders($db, $orders);
-            drawFavoriteRestaurants($restaurants);
-            drawReviewsByUser($db, $reviews);
-        } else {
-            drawOwnedRestaurants($db, $restaurants);
-            drawReviewsByRestaurant($db, $reviews);
-            //drawReviewsByUser($db, $reviews);
-        } 
-        ?>
-    </div>
+<?php function drawSeparateCards($db, $session, array $restaurants, array $orders, array $reviews) { ?>
+    <?php if ($session->getType() == "customer") {
+        drawFavoriteRestaurants($restaurants);
+        drawUserOrders($db, $orders);
+        drawReviewsByUser($db, $reviews);
+    } else {
+        drawOwnedRestaurants($db, $restaurants);
+        drawReviewsByRestaurant($db, $reviews);
+        drawRestaurantOrders($db, $orders);
+    } 
+    ?>
+<?php } ?>
+
+<?php function drawModifyRestaurants(array $restaurants) { ?>
+    <form action="../pages/user.php">
+        <label for="option">Create</label>
+        <button class="button edit-button" type="submit">Create new restaurant</button>
+    </form> 
+    <form action="../pages/user.php">
+        <div class="input-field">
+            <label for="option">Update/Delete</label>
+            <select name="option" required>
+                <option value="update">Update</option>
+                <option value="delete">Delete</option>
+            </select>
+        </div>
+        <div class="input-field">
+        <select name="restaurant" required>
+            <?php foreach($restaurants as $restaurant) { ?>
+                <option value=<?=$restaurant->id?>><?=$restaurant->name?> </option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Update/Delete restaurant</button>
+        </div>
+    </form>
 <?php } ?>
 
 <?php function drawReviewsByUser($db, array $reviews) { ?>
+    <div class="card other-card">
     <h4 class="section-title">Your Reviews</h4>
     <?php if (count($reviews) == 0) { ?>
         <div class="empty-section-wrapper">
@@ -150,31 +178,42 @@
         <?php } ?>
         </tbody>
     </table>
+    </div>
     <?php } ?>
 <?php } ?> 
 
 <?php function drawFavoriteRestaurants(array $restaurants) { ?>
+    <div class="card other-card">
     <h4 class="section-title">Favorite Restaurants</h4>
-    <table class="table restaurant-table">
-        <thead class="table-header-list">
-            <tr>
-                <th class="table-header">Restaurant Name</th>
-                <th class="table-header">Restaurant Address</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($restaurants as $restaurant) { ?>
-            <tr>
-                <td class="table-cell"><?=$restaurant->name?></td>
-                <td class="table-cell"><?=$restaurant->address?></td>
-            </tr>
+    <?php if (count($restaurants) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No favourite restaurants yet. Click the hearts!</div>
+        </div>
+    <?php }
+    else { ?>
+    <section class="restaurants">
+        <?php foreach($restaurants as $restaurant) { ?> 
+            <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
+                <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center">
+                <div class="middle-text">
+                    <div class="label"><?=$restaurant->name?></div>
+                </div>
+            </a>
         <?php } ?>
-        </tbody>
-    </table>
+    </section>
+    </div>
+    <?php } ?>
 <?php } ?>
 
 <?php function drawUserOrders($db, array $orders) { ?>
+    <div class="card other-card">
     <h4 class="section-title">Order history</h4>
+    <?php if (count($orders) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No orders yet. Get to eating!</div>
+        </div>
+    <?php }
+    else { ?>
     <table class="table order-table">
         <thead class="table-header-list">
             <tr>
@@ -192,33 +231,66 @@
         <?php } ?>
         </tbody>
     </table>
+    <?php } ?>
+    </div>
 <?php } ?>
 
-<?php function drawOwnedRestaurants($db, array $restaurants) { ?>
-    <h4 class="section-title">Owned Restaurants</h4>
-    <table class="table restaurant-table">
+<?php function drawRestaurantOrders($db, array $orders) { ?>
+    <div class="card other-card">
+    <h4 class="section-title">Order history</h4>
+    <?php if (count($orders) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No orders yet. Give it time!</div>
+        </div>
+    <?php }
+    else { ?>
+    <table class="table order-table">
         <thead class="table-header-list">
             <tr>
                 <th class="table-header">Restaurant Name</th>
-                <th class="table-header">Restaurant Address</th>
-                <th class="table-header">Average Score</th>
+                <th class="table-header">Status</th>
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($restaurants as $restaurant) { 
-            $score = Restaurant::averageScore($db, $restaurant->id);
-            if ($score < 0) $score = "No reviews";?>
+        <?php foreach ($orders as $order) { 
+            $restaurant = Restaurant::getRestaurant($db, $order->restaurant)?>
             <tr>
                 <td class="table-cell"><?=$restaurant->name?></td>
-                <td class="table-cell"><?=$restaurant->address?></td>
-                <td class="table-cell"><?=$score?></td>
+                <td class="table-cell"><?=$order->status?></td>
             </tr>
         <?php } ?>
         </tbody>
-    </table>    
+    </table>
+    <?php } ?>
+    </div>
+<?php } ?>
+
+<?php function drawOwnedRestaurants($db, array $restaurants) { ?>
+    <div class="card other-card">
+    <h4 class="section-title">Owned Restaurants</h4>
+    <?php if (count($restaurants) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No owned restaurants yet. Make your food known!</div>
+        </div>
+    <?php } 
+    else { ?>
+    <section class="restaurants">
+        <?php foreach($restaurants as $restaurant) { ?> 
+            <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
+                <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center">
+                <div class="middle-text">
+                    <div class="label"><?=$restaurant->name?></div>
+                </div>
+            </a>
+        <?php } ?>
+    </section>
+    <?php drawModifyRestaurants($restaurants) ?>
+    </div>
+    <?php } ?>
 <?php } ?>
 
 <?php function drawReviewsByRestaurant($db, array $reviews) { ?>
+    <div class="card other-card">
     <h4 class="section-title">Your Restaurants' Reviews</h4>
     <?php if (count($reviews) == 0) { ?>
         <div class="empty-section-wrapper">
@@ -250,6 +322,7 @@
         </tbody>
     </table>
     <?php } ?>
+    </div>
 <?php } ?> 
 
 <!--

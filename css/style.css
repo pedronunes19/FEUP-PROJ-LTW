@@ -126,6 +126,7 @@
     text-align: center;
     color: var(--white);
     padding-top: 1em;
+    word-wrap: break-word;
   }
   
   main a {
@@ -196,27 +197,34 @@
   }
 
   .slideshow-container{
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 1;
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    max-width: 40%;
+    max-width: 60%;
     position: relative;
     margin: auto;
   }
   .slide-fading{
-    box-sizing: border-box;
     display: none;
-    
+    width: 100%;
   }
+
+  .slide-fading img {
+    width: 100%;
+  }
+
+  .slide-fading > a {
+    word-break: break-all;
+    font-size: 1vw;
+  }
+
   .prev,.next{
     cursor: pointer;
     text-align: center;
-    width: auto;
-    padding: 16px;
+    padding: 2vw;
     color: white;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 2vw;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
@@ -232,13 +240,13 @@
     color: var(--white);
     background-color: var(--black-translucid);
     font-size: 1.5em;
-    position: absolute;
-    bottom: 0.22em;
     padding-top: 0.3em;
+    margin-top: -0.3em;
     padding-bottom: 0.3em;
-    width: 80%;
+    margin-bottom: 0.3em;
     text-align: center;
   }
+
   .number-text{
     color : #f2f2f2;
     font-size: 12px;
@@ -246,7 +254,7 @@
     position: absolute;
     top: 0;
   }
-  .dot{
+  .dot {
     cursor: pointer;
     height: 15px;
     width: 15px;
@@ -255,7 +263,10 @@
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.6s ease;
-  
+  }
+
+  .dot-choices {
+    text-align: center;
   }
   
   .active,.dot:hover{
@@ -340,12 +351,13 @@
 
   footer {
     bottom: 0;
+    box-sizing: border-box;
     margin-top: auto;
     padding-right: 1em;
     padding-left: 1em;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     background-color: var(--black);
     color: var(--white);
   }
@@ -354,19 +366,34 @@
     display: block;
   }
 
+  .error-display {
+    max-width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  .error-heading {
+    font-size: 6em;
+    margin-bottom: 1em;
+  }
+
   @media screen and (max-width: 850px) {
     header {
       display: block;
       text-align: center;
+      position:-webkit-sticky;
     }
 
     .logo {
-      color: var(--white);
-      text-decoration: none;
-      letter-spacing: 0.5em;
-      font-weight: 900;
-      text-shadow:0.1em 0.1em var(--black);
       font-size: 6vw;
+    }
+
+    .error-heading {
+      font-size: 9vw;
     }
 
     .topnav {
@@ -379,6 +406,14 @@
     .topnav .search-container {
       float: none;
       max-width: 100%;
+    }
+
+    .slideshow-container {
+      max-width: 100%;
+    }
+
+    .slide-fading > a {
+      font-size: 2vw;
     }
 
     .search-form {
@@ -418,4 +453,13 @@
       transform: scale(101%)
     }
 
+    .restaurants {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .restaurants .middle-text {
+      font-size: 4vw;
+    }
   }

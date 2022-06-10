@@ -22,11 +22,10 @@
     border: 0.1em solid var(--black);
     border-radius: 1em;
     overflow-wrap: break-word;
-    min-width: 40%;
+    min-width: 20%;
 }
 
 .intro-card {
-    max-width: 100%;
     max-height: 50%;
     display: flex;
     flex-wrap: wrap;
@@ -37,8 +36,8 @@
 
 .profile-img {
     align-self: center;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 50%;
+    max-height: auto;
 }
 
 .section-title {
@@ -71,6 +70,12 @@
     text-align: center;
     align-self: center;
 }
+
+.restaurants {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
 
 .table {
     width: 100%;
@@ -124,6 +129,7 @@
     border: none;
     outline: none;
     box-shadow: 0.1em 0.1em var(--black);
+    margin-top: 1em;
 }
 
 label {
@@ -151,6 +157,19 @@ label {
     width: 100%;
     padding: 1em;
     margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+@media screen and (max-width: 850px) {
+    .restaurants {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+  
+      .restaurants .middle-text {
+        font-size: 4vw;
+      }
 }
 
 @media screen and (max-width: 420px) {

@@ -12,7 +12,7 @@
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
             <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
-                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" class="center">
+                <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center">
                 <div class="middle-text">
                     <div class="label"><?=$restaurant->name?></div>
                 </div>
@@ -38,7 +38,7 @@
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
             <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
-                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" class="center">
+                <img src="https://picsum.photos/400/200?<?=$restaurant->id?>.png" class="center">
                 <div class="middle-text">
                     <div class="label"><?=$restaurant->name?></div>
                 </div>
@@ -54,15 +54,17 @@
     <?php $slide_counter = 1;
     foreach($restaurants as $restaurant) { ?> 
         <div class = "slide-fading">
-          <img src="https://picsum.photos/400/200?<?=$restaurant->id?>" style = "width: 100%;">
-          <div class = "img-text">
-            <a href="restaurant.php?id=<?=$restaurant->id?>"> <?=$restaurant->name?> </a>
-          </div>
+          <a href="restaurant.php?id=<?=$restaurant->id?>">
+            <img src="../images/restaurants/<?=$restaurant->id?>.png">
+            <div class = "img-text">
+              <?=$restaurant->name?>
+            </div>
+          </a>
         </div>
     <?php $slide_counter +=1;} ?>
     <a class = "next" onclick="plusSlides(1)">&#10095;</a> 
   </div>
-  <div style="text-align:center">
+  <div class="dot-choices">
           <span class = "dot" onclick="currentSlide(1)"></span>
           <span class = "dot" onclick="currentSlide(2)"></span>
           <span class = "dot" onclick="currentSlide(3)"></span>

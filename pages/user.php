@@ -8,6 +8,11 @@
     require_once('../database/connection.db.php');
     require_once('../templates/user.temp.php');
     
+    if (!isset($_SESSION['id'])) {
+        http_response_code(404);
+        require("error.php");
+        die();
+    }
 
     $db = getDatabaseConnection();
 
@@ -19,7 +24,6 @@
     }
     else {
         $user = RestaurantOwner::getOwner($db, $session->getID());
-        $orders = Order::getOrdersByRestaurant($db, $user->id);
         $restaurants = Restaurant::getRestaurantsByOwner($db, $user->id);
         $reviews = array();
         $review_aux = array();
@@ -31,11 +35,21 @@
                 }
             }
         }
+        $orders = array();
+        $orders_aux = array();
+        foreach ($restaurants as $restaurant) {
+            $orders_aux = Order::getOrdersByRestaurant($db, $restaurant->id);
+            if (count($orders_aux) != 0) {
+                foreach ($orders_aux as $order) {
+                    array_push($orders, $order);
+                }
+            }
+        }
     }
 
     drawHeader("../css/user.css",$session);
     drawUserPage($db, $session, $user);
-    drawTables($db, $session, $restaurants, $orders, $reviews);
+    drawSeparateCards($db, $session, $restaurants, $orders, $reviews);
     drawEditProfile($db, $session, $user);
     drawFooter();
 ?>    

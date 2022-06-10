@@ -65,7 +65,7 @@
 
     static function searchRestaurants(PDO $db, string $search, int $count) : array {
       $stmt = $db->prepare('
-        SELECT RestaurantId, Name, Address
+        SELECT RestaurantId, Name, Address, OwnerId
         FROM Restaurant WHERE Name LIKE ? LIMIT ?
       ');
       $stmt->execute(array('%' . $search . '%', $count));
@@ -76,6 +76,7 @@
           $restaurant['RestaurantId'], 
           $restaurant['Name'],
           $restaurant['Address'],
+          $restaurant['OwnerId'],
           $restaurant['Category']
         );
       }
