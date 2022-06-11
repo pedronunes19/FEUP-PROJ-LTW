@@ -118,22 +118,6 @@
 }
 
 
-.search-menu a {
-  padding-bottom: 0.5em;
-  padding-left: 1em;
-  text-decoration: none;
-  font-size: 25px;
-  color: var(--white);
-  display: block;
-  transition: 0.3s;
-}
-
-
-.search-menu a:hover {
-  color: var(--grey);
-}
-
-
 .search-menu .closebtn {
   position: absolute;
   top: 0;
@@ -158,3 +142,29 @@
 .openbtn:hover {
   color: var(--dark-red);
 }
+
+
+.filter-search-container .search-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+}
+
+.filter-search-container button {
+  position: relative;
+  align-self: center;
+  padding: 0.5em;
+  width: 100%;
+  color: var(--dark-red);
+  background-color: var(--white);
+  border-radius: 1em;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.filter-search-container button:hover {
+  background-color: var(--dark-red);
+  color: var(--white);
+  transform: scale(101%)
+}
+

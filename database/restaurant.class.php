@@ -87,7 +87,8 @@
       return;
     }
 
-    static function searchRestaurants(PDO $db, string $search, int $count) : array {
+
+    static function searchRestaurants(PDO $db, string $search, ?string $score, int $count) : array {
       $stmt = $db->prepare('
         SELECT RestaurantId, Name, Address, OwnerId
         FROM Restaurant WHERE Name LIKE ? LIMIT ?
@@ -96,6 +97,11 @@
   
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
+        if ($score && $score != ''){
+          if (Restaurant::averageScore($db, $restaurant['RestaurantId']) < floatval($score)){
+            continue;
+          }
+        }
         $restaurants[] = new Restaurant(
           $restaurant['RestaurantId'], 
           $restaurant['Name'],
@@ -105,21 +111,6 @@
       }
   
       return $restaurants;
-    }
-
-    function hasScore(PDO $db, int $id): bool {
-
-      $stmt = $db->prepare('
-        SELECT ReviewScore 
-        FROM Review WHERE RestaurantId = ?
-      ');
-      $stmt->execute(array($id));
-  
-      if($score = $stmt->fetch()) {
-        return true;
-      }
-
-      return false;
     }
 
     static function averageScore(PDO $db, int $id): float {

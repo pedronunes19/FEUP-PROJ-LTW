@@ -25,12 +25,16 @@
 
     <script>var nav = 0;</script>
     <script src="../scripts/sidemenu.js"></script>
-  
+    
     <div id="search-menu" class="search-menu">
-      <a href="#"></a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <div class="filter-search-container">
+          <form action="search.php"  class="search-form">
+              <input type="hidden" name="search" value=<?=$_GET['search']?>>
+              <input type="range" min=0 max=5 step=0.1 value="2.5" name="score" id="score-range" oninput="this.nextElementSibling.value = this.value">
+              <p id="score-value">2.5</p>
+              <button class="button" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+      </div>
     </div>
     <button class="openbtn" onclick="clickNav()"><i class="fas fa-bars"></i></button>
 
