@@ -4,10 +4,12 @@
     require_once('../database/restaurant.class.php');
     require_once('../database/order.class.php');
     require_once('../database/review.class.php');
+    require_once('../database/category.class.php');
 ?>
 
 <?php function drawRestaurantForm($db, $session, $object_id) {
-    if ($object_id != null) $restaurant = Restaurant::getRestaurant($db, $object_id); ?>
+    if ($object_id != null) { $restaurant = Restaurant::getRestaurant($db, $object_id); $restaurant_category = Category::getCategory($db, $restaurant->category); } ?> 
+    <?php $categories = Category::getCategories($db); ?>
     <div class="card modify-card">
         <h4 class="section-title">Restaurant</h4>
         <form <?php if ($object_id != null) { ?> action="../actions/action.edit_restaurant.php" 
@@ -21,6 +23,17 @@
             <div class="input-field">
                 <label for="address">Restaurant address</label>
                 <input class="text-field" type="text" name="address" <?php if ($object_id != null) {?> value="<?=$restaurant->address?>"<?php }?>>
+            </div>
+            <div class="input-field">
+                <label for="category">Restaurant category *</label>
+                <select name="category" required>
+                    <?php if ($object_id != null) { ?> <option value=<?=$restaurant->category?>><?=$restaurant_category->name?></option> <?php } ?>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if ($category->id != $restaurant->category) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
             </div>
             <div class="input-field">
                 <?php if ($object_id != null) { ?>

@@ -135,7 +135,7 @@
     }
 
     static function getfavoriteRestaurants(PDO $db, int $id){
-      $stmt = $db->prepare('SELECT FavoriteCustomerRestaurantId, Restaurant.OwnerId, Restaurant.RestaurantId, CustomerId, Name, Address
+      $stmt = $db->prepare('SELECT FavoriteCustomerRestaurantId, Restaurant.OwnerId, Restaurant.RestaurantId, CustomerId, Name, Address, CategoryId
         FROM FavoriteCustomerRestaurant
         INNER JOIN Restaurant
         ON FavoriteCustomerRestaurant.RestaurantId = Restaurant.RestaurantId
@@ -144,7 +144,7 @@
       $stmt->execute(array($id));
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
-        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId']);
+        $restaurants[] = new Restaurant($restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId'], $restaurant['CategoryId']);
       }
       return $restaurants;
 

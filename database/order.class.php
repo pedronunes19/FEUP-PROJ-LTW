@@ -24,6 +24,14 @@
       $stmt->execute(array($status, $id));
     }    
 
+    static function create(int $customer, int $restaurant, string $status) {
+      $stmt = $db->prepare('
+        INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status)  
+        VALUES (NULL, ?, ?, ?)'
+      );
+      $stmt->execute(array($customer, $restaurant, $status));
+    }
+
     static function getOrder(PDO $db, int $id) : Order {
       $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status
       FROM OrderQueue

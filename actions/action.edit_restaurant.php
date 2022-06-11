@@ -31,7 +31,7 @@
     }
   }
 
-  $restaurant->save($db, $_POST["name"], $_POST["address"], intval($_POST["owner-id"]), intval($_POST["id"]));
+  $restaurant->save($db, $_POST["name"], $_POST["address"], intval($_POST["owner-id"]), intval($_POST["category"]), intval($_POST["id"]));
  
   $session->addMessage('success', "Restaurant edited successfully!");
   header("Location: ../pages/user.php");

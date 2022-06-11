@@ -25,7 +25,7 @@
     }
   }
 
-  Restaurant::create($db, $_POST["name"], $_POST["address"], intval($_POST["owner-id"]));
+  Restaurant::create($db, $_POST["name"], $_POST["address"], intval($_POST["owner-id"]), intval($_POST["category"]));
   $restaurants = Restaurant::getRestaurants($db, 0);
   $restaurant =  $restaurants[count($restaurants)-1];
 
