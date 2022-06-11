@@ -7,10 +7,9 @@
   require_once('../database/connection.db.php');
   require_once('../database/restaurantOwner.class.php');
   require_once('../database/restaurant.class.php');
+  require_once('../database/category.class.php');
 
   $db = getDatabaseConnection();
-
-  $restaurant = Restaurant::getRestaurant($db, intval($_POST["id"]));
 
   if (strlen($_FILES["image"]["tmp_name"]) != 0) {
     $verify_image = getimagesize($_FILES["image"]["tmp_name"]);
@@ -25,13 +24,20 @@
       header("Location: ../pages/user.php");
       die();
     }
-    
-    else {
-      move_uploaded_file($_FILES["image"]["tmp_name"], "../images/restaurants/" . $restaurant->id . ".png");
-    }
   }
 
-  $restaurant->save($db, $_POST["name"], $_POST["address"], intval($_POST["owner-id"]), intval($_POST["category"]), intval($_POST["id"]));
+  if (($_POST['category-1'] == $_POST['category-2']) || ($_POST['category-3'] == $_POST['category-2']) || ($_POST['category-1'] == $_POST['category-3'])) {
+    $session->addMessage('error', "A restaurant cannot have more than one category with the same name!");
+    header("Location: ../pages/user.php");
+    die();
+  }
+
+  Category::deleteRestaurantCategories($db, intval($_POST['id']));
+  Category::addRestaurantCategories($db, intval($_POST['category-1']), intval($_POST['id']));
+  if ($_POST['category-2'] != "none") Category::addRestaurantCategories($db, intval($_POST['category-2']), intval($_POST['id']));
+  if ($_POST['category-3'] != "none") Category::addRestaurantCategories($db, intval($_POST['category-3']), intval($_POST['id']));
+
+  move_uploaded_file($_FILES["image"]["tmp_name"], "../images/restaurants/" . $restaurant->id . ".png");
  
   $session->addMessage('success', "Restaurant edited successfully!");
   header("Location: ../pages/user.php");

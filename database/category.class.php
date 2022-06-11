@@ -33,6 +33,35 @@
           $categories[] = new Category($category['CategoryId'], $category['Name']);
         }
         return $categories;
+    }
+
+    static function getRestaurantCategories(PDO $db, int $restaurant) : array {
+        $stmt = $db->prepare('
+          SELECT CategoryRestaurant.CategoryId, Name
+          FROM CategoryRestaurant INNER JOIN Category ON CategoryRestaurant.CategoryId = Category.CategoryId 
+          WHERE RestaurantId = ?
+        ');
+        $stmt->execute(array($restaurant));
+    
+        $categories = array();
+        while ($category = $stmt->fetch()) {
+          $categories[] = new Category($category['CategoryId'], $category['Name']);
+        }
+        return $categories;
       }
+    
+    static function addRestaurantCategories(PDO $db, int $category, int $restaurant) {
+        $stmt = $db->prepare('
+          INSERT INTO CategoryRestaurant (CategoryId, RestaurantId) VALUES (?, ?)
+        ');
+        $stmt->execute(array($category, $restaurant));
+    }
+
+    static function deleteRestaurantCategories(PDO $db, int $restaurant) {
+        $stmt = $db->prepare('
+          DELETE FROM CategoryRestaurant WHERE RestaurantId = ?
+        ');
+        $stmt->execute(array($restaurant));
+    }
 
 }

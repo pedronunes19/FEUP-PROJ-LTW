@@ -23,8 +23,10 @@
     switch ($_POST["modify_type"]) {
         case "restaurant":
             drawRestaurantForm($db, $session, $object_id);
+            break;
         case "review":
             drawReviewForm($db, $session, $object_id);
+            break;
         default:
             break;
     }

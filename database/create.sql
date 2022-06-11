@@ -16,14 +16,8 @@ DROP TABLE IF EXISTS FavoriteCustomerDish;
 DROP TABLE IF EXISTS MenuDish;
 
 DROP TRIGGER IF EXISTS sameRestaurantMenuDish;
-DROP TRIGGER IF EXISTS onRestaurantCreate;
-DROP TRIGGER IF EXISTS onRestaurantUpdate;
 DROP TRIGGER IF EXISTS onRestaurantDelete;
-DROP TRIGGER IF EXISTS onMenuCreate;
-DROP TRIGGER IF EXISTS onMenuUpdate;
 DROP TRIGGER IF EXISTS onMenuDelete;
-DROP TRIGGER IF EXISTS onDishCreate;
-DROP TRIGGER IF EXISTS onDishUpdate;
 DROP TRIGGER IF EXISTS onDishDelete;
 /*CREATE*/
 
@@ -48,9 +42,7 @@ CREATE TABLE Restaurant
     Name NVARCHAR(100) NOT NULL,
     Address NVARCHAR(100),
     OwnerId INTEGER NOT NULL,
-    CategoryId INTEGER NOT NULL,
     FOREIGN KEY (OwnerId) REFERENCES RestaurantOwner (OwnerId),
-    FOREIGN KEY (CategoryId) REFERENCES Category (CategoryId),
     CONSTRAINT PK_Restaurant PRIMARY KEY (RestaurantId)
 );
 
@@ -60,7 +52,6 @@ CREATE TABLE Menu
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
     RestaurantId INTEGER NOT NULL,
-    CategoryId INTEGER NOT NULL,
     CONSTRAINT PK_Menu PRIMARY KEY (MenuId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );
@@ -71,7 +62,6 @@ CREATE TABLE Dish
     Name NVARCHAR(100) NOT NULL,
     Price REAL NOT NULL,
     RestaurantId INTEGER NOT NULL,
-    CategoryId INTEGER NOT NULL,
     CONSTRAINT PK_Dish PRIMARY KEY (DishId),
     FOREIGN KEY (RestaurantId) REFERENCES Restaurant (RestaurantId)
 );
@@ -190,18 +180,6 @@ CREATE TRIGGER sameRestaurantMenuDish
 	DELETE FROM MenuDish WHERE new.MenuDishId = MenuDish.MenuDishId;
     END;
 
-CREATE TRIGGER onRestaurantCreate
-    AFTER INSERT ON Restaurant
-    BEGIN
-    INSERT INTO CategoryRestaurant ('CategoryId', 'RestaurantId') VALUES (new.CategoryId, new.RestaurantId);
-    END;
-
-CREATE TRIGGER onRestaurantUpdate
-    AFTER UPDATE ON Restaurant
-    BEGIN
-    UPDATE CategoryRestaurant SET CategoryId = new.CategoryId WHERE CategoryRestaurant.RestaurantId = new.RestaurantId;
-    END;
-
 CREATE TRIGGER onRestaurantDelete
     AFTER DELETE ON Restaurant FOR EACH ROW
     BEGIN
@@ -212,35 +190,11 @@ CREATE TRIGGER onRestaurantDelete
     DELETE FROM Dish WHERE old.RestaurantId = Dish.RestaurantId;
     END;
 
-CREATE TRIGGER onMenuCreate
-    AFTER INSERT ON Menu
-    BEGIN
-    INSERT INTO CategoryMenu ('CategoryId', 'MenuId') VALUES (new.CategoryId, new.MenuId);
-    END;
-
-CREATE TRIGGER onMenuUpdate
-    AFTER UPDATE ON Menu
-    BEGIN
-    UPDATE CategoryMenu SET CategoryId = new.CategoryId WHERE CategoryMenu.MenuId = new.MenuId;
-    END;
-
 CREATE TRIGGER onMenuDelete
     AFTER DELETE ON Menu FOR EACH ROW
     BEGIN
     DELETE FROM MenuDish WHERE old.MenuId = MenuDish.MenuId;
     DELETE FROM CategoryMenu WHERE old.MenuId = CategoryMenu.MenuId;
-    END;
-
-CREATE TRIGGER onDishCreate
-    AFTER INSERT ON Dish
-    BEGIN
-    INSERT INTO CategoryDish ('CategoryId', 'DishId') VALUES (new.CategoryId, new.DishId);
-    END;
-
-CREATE TRIGGER onDishUpdate
-    AFTER UPDATE ON Dish
-    BEGIN
-    UPDATE CategoryDish SET CategoryId = new.CategoryId WHERE CategoryDish.DishId = new.DishId;
     END;
 
 CREATE TRIGGER onDishDelete

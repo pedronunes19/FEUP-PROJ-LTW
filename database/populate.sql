@@ -5,40 +5,40 @@ VALUES
     (3, "Owner", "3", "votae@votae.com", "Password 3" ),
     (4, "João", "Patrão Genérico", "joaogenerico@gmail.com", "$2y$10$SXdWFvjbGAbe/N8vgInw2uf0jgYC8FtUGElEAAHRa0IM.OqHNPE0q");
 
-INSERT INTO Restaurant (RestaurantId, Name, Address, OwnerId, CategoryId) 
+INSERT INTO Restaurant (RestaurantId, Name, Address, OwnerId) 
 VALUES 
-    (1, "Restaurante 1", "Add 1", 4, 1),
-    (2, "Restaurante 2", "Add 2", 4, 6),
-    (3, "Restaurante 3", "Add 3", 4, 5),
-    (4, "Restaurante 4", "Add 4", 4, 4),
-    (5, "Restaurante 5", "Add 5", 4, 8),
-    (6, "Restaurante 6", "Add 6", 4, 2),
-    (7, "Restaurante 7", "Add 7", 4, 7),
-    (8, "Restaurante 8", "Add 8", 4, 10),
-    (9, "Restaurante 9", "Add 9", 4, 19),
-    (10, "Restaurante 10", "Add 10", 4, 21),
-    (11, "Restaurante 11", "Add 11", 4, 12),
-    (12, "Restaurante 12", "Add 12", 4, 17),
-    (13, "Restaurante 13", "Add 13", 4, 3),
-    (14, "Restaurante 14", "Add 14", 4, 9);
+    (1, "Restaurante 1", "Add 1", 4),
+    (2, "Restaurante 2", "Add 2", 4),
+    (3, "Restaurante 3", "Add 3", 4),
+    (4, "Restaurante 4", "Add 4", 4),
+    (5, "Restaurante 5", "Add 5", 4),
+    (6, "Restaurante 6", "Add 6", 4),
+    (7, "Restaurante 7", "Add 7", 4),
+    (8, "Restaurante 8", "Add 8", 4),
+    (9, "Restaurante 9", "Add 9", 4),
+    (10, "Restaurante 10", "Add 10", 4),
+    (11, "Restaurante 11", "Add 11", 4),
+    (12, "Restaurante 12", "Add 12", 4),
+    (13, "Restaurante 13", "Add 13", 4),
+    (14, "Restaurante 14", "Add 14", 4);
 
-INSERT INTO Menu (MenuId, Name, Price, RestaurantId, CategoryId) 
+INSERT INTO Menu (MenuId, Name, Price, RestaurantId) 
 VALUES 
-    (1, "Menu 1", 1.00, 1, 2),
-    (2, "Menu 2", 2.00, 1, 1),
-    (3, "Menu 3", 3.00, 1, 7),
-    (4, "Menu 4", 4.00, 2, 15),
-    (5, "Menu 5", 5.00, 2, 6),
-    (6, "Menu 6", 6.00, 2, 9),
-    (7, "Menu 7", 7.00, 1, 2),
-    (8, "Menu 8", 8.00, 3, 3),
-    (9, "Menu 9", 9.00, 3, 8);
+    (1, "Menu 1", 1.00, 1),
+    (2, "Menu 2", 2.00, 1),
+    (3, "Menu 3", 3.00, 1),
+    (4, "Menu 4", 4.00, 2),
+    (5, "Menu 5", 5.00, 2),
+    (6, "Menu 6", 6.00, 2),
+    (7, "Menu 7", 7.00, 1),
+    (8, "Menu 8", 8.00, 3),
+    (9, "Menu 9", 9.00, 3);
 
-INSERT INTO Dish (DishId, Name, Price, RestaurantId, CategoryId) 
+INSERT INTO Dish (DishId, Name, Price, RestaurantId) 
 VALUES 
-    (1, "Prato 1", 1.00, 1, 3),
-    (2, "Prato 2", 2.00, 1, 5),
-    (3, "Prato 3", 3.00, 1, 4);
+    (1, "Prato 1", 1.00, 1),
+    (2, "Prato 2", 2.00, 1),
+    (3, "Prato 3", 3.00, 1);
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Address, Password) 
 VALUES 
@@ -94,3 +94,21 @@ VALUES
 ('Halal'), ('Japanese'), ('Turkish'), ('Pub'), ('Spanish'), ('Hawaiian'),
 ('South American'), ('Greek'), ('Mediterranean'), ('Falafel');
 
+INSERT INTO CategoryRestaurant (CategoryId, RestaurantId)
+VALUES
+    (1, 1),
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (1, 6),
+    (1, 7),
+    (1, 8),
+    (1, 9),
+    (1, 10),
+    (1, 11),
+    (1, 12),
+    (1, 13),
+    (1, 14);
+
+                  

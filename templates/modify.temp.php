@@ -8,7 +8,7 @@
 ?>
 
 <?php function drawRestaurantForm($db, $session, $object_id) {
-    if ($object_id != null) { $restaurant = Restaurant::getRestaurant($db, $object_id); $restaurant_category = Category::getCategory($db, $restaurant->category); } ?> 
+    if ($object_id != null) { $restaurant = Restaurant::getRestaurant($db, $object_id); $restaurant_categories = Category::getRestaurantCategories($db, $object_id); } ?> 
     <?php $categories = Category::getCategories($db); ?>
     <div class="card modify-card">
         <h4 class="section-title">Restaurant</h4>
@@ -25,14 +25,47 @@
                 <input class="text-field" type="text" name="address" <?php if ($object_id != null) {?> value="<?=$restaurant->address?>"<?php }?>>
             </div>
             <div class="input-field">
-                <label for="category">Restaurant category *</label>
-                <select name="category" required>
-                    <?php if ($object_id != null) { ?> <option value=<?=$restaurant->category?>><?=$restaurant_category->name?></option> <?php } ?>
+                <label for="category">Restaurant category 1 *</label>
+                <select name="category-1" required>
+                    <?php if ($object_id != null) { ?> <option value=<?=$restaurant_categories[0]->id?>><?=$restaurant_categories[0]->name?></option> <?php } ?>
                     <?php foreach($categories as $category) { ?> 
-                        <?php if ($category->id != $restaurant->category) { ?>
+                        <?php if (isset($restaurant_categories)) {
+                            if ($category->id != $restaurant_categories[0]->id) { ?>
                             <option value=<?=$category->id?>><?=$category->name?></option>
-                        <?php } ?>
-                    <?php } ?>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Restaurant category 2</label>
+                <select name="category-2">
+                    <?php if ($object_id != null && count($restaurant_categories) > 1) { ?> <option value=<?=$restaurant_categories[1]->id?>><?=$restaurant_categories[1]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($restaurant_categories) && count($restaurant_categories) > 1) {
+                            if ($category->id != $restaurant_categories[1]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Restaurant category 3</label>
+                <select name="category-3">
+                    <?php if ($object_id != null && count($restaurant_categories) > 2) { ?> <option value=<?=$restaurant_categories[2]->id?>><?=$restaurant_categories[2]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($restaurant_categories) && count($restaurant_categories) > 2) {
+                            if ($category->id != $restaurant_categories[2]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
                 </select>
             </div>
             <div class="input-field">
