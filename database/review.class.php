@@ -72,6 +72,5 @@
       }
       return $reviews;
     }
-  
   }
 ?>

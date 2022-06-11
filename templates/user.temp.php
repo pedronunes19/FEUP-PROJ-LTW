@@ -177,6 +177,8 @@
 <?php function drawModifyReviews($db, array $reviews) { ?>
     <form action="../pages/modify.php" method="post">
         <input type="hidden" name="modify_type" value="review">
+        <input type="hidden" name="restaurant" value=<?=$restaurant->id?>>
+        <input type="hidden" name="customer" value=<?=$customer->id?>>
         <button class="button edit-button" type="submit">Create new review</button>
     </form> 
     <form action="../pages/modify.php" method="post">

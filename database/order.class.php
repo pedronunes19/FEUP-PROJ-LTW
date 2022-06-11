@@ -62,6 +62,17 @@
       }
       return $orders;
     }
-  
+    
+    static function checkReviewValidity(PDO $db, int $customer_id, int $restaurant_id) : bool {
+      $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status FROM OrderQueue WHERE CustomerId = ? AND RestaurantId = ?');
+      $stmt-> execute(array($customer_id, $restaurant_id));
+
+      $orders = array();
+      while ($order = $stmt->fetch()) {
+        $orders[] = new Order($order["OrderId"], $order['CustomerId'], $order['RestaurantId'], $order['Status']);
+      }
+
+      return (count($orders) > 0);
+    }
   }
 ?>
