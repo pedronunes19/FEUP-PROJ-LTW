@@ -126,25 +126,80 @@
 <?php } ?>
 
 <?php function drawModifyRestaurants(array $restaurants) { ?>
-    <form action="../pages/user.php">
-        <label for="option">Create</label>
+    <form action="../pages/modify.php" method="post">
+        <input type="hidden" name="modify_type" value="restaurant">
         <button class="button edit-button" type="submit">Create new restaurant</button>
     </form> 
-    <form action="../pages/user.php">
+    <form action="../pages/modify.php" method="post">
         <div class="input-field">
-            <label for="option">Update/Delete</label>
-            <select name="option" required>
-                <option value="update">Update</option>
-                <option value="delete">Delete</option>
-            </select>
+        <input type="hidden" name="modify_type" value="restaurant">
+        <select name="object_id" required>
+            <?php foreach($restaurants as $restaurant) { ?>
+                <option value=<?=$restaurant->id?>><?=$restaurant->name?> </option>
+            <?php } ?>
+        </select>
         </div>
+        <button class="button edit-button" type="submit">Update restaurant</button>
+    </form>
+    <form action="../actions/action.delete_restaurant.php" method="post">
         <div class="input-field">
         <select name="restaurant" required>
             <?php foreach($restaurants as $restaurant) { ?>
                 <option value=<?=$restaurant->id?>><?=$restaurant->name?> </option>
             <?php } ?>
         </select>
-        <button class="button edit-button" type="submit">Update/Delete restaurant</button>
+        </div>
+        <button class="button edit-button" type="submit">Delete restaurant</button>
+    </form>
+<?php } ?>
+
+<?php function drawModifyOrders($db, array $orders) { ?>
+    <form action="../actions/action.edit_order.php" method="post">
+        <div class="input-field">
+        <select name="object_id" required>
+            <?php foreach($orders as $order) { 
+                $restaurant = Restaurant::getRestaurant($db, $order->restaurant);
+                $customer = Customer::getCustomer($db, $order->customer);?>
+                <option value=<?=$order->id?>><?=$restaurant->name?> - <?=$customer->name()?> - <?=$order->status?></option>
+            <?php } ?>
+        </select>
+        <select name="status" required>
+                <option value="Received">Received</option>
+                <option value="Preparing">Preparing</option>
+                <option value="Ready">Ready</option>
+                <option value="Delivered">Delivered</option>
+        </select>
+        </div>
+        <button class="button edit-button" type="submit">Change order status</button>
+    </form>
+<?php } ?>
+
+<?php function drawModifyReviews($db, array $reviews) { ?>
+    <form action="../pages/modify.php" method="post">
+        <input type="hidden" name="modify_type" value="review">
+        <button class="button edit-button" type="submit">Create new review</button>
+    </form> 
+    <form action="../pages/modify.php" method="post">
+        <div class="input-field">
+        <input type="hidden" name="modify_type" value="review">
+        <select name="object_id" required>
+            <?php foreach($reviews as $review) { 
+                $restaurant = Restaurant::getRestaurant($db, $review->restaurant);?>
+                <option value=<?=$review->id?>><?=$restaurant->name?>: <?=$review->content?> </option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Update review</button>
+        </div>
+    </form>
+    <form action="../actions/action.delete_review.php" method="post">
+        <div class="input-field">
+        <select name="review" required>
+            <?php foreach($reviews as $review) { 
+                $restaurant = Restaurant::getRestaurant($db, $review->restaurant);?>
+                <option value=<?=$review->id?>><?=$restaurant->name?>: <?=$review->content?> </option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Delete review</button>
         </div>
     </form>
 <?php } ?>
@@ -178,6 +233,7 @@
         <?php } ?>
         </tbody>
     </table>
+    <?php drawModifyReviews($db, $reviews); ?>
     </div>
     <?php } ?>
 <?php } ?> 
@@ -261,7 +317,8 @@
         <?php } ?>
         </tbody>
     </table>
-    <?php } ?>
+    <?php }
+    drawModifyOrders($db, $orders); ?>
     </div>
 <?php } ?>
 
@@ -277,7 +334,7 @@
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
             <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">
-                <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center">
+                <img src="../images/restaurants/<?=$restaurant->id?>.png" class="center" width=400 height=200>
                 <div class="middle-text">
                     <div class="label"><?=$restaurant->name?></div>
                 </div>

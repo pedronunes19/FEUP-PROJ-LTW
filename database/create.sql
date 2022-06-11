@@ -16,6 +16,9 @@ DROP TABLE IF EXISTS FavoriteCustomerDish;
 DROP TABLE IF EXISTS MenuDish;
 
 DROP TRIGGER IF EXISTS sameRestaurantMenuDish;
+DROP TRIGGER IF EXISTS onRestaurantDelete;
+DROP TRIGGER IF EXISTS onMenuDelete;
+DROP TRIGGER IF EXISTS onDishDelete;
 
 /*CREATE*/
 
@@ -177,3 +180,29 @@ CREATE TRIGGER sameRestaurantMenuDish
     BEGIN
 	DELETE FROM MenuDish WHERE new.MenuDishId = MenuDish.MenuDishId;
     END;
+
+CREATE TRIGGER onRestaurantDelete
+    AFTER DELETE ON Restaurant FOR EACH ROW
+    BEGIN
+    DELETE FROM OrderQueue WHERE old.RestaurantId = OrderQueue.RestaurantId;
+    DELETE FROM Review WHERE old.RestaurantId = Review.RestaurantId;
+    DELETE FROM CategoryRestaurant WHERE old.RestaurantId = CategoryRestaurant.RestaurantId;
+    DELETE FROM Menu WHERE old.RestaurantId = Menu.RestaurantId;
+    DELETE FROM Dish WHERE old.RestaurantId = Dish.RestaurantId;
+    END;
+
+CREATE TRIGGER onDishDelete
+    AFTER DELETE ON Dish FOR EACH ROW
+    BEGIN
+    DELETE FROM FavoriteCustomerDish WHERE old.DishId = FavoriteCustomerDish.DishId;
+    DELETE FROM MenuDish WHERE old.DishId = MenuDish.DishId;
+    DELETE FROM CategoryDish WHERE old.DishId = CategoryDish.DishId;
+    END;
+
+CREATE TRIGGER onMenuDelete
+    AFTER DELETE ON Menu FOR EACH ROW
+    BEGIN
+    DELETE FROM MenuDish WHERE old.MenuId = MenuDish.MenuId;
+    DELETE FROM CategoryMenu WHERE old.MenuId = CategoryMenu.MenuId;
+    END;
+

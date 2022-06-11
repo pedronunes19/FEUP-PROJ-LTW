@@ -61,11 +61,18 @@ h2 {
     flex-grow: 1;
 }
 
-.button {
+.submit-button {
     width: 100%;
     padding: 1em;
     margin-bottom: 1em;
 }
+
+.close-button {
+    width: none;
+    margin-left: 1em;
+    background: var(--black);
+    border-radius: 0;
+  }
 
 @media screen and (max-width: 400px) {
     .button-page-swap-wrapper {

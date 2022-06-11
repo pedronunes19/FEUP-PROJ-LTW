@@ -51,7 +51,7 @@
         </div>
 
         <div class="button-page-swap-wrapper">
-            <button class="button" type="submit">Login</button>
+            <button class="button submit-button" type="submit">Login</button>
             <span>
                 <a class="account-page-switch" href="../pages/register.php">Don't have an account? Click here!</a>
             </span>
@@ -122,7 +122,7 @@
         </div> 
 
         <div class="button-page-swap-wrapper">
-            <button class="button" type="submit">Register</button>
+            <button class="button submit-button" type="submit">Register</button>
             <span>
                 <a class="account-page-switch" href="../pages/login.php">Already have an account? Click here!</a>
             </span>

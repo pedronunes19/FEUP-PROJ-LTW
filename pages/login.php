@@ -10,6 +10,12 @@
 
     $db = getDatabaseConnection();
 
+    if (isset($_SESSION['id'])) {
+        http_response_code(404);
+        require("error.php");
+        die();
+    }
+
     drawFormWrapper("../css/account.css", $session);
     drawLoginForm();
     drawFooter();

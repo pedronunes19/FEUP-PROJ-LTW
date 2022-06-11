@@ -48,7 +48,7 @@
 }
 
 .section-text {
-    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .empty-section-text {
@@ -71,16 +71,10 @@
     align-self: center;
 }
 
-.restaurants {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-  }
-
 .table {
     width: 100%;
     table-layout: fixed;
-    word-break: break-all;
+    word-wrap: break-word;
     border-style: solid;
     border-width: 0.1em;
     border-spacing: 0;
@@ -118,7 +112,7 @@
 }
 
 
-.input-field input, .input-field select {
+.input-field input, .input-field textarea, .input-field select {
     padding: 0.5em;
     width: 100%;
     font-size: 1em;
@@ -151,6 +145,15 @@ label {
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
+}
+
+.modify-card {
+    max-width: 30em;
+    margin: 12em auto;
+    padding: 3em;
+    background: var(--red);
+    border-radius: 1em;
+    box-shadow: 0.1em 0.1em var(--black);
 }
 
 .edit-button {
@@ -188,11 +191,10 @@ label {
 
 @media screen and (max-width: 300px) {
     .section-title {
-        word-wrap: none;
-        word-break: break-all;
+        word-wrap: break-word;
     }
 
     .button-wrapper {
-        word-break: break-all;
+        word-wrap: break-word;
     }
 }

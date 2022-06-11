@@ -15,6 +15,26 @@
       $this->status = $status;
     }
 
+    function save($db, string $status, int $id) {
+      $stmt = $db->prepare('
+        UPDATE OrderQueue SET Status = ?
+        WHERE OrderId = ?
+      ');
+
+      $stmt->execute(array($status, $id));
+    }    
+
+    static function getOrder(PDO $db, int $id) : Order {
+      $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status
+      FROM OrderQueue
+      WHERE OrderId = ? 
+      ');
+      $stmt-> execute(array($id));
+
+      $order = $stmt->fetch();
+      return new Order($order["OrderId"], $order['CustomerId'], $order['RestaurantId'], $order['Status']);
+    }
+
     static function getOrdersByUser(PDO $db, int $id) : array {
       $stmt = $db->prepare('SELECT OrderId, CustomerId, RestaurantId, Status
       FROM OrderQueue

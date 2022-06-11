@@ -4,10 +4,10 @@
   class Restaurant {
     public int $id;
     public string $name;
-    public string $address;
+    public ?string $address;
     public int $owner;
 
-    public function __construct(int $id, string $name, string $address, int $owner)
+    public function __construct(int $id, string $name, ?string $address, int $owner)
     {
       $this->id = $id;
       $this->name = $name;
@@ -15,18 +15,33 @@
       $this->owner = $owner;
     }
 
-    function save($db) {
+    function save($db, string $name, ?string $address, int $owner_id, int $id) {
       $stmt = $db->prepare('
         UPDATE Restaurant SET Name = ?, Address = ?, OwnerId = ?
         WHERE RestaurantId = ?
       ');
 
-      $stmt->execute(array($this->name, $this->address, $this->id, $this->owner));
+      $stmt->execute(array($name, $address, $owner_id, $id));
+    }
+
+    static function create($db, string $name, ?string $address, int $owner_id) {
+      $stmt = $db->prepare('
+        INSERT INTO Restaurant (RestaurantId, Name, Address, OwnerId)  
+        VALUES (NULL, ?, ?, ?)'
+      );
+      $stmt->execute(array($name, $address, $owner_id));
     }
 
     static function getRestaurants(PDO $db, int $size) : array {
-      $stmt = $db->prepare('SELECT RestaurantId, Name, Address, OwnerId FROM Restaurant LIMIT ?');
-      $stmt-> execute(array($size));
+      if ($size == 0) {
+        $stmt = $db->prepare('SELECT RestaurantId, Name, Address, OwnerId FROM Restaurant'); 
+        $stmt-> execute(array());
+      }
+      else {
+        $stmt = $db->prepare('SELECT RestaurantId, Name, Address, OwnerId FROM Restaurant LIMIT ?');
+        $stmt-> execute(array($size));
+      }
+
 
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
@@ -61,6 +76,15 @@
         $restaurant['Address'],
         $restaurant['OwnerId'],
       );
+    }
+
+    static function deleteRestaurant(PDO $db, int $id) {
+      $stmt = $db->prepare('
+        DELETE FROM Restaurant WHERE RestaurantId = ?
+      ');
+      $stmt->execute(array($id));
+  
+      return;
     }
 
     static function searchRestaurants(PDO $db, string $search, int $count) : array {
