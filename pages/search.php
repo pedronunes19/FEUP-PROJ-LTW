@@ -11,8 +11,9 @@
     $db = getDatabaseConnection();
     $restaurants = Restaurant::searchRestaurants($db, $_GET['search'], $_GET['score'], 18);
     $dishes = Dish::searchDishes($db, $_GET['search'], 16);
+    $categories = Category::getCategories($db);
 
     drawHeader("../css/search.css", $session);
-    drawRestaurantSearch($restaurants, $dishes, $_GET['search']);
+    drawRestaurantSearch($restaurants, $dishes, $categories, $_GET['search']);
     drawFooter();
 ?>

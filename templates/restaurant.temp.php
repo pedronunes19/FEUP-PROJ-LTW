@@ -2,6 +2,7 @@
     declare(strict_types = 1);
     require_once('../database/restaurant.class.php');
     require_once('../database/customer.class.php');
+    require_once('../database/category.class.php');
     require_once('../database/menu.class.php');
     require_once('../database/dish.class.php');
     require_once('../database/review.class.php');
@@ -21,17 +22,23 @@
     </section>
 <?php } ?>
 
-<?php function drawRestaurantSearch(array $restaurants, array $dishes, string $search) { ?>
+<?php function drawRestaurantSearch(array $restaurants, array $dishes, array $categories, string $search) { ?>
 
-    <script>var nav = 0;</script>
+    <script>let nav = 0;</script>
     <script src="../scripts/sidemenu.js"></script>
     
     <div id="search-menu" class="search-menu">
       <div class="filter-search-container">
           <form action="search.php"  class="search-form">
               <input type="hidden" name="search" value=<?=$_GET['search']?>>
-              <input type="range" min=0 max=5 step=0.1 value="2.5" name="score" id="score-range" oninput="this.nextElementSibling.value = this.value">
-              <p id="score-value">2.5</p>
+              <input type="range" min=0 max=5 step=0.1 value="0" name="score" class="score-range" oninput="this.nextElementSibling.children[0].value = this.value">
+              <p class="min-score-display">Min. Average: <output>0</output></p>
+              <section class="categories">
+              <?php foreach($categories as $category) {?>
+                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name=<?=$category->name?> class="category-filter">
+                <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
+              <?php } ?> 
+              </section> 
               <button class="button" type="submit"><i class="fa fa-search"></i></button>
           </form>
       </div>
