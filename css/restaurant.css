@@ -165,6 +165,7 @@
     color: var(--white);
     margin-top: 0.3em;
     margin-bottom: 0.3em;
+    max-width: 100%;
     background-color: var(--red);
     background-clip: border-box;
     border-radius: 1em;
@@ -180,11 +181,14 @@
     align-self: center;
     text-align: left;
     padding-left: 0.5em;
+    overflow-wrap: break-word;
   }
 
   .review #review-content{
     flex: 8 8 auto;
     align-self: center;
+    max-width: 70%;
+    overflow-wrap: break-word;
   }
 
   .review #review-score{
