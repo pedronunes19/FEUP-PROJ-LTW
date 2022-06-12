@@ -98,12 +98,17 @@
   </section>
 <?php } ?>
 
-<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews, Session $session) { ?>
+<?php function drawRestaurant(PDO $db, Restaurant $restaurant, array $menus, array $dishes, array $reviews, array $categories, Session $session) { ?>
   <h2 class="sub-header"><?=$restaurant->name?> 
     <?php if($session->isLoggedIn() && $session->getType()=="customer"){
       drawFavoriteButton($db, $restaurant, $session);
     }?>
   </h2>
+  <section class="restaurant-categories">
+    <?php foreach ($categories as $category) { ?>
+      <p class="restaurant-category"><?=$category->name?></p>
+    <?php } ?>
+  </section>
   <h3>MENUS</h3>
   <section class="menus">
     <?php foreach ($menus as $menu) { 

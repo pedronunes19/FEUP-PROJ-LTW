@@ -30,6 +30,30 @@
     text-decoration: none;
   }
 
+  .restaurant-categories{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    width:fit-content;
+    margin-right:auto;
+    margin-left:auto;
+    
+  }
+
+  .restaurant-category{
+    width: fit-content;
+    align-self: center;
+    text-align: center;
+    border: none;
+    border-radius: 1em;
+    margin: 0.15em;
+    padding: 0.2em 0.4em;
+    font-size: 17px;
+    color: var(--dark-red);
+    background-color: var(--white);
+  }
+
+
   .menus {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

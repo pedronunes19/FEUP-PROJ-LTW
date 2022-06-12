@@ -9,9 +9,10 @@
     require_once('../database/connection.db.php');
 
     $db = getDatabaseConnection();
-    $restaurants = Restaurant::searchRestaurants($db, $_GET['search'], $_GET['score'], 18);
-    $dishes = Dish::searchDishes($db, $_GET['search'], 16);
     $categories = Category::getCategories($db);
+    $restaurants = Restaurant::searchRestaurants($db, $_GET, $categories, 18);
+    $dishes = Dish::searchDishes($db, $_GET['search'], 16);
+
 
     drawHeader("../css/search.css", $session);
     drawRestaurantSearch($restaurants, $dishes, $categories, $_GET['search']);

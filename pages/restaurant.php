@@ -23,8 +23,9 @@
     $menus = Menu::getRestaurantMenus($db, intval($_GET['id']));
     $dishes = Dish::getRestaurantDishes($db, intval($_GET['id']));
     $reviews = Review::getReviews($db, intval($_GET['id']));
+    $categories = Category::getRestaurantCategories($db, intval($_GET['id']));
 
     drawHeader("../css/restaurant.css", $session);
-    drawRestaurant($db, $restaurant, $menus, $dishes, $reviews, $session);
+    drawRestaurant($db, $restaurant, $menus, $dishes, $reviews, $categories, $session);
     drawFooter();
 ?>

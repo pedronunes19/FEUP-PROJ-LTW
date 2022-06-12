@@ -84,7 +84,15 @@
       return;
     }
 
-    static function searchRestaurants(PDO $db, string $search, ?string $score, int $count) : array {
+    static function searchRestaurants(PDO $db, array $get, array $categories, int $count) : array {
+      $search = $get['search'];
+      $score = $get['score'];
+      $categories_to_check = array();
+      foreach($categories as $category){
+        if ($get[$category->name]){
+          $categories_to_check[] = $category->id;
+        }
+      }
       $stmt = $db->prepare('
         SELECT RestaurantId, Name, Address, OwnerId
         FROM Restaurant WHERE Name LIKE ? LIMIT ?
@@ -93,14 +101,22 @@
   
       $restaurants = array();
       while ($restaurant = $stmt->fetch()) {
+        $skip = false;
         if ($score && $score != ''){
           if (Restaurant::averageScore($db, $restaurant['RestaurantId']) < floatval($score)){
-            continue;
+            $skip = true;
           }
         }
-        $restaurants[] = new Restaurant(
-          $restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId']
-        );
+        foreach($categories_to_check as $check){
+          if (!Restaurant::hasCategory($db, $restaurant['RestaurantId'], $check)){
+            $skip = true;
+          }
+        }
+        if(!$skip){
+          $restaurants[] = new Restaurant(
+            $restaurant['RestaurantId'], $restaurant['Name'], $restaurant['Address'], $restaurant['OwnerId']
+          );
+        }
       }
   
       return $restaurants;
@@ -123,6 +139,19 @@
 
       if ($count == 0) return -1;
       return ($total/$count);
+    }
+
+    static function hasCategory(PDO $db, int $restaurant, int $category): bool{
+      $stmt = $db->prepare('
+        SELECT CategoryRestaurantId
+        FROM CategoryRestaurant WHERE CategoryId = ? AND RestaurantId = ?
+      ');
+      $stmt->execute(array($category, $restaurant));
+  
+      if ($has = $stmt->fetch()) {
+        return true;
+      }
+      return false;
     }
   }
 ?>
