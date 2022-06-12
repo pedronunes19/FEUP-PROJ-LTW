@@ -26,7 +26,7 @@
     }
   }
 
-  if (($_POST['category-1'] == $_POST['category-2']) || ($_POST['category-3'] == $_POST['category-2']) || ($_POST['category-1'] == $_POST['category-3'])) {
+  if (($_POST['category-1'] == $_POST['category-2']) || (($_POST['category-3'] == $_POST['category-2']) && $_POST['category-2'] != "none") || ($_POST['category-1'] == $_POST['category-3'])) {
     $session->addMessage('error', "A restaurant cannot have more than one category with the same name!");
     header("Location: ../pages/user.php");
     die();
