@@ -35,7 +35,7 @@
               <p class="min-score-display">Min. Average: <output>0</output></p>
               <section class="categories">
               <?php foreach($categories as $category) {?>
-                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name=<?=$category->name?> class="category-filter">
+                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name="category" class="category-filter">
                 <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
               <?php } ?> 
               </section> 
@@ -58,7 +58,7 @@
     </section>
     <section class="dishes">
         <?php foreach($dishes as $dish) { ?> 
-            <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->id?>">
+            <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->restaurant?>">
                 <img src="https://picsum.photos/200?<?=$dish->id * 50?>.png" class="center">
                 <div class="middle-text">
                     <div class="label"><?=$dish->name?></div>
