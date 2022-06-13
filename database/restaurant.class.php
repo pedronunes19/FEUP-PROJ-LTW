@@ -89,7 +89,7 @@
       $score = $get['score'];
       $categories_to_check = array();
       foreach($categories as $category){
-        if ($get[$category->name]){
+        if ($get[$category->id]){
           $categories_to_check[] = $category->id;
         }
       }

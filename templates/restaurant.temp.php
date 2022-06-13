@@ -35,7 +35,7 @@
               <p class="min-score-display">Min. Average: <output>0</output></p>
               <section class="categories">
               <?php foreach($categories as $category) {?>
-                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name="category" class="category-filter">
+                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name=<?=$category->id?> class="category-filter">
                 <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
               <?php } ?> 
               </section> 

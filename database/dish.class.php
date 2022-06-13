@@ -42,7 +42,14 @@
       return $dishes;
     }
 
-    static function searchDishes(PDO $db, string $search, int $count) : array {
+    static function searchDishes(PDO $db, array $get, array $categories, int $count) : array {
+      $search = $get['search'];
+      $categories_to_check = array();
+      foreach($categories as $category){
+        if ($get[$category->id]){
+          $categories_to_check[] = $category->id;
+        }
+      }
       $stmt = $db->prepare('
         SELECT DishId, Name, Price, RestaurantId
         FROM Dish WHERE Name LIKE ? LIMIT ?
@@ -51,15 +58,37 @@
   
       $dishes = array();
       while ($dish = $stmt->fetch()) {
-        $dishes[] = new Dish(
-          $dish['DishId'], 
-          $dish['Name'],
-          $dish['Price'],
-          $dish['RestaurantId']
-        );
+        $skip = false;
+
+        foreach($categories_to_check as $check){
+          if (!Dish::hasCategory($db, $dish['DishId'], $check)){
+            $skip = true;
+          }
+        }
+        if(!$skip){
+          $dishes[] = new Dish(
+            $dish['DishId'], 
+            $dish['Name'],
+            $dish['Price'],
+            $dish['RestaurantId']
+          );
+        }
       }
   
       return $dishes;
+    }
+
+    static function hasCategory(PDO $db, int $dish, int $category): bool{
+      $stmt = $db->prepare('
+        SELECT CategoryDishId
+        FROM CategoryDish WHERE CategoryId = ? AND DishId = ?
+      ');
+      $stmt->execute(array($category, $dish));
+  
+      if ($has = $stmt->fetch()) {
+        return true;
+      }
+      return false;
     }
 
   
