@@ -213,3 +213,15 @@ label{
   color: var(--white);
   background-color: var(--dark-red);
 }
+
+@media screen and (max-width: 850px) {
+  .restaurants, .menus, .dishes {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .restaurants .middle-text {
+      font-size: 4vw;
+    }
+}

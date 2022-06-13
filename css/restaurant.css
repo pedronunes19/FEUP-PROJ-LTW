@@ -6,6 +6,21 @@
     flex-direction: column;
   }
 
+  .card {
+    margin: 1em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 1em;
+    background-color: var(--red);
+    background-clip: border-box;
+    border: 0.1em solid var(--black);
+    border-radius: 1em;
+    overflow-wrap: break-word;
+    min-width: 20%;
+}
+
   .sub-header .favorite-button{
     padding: 0em;
     max-width: fit-content;
@@ -18,7 +33,7 @@
   }
 
 
-  h3 {
+  h3, h4 {
     font-weight: 700;
     text-align: left;
     color: var(--white)
@@ -171,6 +186,48 @@
     padding: 1em;
   }
 
+  .input-field input, .input-field textarea, .input-field select {
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+    background: var(--white);
+    color: var(--black);
+    border-radius: 1em;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: 0.1em 0.1em var(--black);
+    margin-top: 1em;
+  }
+
+label {
+    margin-top: 0.5em;
+    padding-left: 0.5em;
+    display: block;
+    font-size: 1em;
+    color: var(--white);
+}
+
+.text-info {
+    padding: 0.5em;
+    margin-bottom: 1em;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.edit-button {
+  width: 100%;
+  padding: 1em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
   .reviews{
     display: flex;
     flex-direction: column; 
@@ -191,7 +248,7 @@
     margin-top: 0.3em;
     margin-bottom: 0.3em;
     max-width: 100%;
-    background-color: var(--red);
+    background-color: var(--dark-red);
     background-clip: border-box;
     overflow-wrap: break-word;
     border-radius: 1em;
@@ -247,3 +304,13 @@
         display: block;
     }
   }
+
+  @media screen and (max-width: 420px) {
+    .card {
+        margin: 0;
+    }
+
+    main {
+        margin: 0;
+    }
+}

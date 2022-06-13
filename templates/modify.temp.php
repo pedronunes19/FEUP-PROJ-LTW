@@ -2,6 +2,8 @@
     declare(strict_types = 1);
     require_once('../session/session.php'); 
     require_once('../database/restaurant.class.php');
+    require_once('../database/menu.class.php');
+    require_once('../database/dish.class.php');
     require_once('../database/order.class.php');
     require_once('../database/review.class.php');
     require_once('../database/category.class.php');
@@ -121,6 +123,166 @@
             <div class="asterisk-info">
                 <a class="text-info">* - Required field<br></a>
             </div> 
+            <div class="button-wrapper">
+                <button class="button edit-button" type="submit">Edit information</button>
+            </div>
+        </form>
+    </div>
+<?php } ?>
+
+<?php function drawDishForm($db, $session, $object_id) {
+    if ($object_id != null) $dish = Dish::getDish($db, $object_id); $rid = $_POST['restaurant-id']; $dish_categories = Category::getDishCategories($db, $object_id); ?> 
+    <?php $categories = Category::getCategories($db); ?>
+    <div class="card modify-card">
+        <h4 class="section-title">Dish</h4>
+        <form <?php if ($object_id != null) { ?> action="../actions/action.edit_dish.php"
+            <?php } else { ?> action="../actions/action.create_dish.php" <?php } ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value=<?=$object_id?>>
+            <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+            <div class="input-field">
+                <label for="name">Dish name *</label>
+                <input class="text-field" type="text" name="name" <?php if ($object_id != null) {?> value="<?=$dish->name?>"<?php }?> required>
+            </div>
+            <div class="input-field">
+                <label for="name">Dish price (in €) *</label>
+                <input class="text-field" type="number" name="price" <?php if ($object_id != null) {?> value="<?=$dish->price?>"<?php }?> min=0.01 step="0.01" required>
+            </div>
+            <div class="input-field">
+                <label for="category">Dish category 1 *</label>
+                <select name="category-1" required>
+                    <?php if ($object_id != null) { ?> <option value=<?=$dish_categories[0]->id?>><?=$dish_categories[0]->name?></option> <?php } ?>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($dish_categories)) {
+                            if ($category->id != $dish_categories[0]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Dish category 2</label>
+                <select name="category-2">
+                    <?php if ($object_id != null && count($dish_categories) > 1) { ?> <option value=<?=$dish_categories[1]->id?>><?=$dish_categories[1]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($dish_categories) && count($dish_categories) > 1) {
+                            if ($category->id != $dish_categories[1]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Dish category 3</label>
+                <select name="category-3">
+                    <?php if ($object_id != null && count($dish_categories) > 2) { ?> <option value=<?=$dish_categories[2]->id?>><?=$dish_categories[2]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($dish_categories) && count($dish_categories) > 2) {
+                            if ($category->id != $dish_categories[2]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <?php if ($object_id != null) { ?>
+                    <label for="image">Dish picture</label>
+                    <input class="text-field" type="file" name="image">
+                <?php } else { ?>
+                    <label for="image">Dish picture *</label>
+                    <input class="text-field" type="file" name="image" required>
+                <?php } ?>
+            </div>
+            <div class="asterisk-info">
+                <a class="text-info">* - Required field<br></a>
+            </div> 
+            <div class="button-wrapper">
+                <button class="button edit-button" type="submit">Edit information</button>
+            </div>
+        </form>
+    </div>
+<?php } ?>
+
+<?php function drawMenuForm($db, $session, $object_id) {
+    if ($object_id != null) $menu = Menu::getMenu($db, $object_id); $rid = $_POST['restaurant-id']; $menu_categories = Category::getMenuCategories($db, $object_id); ?> 
+    <?php $categories = Category::getCategories($db); ?>
+    <div class="card modify-card">
+        <h4 class="section-title">Menu</h4>
+        <form <?php if ($object_id != null) { ?> action="../actions/action.edit_menu.php"
+            <?php } else { ?> action="../actions/action.create_menu.php" <?php } ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" value=<?=$object_id?>>
+            <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+            <div class="input-field">
+                <label for="name">Menu name *</label>
+                <input class="text-field" type="text" name="name" <?php if ($object_id != null) {?> value="<?=$menu->name?>"<?php }?> required>
+            </div>
+            <div class="input-field">
+                <label for="name">Menu price (in €) *</label>
+                <input class="text-field" type="number" name="price" <?php if ($object_id != null) {?> value="<?=$menu->price?>"<?php }?> min=0.01 step="0.01" required>
+            </div>
+            <div class="input-field">
+                <label for="category">Menu category 1 *</label>
+                <select name="category-1" required>
+                    <?php if ($object_id != null) { ?> <option value=<?=$menu_categories[0]->id?>><?=$menu_categories[0]->name?></option> <?php } ?>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($menu_categories)) {
+                            if ($category->id != $menu_categories[0]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Menu category 2</label>
+                <select name="category-2">
+                    <?php if ($object_id != null && count($menu_categories) > 1) { ?> <option value=<?=$menu_categories[1]->id?>><?=$menu_categories[1]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($menu_categories) && count($menu_categories) > 1) {
+                            if ($category->id != $menu_categories[1]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="category">Menu category 3</label>
+                <select name="category-3">
+                    <?php if ($object_id != null && count($menu_categories) > 2) { ?> <option value=<?=$menu_categories[2]->id?>><?=$menu_categories[2]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($categories as $category) { ?> 
+                        <?php if (isset($menu_categories) && count($menu_categories) > 2) {
+                            if ($category->id != $menu_categories[2]->id) { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <?php if ($object_id != null) { ?>
+                    <label for="image">Menu picture</label>
+                    <input class="text-field" type="file" name="image">
+                <?php } else { ?>
+                    <label for="image">Menu picture *</label>
+                    <input class="text-field" type="file" name="image" required>
+                <?php } ?>
+            </div>
+            <div class="asterisk-info">
+                <a class="text-info">* - Required field<br></a>
+            </div>
             <div class="button-wrapper">
                 <button class="button edit-button" type="submit">Edit information</button>
             </div>

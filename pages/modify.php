@@ -27,6 +27,12 @@
         case "review":
             drawReviewForm($db, $session, $object_id);
             break;
+        case "dish":
+            drawDishForm($db, $session, $object_id);
+            break;
+        case "menu":
+            drawMenuForm($db, $session, $object_id);
+            break;
         default:
             break;
     }

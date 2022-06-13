@@ -6,7 +6,7 @@
   
   require_once('../database/connection.db.php');
   require_once('../database/restaurantOwner.class.php');
-  require_once('../database/restaurant.class.php');
+  require_once('../database/dish.class.php');
   require_once('../database/category.class.php');
 
   $db = getDatabaseConnection();
@@ -27,21 +27,21 @@
   }
 
   if (($_POST['category-1'] == $_POST['category-2']) || (($_POST['category-3'] == $_POST['category-2']) && $_POST['category-2'] != "none") || ($_POST['category-1'] == $_POST['category-3'])) {
-    $session->addMessage('error', "A restaurant cannot have more than one category with the same name!");
+    $session->addMessage('error', "A dish cannot have more than one category with the same name!");
     header("Location: ../pages/user.php");
     die();
   }
 
-  $restaurant = Restaurant::getRestaurant($db, intval($_POST['id']));
-  $restaurant->save($db, $_POST["name"], $_POST["address"], intval($_POST["id"]));
+  Dish::create($db, $_POST["name"], floatval($_POST["price"]), intval($_POST["restaurant-id"]));
+  
+  $dishes = Dish::getDishes($db, 0);
+  $dish =  $dishes[count($dishes)-1];
+  Category::addDishCategories($db, intval($_POST['category-1']), $dish->id);
+  if ($_POST['category-2'] != "none") Category::addDishCategories($db, intval($_POST['category-2']), $dish->id);
+  if ($_POST['category-3'] != "none") Category::addDishCategories($db, intval($_POST['category-3']), $dish->id);
 
-  Category::deleteRestaurantCategories($db, intval($_POST['id']));
-  Category::addRestaurantCategories($db, intval($_POST['category-1']), intval($_POST['id']));
-  if ($_POST['category-2'] != "none") Category::addRestaurantCategories($db, intval($_POST['category-2']), intval($_POST['id']));
-  if ($_POST['category-3'] != "none") Category::addRestaurantCategories($db, intval($_POST['category-3']), intval($_POST['id']));
-
-  move_uploaded_file($_FILES["image"]["tmp_name"], "../images/restaurants/" . $restaurant->id . ".png");
+  move_uploaded_file($_FILES["image"]["tmp_name"], "../images/dishes/" . $dish->id . ".png");
  
-  $session->addMessage('success', "Restaurant edited successfully!");
-  header("Location: ../pages/user.php");
+  $session->addMessage('success', "Dish created successfully!");
+  header("Location: ../pages/restaurant.php?id=" . $dish->id);
 ?>

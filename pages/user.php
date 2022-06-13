@@ -20,6 +20,7 @@
         $user = Customer::getCustomer($db, $session->getID());
         $orders = Order::getOrdersByUser($db, $user->id);
         $restaurants = Customer::getfavoriteRestaurants($db, $user->id);
+        //$dishes = Customer::getfavoriteDishes($db, $user->id);
         $reviews = Review::getReviewsByUser($db, $user->id);
     }
     else {

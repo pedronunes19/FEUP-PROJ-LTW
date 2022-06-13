@@ -109,12 +109,15 @@
       <p class="restaurant-category"><?=$category->name?></p>
     <?php } ?>
   </section>
+  <div class="card other-card">
   <h3>MENUS</h3>
   <section class="menus">
     <?php foreach ($menus as $menu) { 
       drawMenu($db, $menu);
     } ?>
   </section>
+  </div>
+  <div class="card other-card">
   <h3>DISHES</h3>
   <section class="dishes">
     <?php foreach ($dishes as $dish) { ?>
@@ -126,7 +129,22 @@
     </a>
     <?php } ?>
   </section>
+  </div>
+  <div class="card other-card">
   <?php drawReviews($db, $reviews) ?>
+  </div>
+<?php } ?>
+
+<?php function drawOwnerMenu($db, $session, $dishes, $menus) { ?>
+  <?php $rid=$_GET['id']?>
+  <div class="card other-card">
+    <h3>OWNER MENU</h3>
+    <h4>Dishes</h4>
+    <?php drawModifyDishes($db, $dishes, $rid); ?>
+    <h4>Menus</h4>
+    <?php drawModifyMenus($db, $menus, $rid); ?>
+
+  </div>
 <?php } ?>
 
 <?php function drawFavoriteButton(PDO $db, Restaurant $restaurant, Session $session) { ?>

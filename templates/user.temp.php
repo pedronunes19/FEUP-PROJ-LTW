@@ -177,8 +177,6 @@
 <?php function drawModifyReviews($db, array $reviews) { ?>
     <form action="../pages/modify.php" method="post">
         <input type="hidden" name="modify_type" value="review">
-        <input type="hidden" name="restaurant" value=<?=$restaurant->id?>>
-        <input type="hidden" name="customer" value=<?=$customer->id?>>
         <button class="button edit-button" type="submit">Create new review</button>
     </form> 
     <form action="../pages/modify.php" method="post">
@@ -202,6 +200,68 @@
             <?php } ?>
         </select>
         <button class="button edit-button" type="submit">Delete review</button>
+        </div>
+    </form>
+<?php } ?>
+
+<?php function drawModifyDishes($db, array $dishes, $rid) { ?>
+    <form action="../pages/modify.php" method="post">
+        <input type="hidden" name="modify_type" value="dish">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <button class="button edit-button" type="submit">Create new dish</button>
+    </form> 
+    <form action="../pages/modify.php" method="post">
+        <div class="input-field">
+        <input type="hidden" name="modify_type" value="dish">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <select name="object_id" required>
+            <?php foreach($dishes as $dish) { ?>
+                <option value=<?=$dish->id?>><?=$dish->name?></option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Update dish</button>
+        </div>
+    </form>
+    <form action="../actions/action.delete_dish.php" method="post">
+        <div class="input-field">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <select name="dish" required>
+            <?php foreach($dishes as $dish) { ?>
+                <option value=<?=$dish->id?>><?=$dish->name?></option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Delete dish</button>
+        </div>
+    </form>
+<?php } ?>
+
+<?php function drawModifyMenus($db, array $menus, $rid) { ?>
+    <form action="../pages/modify.php" method="post">
+        <input type="hidden" name="modify_type" value="menu">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <button class="button edit-button" type="submit">Create new menu</button>
+    </form> 
+    <form action="../pages/modify.php" method="post">
+        <div class="input-field">
+        <input type="hidden" name="modify_type" value="menu">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <select name="object_id" required>
+            <?php foreach($menus as $menu) { ?>
+                <option value=<?=$menu->id?>><?=$menu->name?></option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Update menu</button>
+        </div>
+    </form>
+    <form action="../actions/action.delete_menu.php" method="post">
+        <div class="input-field">
+        <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+        <select name="menu" required>
+        <?php foreach($menus as $menu) { ?>
+                <option value=<?=$menu->id?>><?=$menu->name?></option>
+            <?php } ?>
+        </select>
+        <button class="button edit-button" type="submit">Delete menu</button>
         </div>
     </form>
 <?php } ?>
@@ -262,6 +322,31 @@
     </div>
     <?php } ?>
 <?php } ?>
+
+<!--
+<?php function drawFavoriteDishes(array $dishes) { ?>
+    <div class="card other-card">
+    <h4 class="section-title">Favorite Dishes</h4>
+    <?php if (count($dishes) == 0) { ?>
+        <div class="empty-section-wrapper">
+            <div class="empty-section-text">No favourite dishes yet. Click the hearts!</div>
+        </div>
+    <?php }
+    else { ?>
+    <section class="dishes">
+        <?php foreach($dishes as $dish) { ?> 
+            <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->restaurant?>">
+                <img src="../images/dishes/<?=$dish->id?>.png" class="center">
+                <div class="middle-text">
+                    <div class="label"><?=$dish->name?></div>
+                </div>
+            </a>
+        <?php } ?>
+    </section>
+    </div>
+    <?php } ?>
+<?php } ?>
+-->
 
 <?php function drawUserOrders($db, array $orders) { ?>
     <div class="card other-card">

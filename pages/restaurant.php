@@ -7,18 +7,14 @@
     require_once('../templates/common.temp.php');
     require_once('../templates/restaurant.temp.php');
     require_once('../database/connection.db.php');
+    require_once('../templates/modify.temp.php');
+    require_once('../templates/user.temp.php');
     //require_once('templates/menus.temp.php');
 
     $db = getDatabaseConnection();
 
     $restaurant_list = Restaurant::getRestaurants($db, 0);
-
-    if (!isset($_SESSION['id'])) {
-        $session->addMessage('error', "You must login to access the restaurant pages!");
-        header("Location: ../pages/login.php");
-        die();
-    } 
-
+    
     if ((intval($_GET['id']) <= 0) || (intval($_GET['id']) > count($restaurant_list))) {
         http_response_code(404);
         require("error.php");
@@ -33,5 +29,6 @@
 
     drawHeader("../css/restaurant.css", $session);
     drawRestaurant($db, $restaurant, $menus, $dishes, $reviews, $categories, $session);
+    if (($session->getType() == "owner") && ($restaurant->owner == $session->getId())) drawOwnerMenu($db, $session, $dishes, $menus);
     drawFooter();
 ?>

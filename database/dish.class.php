@@ -9,25 +9,61 @@
 
     public function __construct(int $id, string $name, float $price, int $restaurant)
     {
-      if (!is_string($category)) {
-        $category = 'Unspecified';
-      }
       $this->id = $id;
       $this->name = $name;
       $this->price = $price;
       $this->restaurant = $restaurant;
     }
 
-    static function getDishes(PDO $db, int $size) : array {
-      $stmt = $db->prepare('SELECT DishId, Name, Price, RestaurantId FROM Dish LIMIT ?');
-      $stmt-> execute(array($size));
+    function save($db, string $name, float $price, int $id) {
+      $stmt = $db->prepare('
+        UPDATE Dish SET Name = ?, Price = ?
+        WHERE DishId = ?
+      ');
 
+      $stmt->execute(array($name, $price, $id));
+    }
+
+    static function create($db, string $name, float $price, int $restaurant) {
+      $stmt = $db->prepare('
+        INSERT INTO Dish (Name, Price, RestaurantId)  
+        VALUES (?, ?, ?)'
+      );
+      $stmt->execute(array($name, $price, $restaurant));
+    }
+
+    static function deleteDish(PDO $db, int $id) {
+      $stmt = $db->prepare('
+        DELETE FROM Dish WHERE DishId = ?
+      ');
+      $stmt->execute(array($id));
+  
+      return;
+    }
+
+    static function getDishes(PDO $db, int $size) : array {
+      if ($size == 0) {
+        $stmt = $db->prepare('SELECT DishId, Name, Price, RestaurantId FROM Dish'); 
+        $stmt-> execute(array());
+      }
+      else {
+        $stmt = $db->prepare('SELECT DishId, Name, Price, RestaurantId FROM Dish LIMIT ?');
+        $stmt-> execute(array($size));
+      }
       $dishes = array();
       while ($dish = $stmt->fetch()) {
         $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['RestaurantId']);
 
       }
       return $dishes;
+    }
+
+    static function getDish(PDO $db, int $id) : Dish {
+      $stmt = $db->prepare('SELECT DishId, Name, Price, RestaurantId FROM Dish WHERE DishId = ?');
+      $stmt-> execute(array($id));
+
+      $dish = $stmt->fetch();
+      return new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['RestaurantId']);
     }
 
     static function getRestaurantDishes(PDO $db, int $restaurant) : array {
