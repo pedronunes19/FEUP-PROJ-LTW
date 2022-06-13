@@ -18,13 +18,13 @@
     $session->setName($customer->name());
     $session->setType($type);
     $session->addMessage('success', "You're in! Welcome, customer " . $customer->name() . "!");
-    header('Location: ../pages/index.php');
+    header('Location: ..');
   } else if ($owner && ($type == "owner")) {
     $session->setId($owner->id);
     $session->setName($owner->name());
     $session->setType($type);
     $session->addMessage('success', "You're in! Welcome, owner " . $owner->name() . "!");
-    header('Location: ../pages/index.php');
+    header('Location: ..');
   } else {
     $session->addMessage('error', "Wrong email or password...");
     header('Location: ../pages/login.php');

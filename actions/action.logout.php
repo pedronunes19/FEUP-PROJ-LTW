@@ -5,5 +5,5 @@
   $session = new Session();
   $session->logout();
 
-  header('Location: ../pages/index.php');
+  header('Location: ..');
 ?>

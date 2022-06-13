@@ -11,9 +11,15 @@
 
     $db = getDatabaseConnection();
 
-    $restaurant_list = Restaurant::getRestaurants($db, 999999);
+    $restaurant_list = Restaurant::getRestaurants($db, 0);
 
-    if (!isset($_SESSION['id']) || (intval($_GET['id']) <= 0) || (intval($_GET['id']) > count($restaurant_list))) {
+    if (!isset($_SESSION['id'])) {
+        $session->addMessage('error', "You must login to access the restaurant pages!");
+        header("Location: ../pages/login.php");
+        die();
+    } 
+
+    if ((intval($_GET['id']) <= 0) || (intval($_GET['id']) > count($restaurant_list))) {
         http_response_code(404);
         require("error.php");
         die();

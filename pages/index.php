@@ -9,7 +9,7 @@
     //require_once('templates/menus.temp.php');
 
     $db = getDatabaseConnection();
-    $restaurants = Restaurant::getRestaurants($db, 100);
+    $restaurants = Restaurant::getRestaurants($db, 0);
 
     $menus = Menu::getMenus($db, 14);
 

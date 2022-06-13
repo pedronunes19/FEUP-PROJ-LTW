@@ -180,10 +180,11 @@
   }
 
   .review{
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: row; 
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 8px;
+    grid-row-gap: 0px; 
     padding-top : 1em;
     padding-bottom: 1em;
     color: var(--white);
@@ -192,6 +193,7 @@
     max-width: 100%;
     background-color: var(--red);
     background-clip: border-box;
+    overflow-wrap: break-word;
     border-radius: 1em;
     z-index:4;
   }
@@ -201,7 +203,6 @@
   }
 
   .review #review-customer{
-    flex: 1 0 auto;
     align-self: center;
     text-align: left;
     padding-left: 0.5em;
@@ -209,16 +210,14 @@
   }
 
   .review #review-content{
-    flex: 8 8 auto;
     align-self: center;
-    max-width: 70%;
+    padding-left: 0.5em;
     overflow-wrap: break-word;
   }
 
   .review #review-score{
-    flex: 1 0 auto;
     align-self: center;
-    text-align: center;
+    padding-left: 0.5em;
   }
 
   .review #user-score{
@@ -226,7 +225,25 @@
   }
 
   .review #star{
-    position: absolute;
+
     font-size: 18px;
     transform: translate(2px, -3px);
+  }
+
+  @media screen and (max-width: 850px) {
+    .restaurants, .menus, .dishes {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+  
+      .restaurants .middle-text {
+        font-size: 4vw;
+      }
+}
+
+  @media screen and (max-width: 300px) {
+    .review {
+        display: block;
+    }
   }
