@@ -150,6 +150,22 @@
 
     }
 
+    static function getfavoriteDishes(PDO $db, int $id){
+      $stmt = $db->prepare('SELECT FavoriteCustomerDishId, Dish.RestaurantId, Dish.Price, CustomerId, Dish.Name, Dish.DishId
+        FROM FavoriteCustomerDish
+        INNER JOIN Dish
+        ON FavoriteCustomerDish.DishId = Dish.DishId
+        WHERE CustomerId = ? ORDER BY Dish.DishId ASC
+      ');
+      $stmt->execute(array($id));
+      $dishes = array();
+      while ($dish = $stmt->fetch()) {
+        $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['RestaurantId']);
+      }
+      return $dishes;
+
+    }
+
     function favoriteRestaurant(PDO $db, int $restaurant) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerRestaurant (CustomerId, RestaurantId)
@@ -192,7 +208,7 @@
     function favoriteDish(PDO $db, int $dish) {
       $stmt = $db->prepare('
         INSERT INTO FavoriteCustomerDish (CustomerId, DishId)
-        VALUES ?, ?
+        VALUES (?, ?)
       ');
 
       $stmt->execute(array($this->id, $dish));
@@ -203,7 +219,7 @@
     function unFavoriteDish(PDO $db, int $dish) {
       $stmt = $db->prepare('
         DELETE FROM FavoriteCustomerDish
-        WHERE CustomerId = ?, DishId = ?
+        WHERE CustomerId = ? AND DishId = ?
       ');
 
       $stmt->execute(array($this->id, $dish));

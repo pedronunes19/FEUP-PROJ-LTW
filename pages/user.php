@@ -20,7 +20,7 @@
         $user = Customer::getCustomer($db, $session->getID());
         $orders = Order::getOrdersByUser($db, $user->id);
         $restaurants = Customer::getfavoriteRestaurants($db, $user->id);
-        //$dishes = Customer::getfavoriteDishes($db, $user->id);
+        $dishes = Customer::getfavoriteDishes($db, $user->id);
         $reviews = Review::getReviewsByUser($db, $user->id);
     }
     else {
@@ -28,6 +28,7 @@
         $restaurants = Restaurant::getRestaurantsByOwner($db, $user->id);
         $reviews = array();
         $review_aux = array();
+        $dishes = array();
         foreach ($restaurants as $restaurant) {
             $review_aux = Review::getReviews($db, $restaurant->id);
             if (count($review_aux) != 0) {
@@ -50,7 +51,7 @@
 
     drawHeader("../css/user.css",$session);
     drawUserPage($db, $session, $user);
-    drawSeparateCards($db, $session, $restaurants, $orders, $reviews);
+    drawSeparateCards($db, $session, $restaurants, $dishes, $orders, $reviews);
     drawEditProfile($db, $session, $user);
     drawFooter();
 ?>    

@@ -112,9 +112,10 @@
 </div>
 <?php } ?>
 
-<?php function drawSeparateCards($db, $session, array $restaurants, array $orders, array $reviews) { ?>
+<?php function drawSeparateCards($db, $session, array $restaurants, array $dishes, array $orders, array $reviews) { ?>
     <?php if ($session->getType() == "customer") {
         drawFavoriteRestaurants($restaurants);
+        drawFavoriteDishes($dishes);
         drawUserOrders($db, $orders);
         drawReviewsByUser($db, $reviews);
     } else {
@@ -323,7 +324,7 @@
     <?php } ?>
 <?php } ?>
 
-<!--
+
 <?php function drawFavoriteDishes(array $dishes) { ?>
     <div class="card other-card">
     <h4 class="section-title">Favorite Dishes</h4>
@@ -346,7 +347,7 @@
     </div>
     <?php } ?>
 <?php } ?>
--->
+
 
 <?php function drawUserOrders($db, array $orders) { ?>
     <div class="card other-card">

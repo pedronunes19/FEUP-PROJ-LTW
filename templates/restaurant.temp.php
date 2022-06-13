@@ -120,11 +120,15 @@
   <div class="card other-card">
   <h3>DISHES</h3>
   <section class="dishes">
+    <script>let dish; let buttonDish; let favoriteDish; let dish_map = new Map();</script>
     <?php foreach ($dishes as $dish) { ?>
     <a id = "dish-image-blocks">
       <img src="https://picsum.photos/200?<?=($dish->id * 50)?>" class = "center">
       <div class="middle-text">
         <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
+        <?php if($session->isLoggedIn() && $session->getType()=="customer"){
+          drawFavoriteButtonDish($db, $dish->id, $session);
+        }?>
       </div>
     </a>
     <?php } ?>
@@ -157,6 +161,18 @@
     </span></button>
     <script>let res = <?= $restaurant->id ?>;</script>
     <script src="../scripts/favorite.js"></script>
+<?php } ?>  
+
+<?php function drawFavoriteButtonDish(PDO $db, int $dish, Session $session) { ?>
+  <button class='button favorite-button-dish favorite-button-dish<?=$dish?>'> <span class='favorite-dish favorite-dish<?=$dish?>'>
+      <?php if((Customer::getCustomer($db, $session->getId())->isFavoriteDish($db, $dish))){
+          echo "&#10084;";
+        } else {
+          echo "&#9825;";
+        }?>
+    </span></button>
+    <script>dish = <?=$dish?>;</script>
+    <script src="../scripts/favorite.dish.js"></script>
 <?php } ?>  
 
 <?php function drawMenu(PDO $db, Menu $menu) { 

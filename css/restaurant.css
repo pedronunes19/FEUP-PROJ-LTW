@@ -32,6 +32,19 @@
     font-size: 35px;
   }
 
+  .favorite-button-dish{
+    padding: 0em;
+    max-width: fit-content;
+    max-height: fit-content;
+    align-self: center;
+    background-color: transparent;
+  }
+
+  .favorite-dish{
+    font-size: 35px;
+    color: var(--white);
+  }
+
 
   h3, h4 {
     font-weight: 700;
