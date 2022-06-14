@@ -57,7 +57,14 @@ VALUES
     ("Prato 22", 2.00, 12),
     ("Prato 23", 3.00, 12),
     ("Prato 24", 4.00, 12),
-    ("Prato 25", 5.00, 13);
+    ("Prato 25", 5.00, 13),
+    ("Prato 26", 2.00, 13),
+    ("Prato 27", 6.00, 13),
+    ("Prato 28", 9.00, 13),
+    ("Prato 29", 3.00, 14),
+    ("Prato 30", 2.00, 14),
+    ("Prato 31", 2.00, 14),
+    ("Prato 32", 1.00, 14);
 
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Address, Password) 
