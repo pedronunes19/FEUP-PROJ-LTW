@@ -12,7 +12,11 @@
     <h1 class = "greeting"> Hello, <?=$user->first_name?> <?=$user->last_name?>!</h1>
     <div class ='container'>
         <div class="card picture-card">
+            <?php if (file_exists("../images/" . $session->getType() . "s/" . $user->id . ".png")) { ?>
             <img class="profile-img" src="../images/<?=$session->getType()?>s/<?=$user->id?>.png" alt="User">
+            <?php } else { ?>
+            <img class="profile-img" src="../images/default.png" alt="User">
+            <?php } ?>
         </div>
         <div class="card intro-card">
             <div class="section-wrapper">
@@ -274,6 +278,10 @@
         <div class="empty-section-wrapper">
             <div class="empty-section-text">No reviews yet. Your opinion is valuable!</div>
         </div>
+        <form action="../pages/modify.php" method="post">
+        <input type="hidden" name="modify_type" value="review">    
+        <button class="button edit-button" type="submit">Create new review</button>
+    </form> 
     <?php } 
     else { ?>
     <table class="table restaurant-table">
@@ -302,8 +310,8 @@
         </tbody>
     </table>
     <?php drawModifyReviews($db, $reviews); ?>
-    </div>
     <?php } ?>
+    </div>
 <?php } ?> 
 
 <?php function drawFavoriteRestaurants(array $restaurants) { ?>
@@ -325,8 +333,8 @@
             </a>
         <?php } ?>
     </section>
-    </div>
     <?php } ?>
+    </div>
 <?php } ?>
 
 
@@ -410,8 +418,8 @@
         <?php } ?>
         </tbody>
     </table>
-    <?php }
-    drawModifyOrders($db, $orders); ?>
+    <?php drawModifyOrders($db, $orders); ?>
+    <?php } ?>
     </div>
 <?php } ?>
 

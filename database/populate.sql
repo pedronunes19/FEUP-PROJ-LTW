@@ -13,11 +13,11 @@ VALUES
     (7, "Restaurante 7", "Add 7", 1),
     (8, "Restaurante 8", "Add 8", 1),
     (9, "Restaurante 9", "Add 9", 1),
-    (10, "Restaurante 10", "Add 10", 2),
-    (11, "Restaurante 11", "Add 11", 2),
-    (12, "Restaurante 12", "Add 12", 2),
-    (13, "Restaurante 13", "Add 13", 2),
-    (14, "Restaurante 14", "Add 14", 2);
+    (10, "Restaurante 10", "Add 10", 1),
+    (11, "Restaurante 11", "Add 11", 1),
+    (12, "Restaurante 12", "Add 12", 1),
+    (13, "Restaurante 13", "Add 13", 1),
+    (14, "Restaurante 14", "Add 14", 1);
 
 INSERT INTO Menu (MenuId, Name, Price, RestaurantId) 
 VALUES 
