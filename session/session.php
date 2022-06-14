@@ -1,10 +1,12 @@
 <?php
   class Session {
     private array $messages;
+    public array $items;
 
     public function __construct() {
       session_start();
 
+      $this->items = isset($_SESSION['items']) ? $_SESSION['items'] : array();
       $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
       unset($_SESSION['messages']);
     }
@@ -41,12 +43,37 @@
       $_SESSION['type'] = $type;
     }
 
+    public function addToCart(string $type, int $id, int $amount, int $restaurant) {
+      $_SESSION['items'][] = array('type' => $type, 'id' => $id, 'amount' => $amount, 'restaurant' => $restaurant);
+    }
+
+    public function incrementAmount(int $index, int $amount){
+      $_SESSION['items'][$index]['amount'] += $amount;
+    }
+
+    public function removeFromCart(string $type, int $id) {
+      foreach ($_SESSION['items'] as $item) {
+        if (($item['type'] == $type) && ($item['id'] == $id)) {
+          $index = array_search($item, $_SESSION['items']);
+          array_splice($_SESSION['items'], $index, 1);
+        }
+      }
+    }
+
+    public function resetCart() {
+      $_SESSION['items'] = array();
+    }
+
     public function addMessage(string $type, string $text) {
       $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
     }
 
     public function getMessages() {
       return $this->messages;
+    }
+
+    public function getItems() {
+      return $this->items;
     }
   }
 ?>

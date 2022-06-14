@@ -151,6 +151,47 @@
   </div>
 <?php } ?>
 
+<?php function drawCartModify($db, $session, $dishes, $menus) { ?>
+  <?php $rid=$_GET['id']?>
+  <div class="card other-card">
+  <h3>CART MENU</h3>
+  <?php if(count($dishes) != 0) { ?>
+    <form action="../actions/action.add_to_cart.php" method="post">
+      <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+      <input type="hidden" name="type" value="dish">
+      <div class="input-field">
+      <label for="dish">Dishes</label>
+      <select name="id" required>
+      <?php foreach($dishes as $dish) { ?>
+        <option value=<?=$dish->id?>><?=$dish->name?></option>
+      <?php } ?>
+      </select>
+
+      <input class="text-field" type="number" name="amount" min=1 max=10 required>
+      </div>
+      <button class="button edit-button" type="submit">Add to cart</button>
+    </form> 
+    <?php } ?>
+
+    <?php if(count($menus) != 0) { ?>
+    <form action="../actions/action.add_to_cart.php" method="post">
+      <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+      <input type="hidden" name="type" value="menu">
+      <div class="input-field">
+      <label for="dish">Menus</label>
+      <select name="id" required>
+        <?php foreach($menus as $menu) { ?>
+          <option value=<?=$menu->id?>><?=$menu->name?></option>
+        <?php } ?>
+      </select>
+      <input class="text-field" type="number" name="amount" min=1 max=10 required>
+      </div>
+      <button class="button edit-button" type="submit">Add to cart</button>
+    </form> 
+    <?php } ?>
+  </div>
+  <?php } ?>
+
 <?php function drawFavoriteButton(PDO $db, Restaurant $restaurant, Session $session) { ?>
   <button class='button favorite-button'> <span class='favorite'>
       <?php if((Customer::getCustomer($db, $session->getId())->isFavoriteRestaurant($db, $restaurant->id))){

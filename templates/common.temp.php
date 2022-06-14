@@ -64,7 +64,7 @@ require_once('../session/session.php');
     </div>
 <?php } ?>
 
-<?php function drawButtonsLogin() { ?>
+<?php function drawButtonsLogin($session) { ?>
     <div class="icon-wrapper">
         <div class="icon">
             <a class = "icon-area" href="../pages/user.php">
@@ -73,10 +73,21 @@ require_once('../session/session.php');
                 </button>
             </a>
         </div>
-        <form class="icon logout-form" action="../actions/action.logout.php" method="post">
+        <form class="logout-form" action="../actions/action.logout.php" method="post">
+            <div class="icon">
             <button class="icon logout-icon" type="submit">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </button>
+            </div>
         </form>
+        <?php if ($session->getType() == "customer") { ?>
+        <div class="icon">
+            <a class = "icon-area" href="../pages/cart.php">
+                <button class="icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+            </a>
+        </div>
+        <?php } ?>
     </div>
 <?php } ?>

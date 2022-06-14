@@ -1,5 +1,5 @@
-const button = document.querySelector("#session-messages > .close-button")
+const close_button = document.querySelector("#session-messages > .close-button")
 
-button.addEventListener('click', (e) => {
+close_button.addEventListener('click', (e) => {
     e.target.parentElement.remove();
 });

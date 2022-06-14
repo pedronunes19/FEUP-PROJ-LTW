@@ -30,5 +30,6 @@
     drawHeader("../css/restaurant.css", $session);
     drawRestaurant($db, $restaurant, $menus, $dishes, $reviews, $categories, $session);
     if (($session->getType() == "owner") && ($restaurant->owner == $session->getId())) drawOwnerMenu($db, $session, $dishes, $menus);
+    else if (($session->getType() == "customer")) drawCartModify($db, $session, $dishes, $menus);
     drawFooter();
 ?>

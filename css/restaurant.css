@@ -265,7 +265,6 @@ label {
     background-clip: border-box;
     overflow-wrap: break-word;
     border-radius: 1em;
-    z-index:4;
   }
 
   .reviews .review:hover{
@@ -300,8 +299,56 @@ label {
     transform: translate(2px, -3px);
   }
 
+  .cart-container {
+    height: 100%;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 3fr 4, 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px; 
+  }
+
+  .final-calculation {
+    position: relative;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+  }
+
+  #checkout-blocks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #checkout-button {
+    max-width: 100%;
+    min-width: 50%;
+    height: auto;
+    justify-content: center;
+    align-self: center;
+  }
+
+  .remove-button {
+    width: fit-content;
+    height: fit-content;
+    padding: 1em;
+    height: auto;
+    justify-content: center;
+  }
+
+  .item-card { 
+    grid-area: 1 / 1 / 4 / 2; 
+  }
+  .price-card { 
+    grid-area: 1 / 2 / 3 / 3; 
+  }
+  .button-card { 
+    grid-area: 3 / 2 / 4 / 3;
+    justify-content: center;
+  } 
+
   @media screen and (max-width: 850px) {
-    .restaurants, .menus, .dishes {
+    .restaurants, .menus, .dishes, .cart-container {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
@@ -310,6 +357,7 @@ label {
       .restaurants .middle-text {
         font-size: 4vw;
       }
+      
 }
 
   @media screen and (max-width: 300px) {

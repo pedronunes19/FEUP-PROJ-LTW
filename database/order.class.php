@@ -24,10 +24,10 @@
       $stmt->execute(array($status, $id));
     }    
 
-    static function create(int $customer, int $restaurant, string $status) {
+    static function create(PDO $db, int $customer, int $restaurant, string $status) {
       $stmt = $db->prepare('
-        INSERT INTO OrderQueue (OrderId, CustomerId, RestaurantId, Status)  
-        VALUES (NULL, ?, ?, ?)'
+        INSERT INTO OrderQueue (CustomerId, RestaurantId, Status)  
+        VALUES (?, ?, ?)'
       );
       $stmt->execute(array($customer, $restaurant, $status));
     }
