@@ -29,13 +29,13 @@
     
     <div id="search-menu" class="search-menu">
       <div class="filter-search-container">
-          <form action="search.php"  class="search-form">
+          <form action="../pages/search.php" class="search-form">
               <input type="hidden" name="search" value=<?=htmlspecialchars($_GET['search'])?>>
               <input type="range" min=0 max=5 step=0.1 value="0" name="score" class="score-range" oninput="this.nextElementSibling.children[0].value = this.value">
               <p class="min-score-display">Min. Average: <output>0</output></p>
               <section class="categories">
               <?php foreach($categories as $category) {?>
-                <input type="checkbox" value=<?=$category->name?> id="category-filter<?=$category->id?>" name=<?=$category->id?> class="category-filter">
+                <input type="checkbox" value="filter" id="category-filter<?=$category->id?>" name=<?=$category->id?> class="category-filter">
                 <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
               <?php } ?> 
               </section> 
@@ -59,7 +59,7 @@
     <section class="dishes">
         <?php foreach($dishes as $dish) { ?> 
             <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->restaurant?>">
-                <img src="https://picsum.photos/200?<?=$dish->id * 50?>.png" class="center">
+                <img src="../images/dishes/<?=$dish->id?>.png" class="center">
                 <div class="middle-text">
                     <div class="label"><?=$dish->name?></div>
                 </div>
@@ -168,42 +168,41 @@
   <div class="card other-card">
   <h3>CART MENU</h3>
   <?php if(count($dishes) != 0) { ?>
-    <form action="../actions/action.add_to_cart.php" method="post">
-      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-      <input type="hidden" name="restaurant-id" value=<?=$rid?>>
-      <input type="hidden" name="type" value="dish">
+    <form action="javascript:void(0);" method="post">
+      <input id="csrf-form" type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+      <input class="restaurant-id-form" type="hidden" name="restaurant-id" value=<?=$rid?>>
       <div class="input-field">
       <label for="dish">Dishes</label>
-      <select name="id" required>
+      <select class="id-form" name="id" required>
       <?php foreach($dishes as $dish) { ?>
         <option value=<?=$dish->id?>><?=$dish->name?></option>
       <?php } ?>
       </select>
 
-      <input class="text-field" type="number" name="amount" min=1 max=10 required>
+      <input class="text-field amount-form" type="number" name="amount" min=1 max=10 required>
       </div>
-      <button class="button edit-button" type="submit">Add to cart</button>
+      <button class="button edit-button" id="add-dish-button" type="submit">Add to cart</button>
     </form> 
     <?php } ?>
 
     <?php if(count($menus) != 0) { ?>
-    <form action="../actions/action.add_to_cart.php" method="post">
-      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-      <input type="hidden" name="restaurant-id" value=<?=$rid?>>
-      <input type="hidden" name="type" value="menu">
+    <form action="javascript:void(0);" method="post">
+      <input class="csrf-form" type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+      <input class="restaurant-id-form" type="hidden" name="restaurant-id" value=<?=$rid?>>
       <div class="input-field">
       <label for="dish">Menus</label>
-      <select name="id" required>
+      <select class="id-form" name="id" required>
         <?php foreach($menus as $menu) { ?>
           <option value=<?=$menu->id?>><?=$menu->name?></option>
         <?php } ?>
       </select>
-      <input class="text-field" type="number" name="amount" min=1 required>
+      <input class="text-field amount-form" type="number" name="amount" min=1 required>
       </div>
-      <button class="button edit-button" type="submit">Add to cart</button>
+      <button class="button edit-button" id="add-menu-button" type="submit">Add to cart</button>
     </form> 
     <?php } ?>
   </div>
+  <script src="../scripts/add_cart.js"></script>
   <?php } ?>
 
 <?php function drawFavoriteButton(PDO $db, Restaurant $restaurant, Session $session) { ?>

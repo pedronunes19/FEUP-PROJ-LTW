@@ -80,6 +80,7 @@
 
     static function searchDishes(PDO $db, array $get, array $categories, int $count) : array {
       $search = htmlspecialchars($get['search']);
+      $score = $get['score'];
       $categories_to_check = array();
       foreach($categories as $category){
         if ($get[$category->id]){
@@ -90,11 +91,13 @@
         SELECT DishId, Name, Price, RestaurantId
         FROM Dish WHERE Name LIKE ? LIMIT ?
       ');
-      $stmt->execute(array($search, $count));
+      $stmt->execute(array('%' . $search . '%', $count));
   
       $dishes = array();
       while ($dish = $stmt->fetch()) {
         $skip = false;
+
+        if($score > 0){$skip = true;}
 
         foreach($categories_to_check as $check){
           if (!Dish::hasCategory($db, $dish['DishId'], $check)){
