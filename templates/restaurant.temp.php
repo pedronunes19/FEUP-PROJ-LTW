@@ -123,7 +123,7 @@
     <script>let dish; let buttonDish; let favoriteDish; let dish_map = new Map();</script>
     <?php foreach ($dishes as $dish) { ?>
     <a id = "dish-image-blocks">
-      <img src="https://picsum.photos/200?<?=($dish->id * 50)?>" class = "center">
+      <img src="../images/dishes/<?=$dish->id?>.png" class = "center">
       <div class="middle-text">
         <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
         <?php if($session->isLoggedIn() && $session->getType()=="customer"){
@@ -135,7 +135,7 @@
   </section>
   </div>
   <div class="card other-card">
-  <?php drawReviews($db, $reviews) ?>
+  <?php drawReviews($db, $reviews, $session) ?>
   </div>
 <?php } ?>
 
@@ -219,7 +219,7 @@
 <?php function drawMenu(PDO $db, Menu $menu) { 
   $menu_dishes = $menu->getMenuDishes($db) ?>
     <a id = "menu-image-blocks">
-      <img src="https://picsum.photos/200?<?=$menu->id?>" class = "center">
+      <img src="../images/menus/<?=$menu->id?>.png" class = "center">
       <div class="middle-text">
         <div class="label"><?=$menu->name?> - <?=$menu->price?>€</div>
         <?php foreach($menu_dishes as $dish) {?>
@@ -229,7 +229,7 @@
     </a>
 <?php } ?>
 
-<?php function drawReviews(PDO $db, array $reviews) { ?>
+<?php function drawReviews(PDO $db, array $reviews, Session $session) { ?>
   <h3>REVIEWS</h3>
   <section class="reviews">
     <?php foreach ($reviews as $review) { ?>

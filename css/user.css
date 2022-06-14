@@ -38,6 +38,8 @@
     align-self: center;
     max-width: 50%;
     max-height: auto;
+    border: none;
+    border-radius: 1em;
 }
 
 .section-title {
@@ -163,6 +165,60 @@ label {
     margin-top: 1em;
 }
 
+.dishes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto; 
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+    padding-top : 1em;
+    padding-bottom: 2em;
+  }
+
+  #dish-image-blocks {
+    position: relative;
+    border-radius: 1em;
+  }
+
+
+  .dishes img.center {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transition: .3s ease;
+    border-radius: 1em;
+  }
+
+  .dishes .middle-text {
+    transition: 0.3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .dishes a:hover .middle-text{
+    opacity: 1;
+  }
+
+  .dishes a:hover img.center {
+    -webkit-filter: blur(0.2em);
+    filter: blur(0.2em);
+    transform: scale(101%)
+  }
+
+  .dishes .label {
+    background-color: var(--black-translucid);
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    align-self: center;
+    padding: 1em;
+  }
+
 @media screen and (max-width: 850px) {
     .restaurants {
         display: flex;
@@ -171,6 +227,18 @@ label {
       }
   
       .restaurants .middle-text {
+        font-size: 4vw;
+      }
+}
+
+@media screen and (max-width: 850px) {
+    .dishes {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+  
+      .dishes .middle-text {
         font-size: 4vw;
       }
 }
