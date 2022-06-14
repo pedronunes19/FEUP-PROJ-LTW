@@ -9,6 +9,12 @@
   require_once('../database/review.class.php');
   require_once('../database/order.class.php');
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    http_response_code(405);
+    require("../pages/error.php");
+    die();
+  }
+
   $db = getDatabaseConnection();
 
   Order::create($db, intval($_POST["customer-id"]), intval($_POST["restaurant-id"]), "Received");

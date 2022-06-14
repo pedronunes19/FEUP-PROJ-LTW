@@ -31,6 +31,7 @@
 
 <?php function drawLoginForm() { ?>
     <form action="../actions/action.login.php" method="post" class="login-register-form">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <h1 class="logo-wrapper"><a class="no-select logo" href=".">TAKE-AWAY</a></h1>
         <div class="input-field">
             <label for="email">Email</label>
@@ -61,6 +62,7 @@
 
 <?php function drawRegisterForm() { ?>
     <form action="../actions/action.register.php" onsubmit="return address_requirement_toggle()" class="login-register-form" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <h1 class="logo-wrapper"><a class="no-select logo" href=".">TAKE-AWAY</a></h1>
 
         <div class="input-field">

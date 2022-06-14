@@ -8,6 +8,12 @@
   require_once('../database/restaurant.class.php');
   require_once('../database/review.class.php');
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    http_response_code(405);
+    require("../pages/error.php");
+    die();
+  }
+
   $db = getDatabaseConnection();
 
   $review = Review::getReview($db, intval($_POST["id"]));

@@ -16,6 +16,7 @@
         <h4 class="section-title">Restaurant</h4>
         <form <?php if ($object_id != null) { ?> action="../actions/action.edit_restaurant.php" 
             <?php } else { ?> action="../actions/action.create_restaurant.php" <?php } ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="owner-id" value=<?=$session->getID()?>>
             <div class="input-field">
@@ -99,6 +100,7 @@
         <?php } else { ?><h4 class="section-title">New Review</h4><?php } ?>
         <form <?php if ($object_id != null) { ?> action="../actions/action.edit_review.php"
             <?php } else { ?> action="../actions/action.create_review.php" <?php } ?> method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="user-id" value=<?=$session->getID()?>>
             <div class="input-field">
@@ -143,6 +145,7 @@
     <div class="card modify-card">
         <h4 class="section-title">Response for <?=$review->content?></h4>
         <form action="../actions/action.answer_review.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="user-id" value=<?=$session->getID()?>>
             <div class="input-field">
@@ -166,6 +169,7 @@
         <h4 class="section-title">Dish</h4>
         <form <?php if ($object_id != null) { ?> action="../actions/action.edit_dish.php"
             <?php } else { ?> action="../actions/action.create_dish.php" <?php } ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="restaurant-id" value=<?=$rid?>>
             <div class="input-field">
@@ -247,6 +251,7 @@
         <h4 class="section-title">Menu</h4>
         <form <?php if ($object_id != null) { ?> action="../actions/action.edit_menu.php"
             <?php } else { ?> action="../actions/action.create_menu.php" <?php } ?> method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="restaurant-id" value=<?=$rid?>>
             <div class="input-field">

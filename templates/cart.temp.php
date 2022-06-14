@@ -23,6 +23,7 @@
                     <div class="middle-text">
                         <div class="label"><?=$item->name?> (x<?=$arr['amount']?>) - <?=($item->price)*($arr['amount'])?>€</div>
                         <form class="remove-button-form" action="../actions/action.remove_from_cart.php" method="post">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                         <input type="hidden" name="type" value=<?=$arr['type']?>>
                         <input type="hidden" name="id" value=<?=$arr['id']?>>
                         <button class="button remove-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
@@ -50,6 +51,7 @@
         </div>
         </div>
         <form action="../actions/action.order.php"? method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="restaurant-id" value=<?=$session->getItems()[0]['restaurant']?>>
             <input type="hidden" name="customer-id" value=<?=$session->getId()?>>
             <div class="card button-card">

@@ -133,6 +133,7 @@
         <?php if($session->isLoggedIn() && $session->getType()=="customer"){
           drawFavoriteButtonDish($db, $dish->id, $session);?>
           <form action="../actions/action.add_to_cart.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input type="hidden" name="restaurant-id" value=<?=$restaurant->id?>>
             <input type="hidden" name="type" value="dish">
             <input type="hidden" name="id" value=<?=$dish->id?>>
@@ -168,6 +169,7 @@
   <h3>CART MENU</h3>
   <?php if(count($dishes) != 0) { ?>
     <form action="../actions/action.add_to_cart.php" method="post">
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input type="hidden" name="restaurant-id" value=<?=$rid?>>
       <input type="hidden" name="type" value="dish">
       <div class="input-field">
@@ -186,6 +188,7 @@
 
     <?php if(count($menus) != 0) { ?>
     <form action="../actions/action.add_to_cart.php" method="post">
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input type="hidden" name="restaurant-id" value=<?=$rid?>>
       <input type="hidden" name="type" value="menu">
       <div class="input-field">
@@ -238,6 +241,7 @@
         <?php }?>
         <?php if($session->isLoggedIn() && $session->getType()=="customer"){?>
           <form action="../actions/action.add_to_cart.php" method="post">
+          <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
           <input type="hidden" name="restaurant-id" value=<?=$rid?>>
           <input type="hidden" name="type" value="menu">
           <input type="hidden" name="id" value=<?=$menu->id?>>

@@ -8,6 +8,12 @@
   require_once('../database/customer.class.php');
   require_once('../database/restaurantOwner.class.php');
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    http_response_code(405);
+    require("../pages/error.php");
+    die();
+  }
+
   $db = getDatabaseConnection();
   $type = $session->getType();
   $type == "customer" ? $user = Customer::getCustomer($db, $session->getId()) : $user = RestaurantOwner::getOwner($db, $session->getId());

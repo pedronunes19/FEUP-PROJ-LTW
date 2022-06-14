@@ -75,6 +75,7 @@ require_once('../session/session.php');
             </a>
         </div>
         <form class="logout-form" action="../actions/action.logout.php" method="post">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <div class="icon">
             <button class="icon logout-icon" type="submit">
                 <i class="fa-solid fa-right-from-bracket"></i>

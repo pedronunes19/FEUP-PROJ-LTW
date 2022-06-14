@@ -6,6 +6,14 @@
     public function __construct() { 
       session_set_cookie_params(0, '../pages/', true, true);
       session_start();
+      
+      function token_gen() {
+        return bin2hex(openssl_random_pseudo_bytes(32));
+      }
+
+      if (!isset($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = token_gen();
+      }
 
       $this->items = isset($_SESSION['items']) ? $_SESSION['items'] : array();
       $this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();

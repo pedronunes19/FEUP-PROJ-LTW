@@ -50,6 +50,7 @@
     <div class="card edit-card">
         <h4 class="section-title order-title">Edit profile</h4>
         <form action="../actions/action.edit_profile.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <div class="input-field">
                 <label for="first-name">First Name *</label>
                 <input class="register_required" type="text" name="first-name" placeholder="James" value="<?=$user->first_name?>" required>
@@ -147,6 +148,7 @@
         <button class="button edit-button" type="submit">Update restaurant</button>
     </form>
     <form action="../actions/action.delete_restaurant.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div class="input-field">
         <select name="restaurant" required>
             <?php foreach($restaurants as $restaurant) { ?>
@@ -160,6 +162,7 @@
 
 <?php function drawModifyOrders($db, array $orders) { ?>
     <form action="../actions/action.edit_order.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div class="input-field">
         <select name="object_id" required>
             <?php foreach($orders as $order) { 
@@ -197,6 +200,7 @@
         </div>
     </form>
     <form action="../actions/action.delete_review.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div class="input-field">
         <select name="review" required>
             <?php foreach($reviews as $review) { 
@@ -228,6 +232,7 @@
         </div>
     </form>
     <form action="../actions/action.delete_dish.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div class="input-field">
         <input type="hidden" name="restaurant-id" value=<?=$rid?>>
         <select name="dish" required>
@@ -259,6 +264,7 @@
         </div>
     </form>
     <form action="../actions/action.delete_menu.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <div class="input-field">
         <input type="hidden" name="restaurant-id" value=<?=$rid?>>
         <select name="menu" required>
@@ -278,7 +284,7 @@
         <div class="empty-section-wrapper">
             <div class="empty-section-text">No reviews yet. Your opinion is valuable!</div>
         </div>
-        <form action="../pages/modify.php" method="post">
+    <form action="../pages/modify.php" method="post">
         <input type="hidden" name="modify_type" value="review">    
         <button class="button edit-button" type="submit">Create new review</button>
     </form> 

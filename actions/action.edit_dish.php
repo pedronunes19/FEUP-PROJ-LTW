@@ -9,6 +9,12 @@
   require_once('../database/dish.class.php');
   require_once('../database/category.class.php');
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    http_response_code(405);
+    require("../pages/error.php");
+    die();
+  }
+
   $db = getDatabaseConnection();
 
   if (strlen($_FILES["image"]["tmp_name"]) != 0) {
