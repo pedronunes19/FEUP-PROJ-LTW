@@ -59,7 +59,11 @@
     <section class="dishes">
         <?php foreach($dishes as $dish) { ?> 
             <a id="dish-image-blocks" href="restaurant.php?id=<?=$dish->restaurant?>">
-                <img src="../images/dishes/<?=$dish->id?>.png" class="center">
+            <?php if (file_exists("../images/dishes/$dish->id.png")) { ?>
+              <img src="../images/dishes/<?=$dish->id?>.png" class="center">
+              <?php } else { ?>
+              <img src="../images/default.png" class="center">
+            <?php } ?>
                 <div class="middle-text">
                     <div class="label"><?=$dish->name?></div>
                 </div>
