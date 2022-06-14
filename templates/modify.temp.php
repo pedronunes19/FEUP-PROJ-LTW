@@ -134,18 +134,20 @@
 <?php } ?>
 
 <?php function drawResponseForm($db, $session, $object_id, $rid) {
-    if ($object_id != null) $review = Review::getReview($db, $object_id); ?>
+    if ($object_id == null) {
+        http_response_code(404);
+        require("error.php");
+        die();
+    }
+    $review = Review::getReview($db, $object_id); ?>
     <div class="card modify-card">
-    <?php if ($object_id != null) { ?> 
         <h4 class="section-title">Response for <?=$review->context?></h4>
-        <?php } else { ?><h4 class="section-title">New Review</h4><?php } ?>
-        <form <?php if ($object_id != null) { ?> action="../actions/action.answer_review.php"
-            <?php } else { ?> action="../actions/action.create_review.php" <?php } ?> method="post">
+        <form action="../actions/action.answer_review.php">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="user-id" value=<?=$session->getID()?>>
             <div class="input-field">
                 <label for="name">Review response *</label>
-                <textarea class="text-field" type="text" name="response" required><?php if ($object_id != null) {?><?=$review->response?><?php }?></textarea>
+                <textarea class="text-field" type="text" name="response" required><?=$review->response?></textarea>
             </div>
             <div class="asterisk-info">
                 <a class="text-info">* - Required field<br></a>
