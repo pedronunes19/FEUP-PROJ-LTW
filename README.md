@@ -9,7 +9,7 @@
 - [x] Edit Restaurant
 - [x] Add Dishes
 - [x] List Reviews
-- [ ] Restaurant Owner Can Answer to Review
+- [x] Restaurant Owner Can Answer to Review
 - [x] List Customer Orders
 - [x] Change Order State
 - [x] Search Restaurants
@@ -21,4 +21,4 @@
 
 ## Credentials
 
-
+joaogenerico@gmail.com / passwordgenerica (login as customer or owner, there are two accounts with the same credentials)

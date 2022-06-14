@@ -32,6 +32,7 @@
     flex-direction: row;
     gap: 2em;
     justify-content: space-around;
+    color: var(--white);
 }
 
 .profile-img {
@@ -81,6 +82,7 @@
     border-width: 0.1em;
     border-spacing: 0;
     border-radius: 1em;
+    border-color: var(--black);
 }
 
 .table-header, .table-cell {

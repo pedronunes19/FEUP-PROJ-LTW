@@ -98,6 +98,7 @@ CREATE TABLE Review
     ReviewId INTEGER NOT NULL,
     ReviewScore INTEGER NOT NULL,
     ReviewContent NVARCHAR(200) NOT NULL,
+    ReviewResponse NVARCHAR(200),
     CustomerId INTEGER NOT NULL,
     RestaurantId INTEGER NOT NULL,
     CONSTRAINT PK_Review PRIMARY KEY (ReviewId),

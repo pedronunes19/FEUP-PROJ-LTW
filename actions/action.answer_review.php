@@ -12,8 +12,8 @@
 
   $review = Review::getReview($db, intval($_POST["id"]));
 
-  $review->save($db, intval($_POST["score"]), htmlspecialchars($_POST["content"]), null, intval($_POST["id"]));
+  $review->save($db, $review->score, $review->content, htmlspecialchars($_POST['response']), intval($_POST["id"]));
  
-  $session->addMessage('success', "Review edited successfully!");
+  $session->addMessage('success', "Response registered successfully!");
   header("Location: ../pages/user.php");
 ?>

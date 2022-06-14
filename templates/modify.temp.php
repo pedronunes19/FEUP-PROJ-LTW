@@ -133,6 +133,30 @@
     </div>
 <?php } ?>
 
+<?php function drawResponseForm($db, $session, $object_id, $rid) {
+    if ($object_id != null) $review = Review::getReview($db, $object_id); ?>
+    <div class="card modify-card">
+    <?php if ($object_id != null) { ?> 
+        <h4 class="section-title">Response for <?=$review->context?></h4>
+        <?php } else { ?><h4 class="section-title">New Review</h4><?php } ?>
+        <form <?php if ($object_id != null) { ?> action="../actions/action.answer_review.php"
+            <?php } else { ?> action="../actions/action.create_review.php" <?php } ?> method="post">
+            <input type="hidden" name="id" value=<?=$object_id?>>
+            <input type="hidden" name="user-id" value=<?=$session->getID()?>>
+            <div class="input-field">
+                <label for="name">Review response *</label>
+                <textarea class="text-field" type="text" name="response" required><?php if ($object_id != null) {?><?=$review->response?><?php }?></textarea>
+            </div>
+            <div class="asterisk-info">
+                <a class="text-info">* - Required field<br></a>
+            </div> 
+            <div class="button-wrapper">
+                <button class="button edit-button" type="submit">Edit information</button>
+            </div>
+        </form>
+    </div>
+<?php } ?>
+
 <?php function drawDishForm($db, $session, $object_id) {
     if ($object_id != null) $dish = Dish::getDish($db, $object_id); $rid = $_POST['restaurant-id']; $dish_categories = Category::getDishCategories($db, $object_id); ?> 
     <?php $categories = Category::getCategories($db); ?>

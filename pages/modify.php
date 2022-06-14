@@ -28,6 +28,9 @@
         case "review":
             drawReviewForm($db, $session, $object_id, $from_restaurant_id);
             break;
+        case "review-response":
+            drawResponseForm($db, $session, $object_id, $from_restaurant_id);
+            break;    
         case "dish":
             drawDishForm($db, $session, $object_id);
             break;
