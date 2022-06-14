@@ -39,7 +39,7 @@
                 <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
               <?php } ?> 
               </section> 
-              <button class="button" type="submit"><i class="fa fa-search"></i></button>
+              <button class="button" type="submit">Aplicar</button>
           </form>
       </div>
     </div>
@@ -238,6 +238,12 @@
         <p id="review-content"><?=$review->content?></p>
         <p id="review-score"><span id='user-score'><?=$review->score?></span>/5<span id="star"><i class="fa-regular fa-star"></i></span></p>
       </div>
+    <?php } ?>
+    <?php if($session->isLoggedIn() && $session->getType()=="customer"){ ?>
+    <form action="../pages/modify.php" method="post" class="add-review-form">
+      <input type="hidden" name="modify_type" value="review"> 
+      <button class="button add-review" type="submit"><i class="fa fa-plus"></i></button>
+    </form>
     <?php } ?>
   </section>
 <?php } ?>

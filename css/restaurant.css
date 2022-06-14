@@ -246,7 +246,7 @@ label {
     flex-direction: column; 
     flex-wrap: wrap;
     padding-top : 1em;
-    padding-bottom: 2em;
+    padding-bottom: 1em;
   }
 
   .review{
@@ -298,6 +298,19 @@ label {
     font-size: 18px;
     transform: translate(2px, -3px);
   }
+
+  .reviews .add-review-form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: 1em;
+  }
+
+  .reviews .add-review{
+    align-self: center;
+    font-size: 17px;
+  }
+
 
   .cart-container {
     height: 100%;
