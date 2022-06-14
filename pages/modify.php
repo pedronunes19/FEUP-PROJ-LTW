@@ -18,6 +18,7 @@
     }
 
     $object_id = intval($_POST['object_id']);
+    $from_restaurant_id = intval($_POST['from-restaurant-id']);
 
     drawHeader("../css/user.css", $session);
     switch ($_POST["modify_type"]) {
@@ -25,7 +26,7 @@
             drawRestaurantForm($db, $session, $object_id);
             break;
         case "review":
-            drawReviewForm($db, $session, $object_id);
+            drawReviewForm($db, $session, $object_id, $from_restaurant_id);
             break;
         case "dish":
             drawDishForm($db, $session, $object_id);

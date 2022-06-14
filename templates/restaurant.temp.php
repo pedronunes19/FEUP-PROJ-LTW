@@ -39,7 +39,7 @@
                 <label for="category-filter<?=$category->id?>"><?=$category->name?></label>
               <?php } ?> 
               </section> 
-              <button class="button" type="submit">Aplicar</button>
+              <button class="button" type="submit">Apply</button>
           </form>
       </div>
     </div>
@@ -113,7 +113,7 @@
   <h3>MENUS</h3>
   <section class="menus">
     <?php foreach ($menus as $menu) { 
-      drawMenu($db, $menu);
+      drawMenu($db, $menu, $session, $restaurant->id);
     } ?>
   </section>
   </div>
@@ -121,21 +121,32 @@
   <h3>DISHES</h3>
   <section class="dishes">
     <script>let dish; let buttonDish; let favoriteDish; let dish_map = new Map();</script>
-    <?php foreach ($dishes as $dish) { ?>
+    <?php foreach ($dishes as $dish) { 
+      $dish_categories = Category::getDishCategories($db, $dish->id)?>
     <a id = "dish-image-blocks">
       <img src="../images/dishes/<?=$dish->id?>.png" class = "center">
       <div class="middle-text">
         <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
+        <?php foreach ($dish_categories as $category) { ?>
+        <p class="restaurant-category"><?=$category->name?></p>
+        <?php } ?>
         <?php if($session->isLoggedIn() && $session->getType()=="customer"){
-          drawFavoriteButtonDish($db, $dish->id, $session);
-        }?>
+          drawFavoriteButtonDish($db, $dish->id, $session);?>
+          <form action="../actions/action.add_to_cart.php" method="post">
+            <input type="hidden" name="restaurant-id" value=<?=$restaurant->id?>>
+            <input type="hidden" name="type" value="dish">
+            <input type="hidden" name="id" value=<?=$dish->id?>>
+            <input type="hidden" name="amount" value="1">
+            <button class="button add-cart" type="submit"><i class="fa fa-plus"></i></button>
+          </form>
+        <?php } ?>
       </div>
     </a>
     <?php } ?>
   </section>
   </div>
   <div class="card other-card">
-  <?php drawReviews($db, $reviews, $session) ?>
+  <?php drawReviews($db, $reviews, $session, $restaurant->id) ?>
   </div>
 <?php } ?>
 
@@ -144,9 +155,9 @@
   <div class="card other-card">
     <h3>OWNER MENU</h3>
     <h4>Dishes</h4>
-    <?php drawModifyDishes($db, $dishes, $rid); ?>
+    <?php drawModifyDishes($db, $dishes, intval($rid)); ?>
     <h4>Menus</h4>
-    <?php drawModifyMenus($db, $menus, $rid); ?>
+    <?php drawModifyMenus($db, $menus, intval($rid)); ?>
 
   </div>
 <?php } ?>
@@ -184,7 +195,7 @@
           <option value=<?=$menu->id?>><?=$menu->name?></option>
         <?php } ?>
       </select>
-      <input class="text-field" type="number" name="amount" min=1 max=10 required>
+      <input class="text-field" type="number" name="amount" min=1 required>
       </div>
       <button class="button edit-button" type="submit">Add to cart</button>
     </form> 
@@ -216,7 +227,7 @@
     <script src="../scripts/favorite.dish.js"></script>
 <?php } ?>  
 
-<?php function drawMenu(PDO $db, Menu $menu) { 
+<?php function drawMenu(PDO $db, Menu $menu, Session $session, int $rid) { 
   $menu_dishes = $menu->getMenuDishes($db) ?>
     <a id = "menu-image-blocks">
       <img src="../images/menus/<?=$menu->id?>.png" class = "center">
@@ -225,11 +236,20 @@
         <?php foreach($menu_dishes as $dish) {?>
           <div class="secondary-label"><?=$dish->name?></div>
         <?php }?>
+        <?php if($session->isLoggedIn() && $session->getType()=="customer"){?>
+          <form action="../actions/action.add_to_cart.php" method="post">
+          <input type="hidden" name="restaurant-id" value=<?=$rid?>>
+          <input type="hidden" name="type" value="menu">
+          <input type="hidden" name="id" value=<?=$menu->id?>>
+          <input type="hidden" name="amount" value="1">
+            <button class="button add-cart" type="submit"><i class="fa fa-plus"></i></button>
+          </form>
+        <?php } ?>
       </div>
     </a>
 <?php } ?>
 
-<?php function drawReviews(PDO $db, array $reviews, Session $session) { ?>
+<?php function drawReviews(PDO $db, array $reviews, Session $session, int $rid) { ?>
   <h3>REVIEWS</h3>
   <section class="reviews">
     <?php foreach ($reviews as $review) { ?>
@@ -241,7 +261,8 @@
     <?php } ?>
     <?php if($session->isLoggedIn() && $session->getType()=="customer"){ ?>
     <form action="../pages/modify.php" method="post" class="add-review-form">
-      <input type="hidden" name="modify_type" value="review"> 
+      <input type="hidden" name="modify_type" value="review">
+      <input type="hidden" name="from-restaurant-id" value=<?=$rid?>> 
       <button class="button add-review" type="submit"><i class="fa fa-plus"></i></button>
     </form>
     <?php } ?>

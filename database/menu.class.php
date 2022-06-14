@@ -94,6 +94,26 @@
       return $dishes;
     }
 
+    function addMenuDishes(PDO $db, int $dish_id): array{
+      $stmt = $db->prepare('
+      INSERT INTO MenuDish (MenuId, DishId)  
+      VALUES (?, ?)
+      ');
+      $stmt-> execute(array($this->id, $dish_id));
 
+      $dishes = array();
+      while ($dish = $stmt->fetch()) {
+        $dishes[] = new Dish($dish['DishId'], $dish['Name'], $dish['Price'], $dish['RestaurantId']);
+
+      }
+      return $dishes;
+    }
+
+    function deleteMenuDishes(PDO $db) {
+      $stmt = $db->prepare('
+        DELETE FROM MenuDish WHERE MenuId = ?
+      ');
+      $stmt->execute(array($this->id));
+    }
   }
 ?>

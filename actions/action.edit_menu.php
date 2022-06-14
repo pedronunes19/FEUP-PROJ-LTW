@@ -32,8 +32,19 @@
     die();
   }
 
+  if (($_POST['menu-dish-1'] == $_POST['menu-dish-2']) || (($_POST['menu-dish-3'] == $_POST['menu-dish-2']) && $_POST['menu-dish-2'] != "none") || ($_POST['menu-dish-1'] == $_POST['menu-dish-3'])) {
+    $session->addMessage('error', "A menu cannot be built with two equal dishes!");
+    header("Location: ../pages/restaurant.php?id=" . $_POST['restaurant-id']);
+    die();
+  }
+
   $menu = Menu::getMenu($db, intval($_POST['id']));
   $menu->save($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["id"]));
+
+  $menu->deleteMenuDishes($db);
+  $menu->addMenuDishes($db, intval($_POST['menu-dish-1']));
+  if ($_POST['menu-dish-2'] != "none")  $menu->addMenuDishes($db, intval($_POST['menu-dish-2']));
+  if ($_POST['menu-dish-3'] != "none")  $menu->addMenuDishes($db, intval($_POST['menu-dish-3']));
 
   Category::deleteMenuCategories($db, intval($_POST['id']));
   Category::addMenuCategories($db, intval($_POST['category-1']), intval($_POST['id']));

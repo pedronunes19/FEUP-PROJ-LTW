@@ -19,7 +19,7 @@
 
     if ($_SESSION['items'] == null){
         $session->addMessage('error', "Your cart is empty!");
-        header("Location: ..");
+        header('Location: ../pages/user.php');
         die();
     }
 

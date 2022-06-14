@@ -28,6 +28,6 @@
     $session->setId($user->id);
     $session->setName($user->name());
     $session->addMessage('success', "Account created! Don't worry, we logged in for you.");
-    header("Location: ..");
+    header("Location: ../pages/");
   }
 ?>

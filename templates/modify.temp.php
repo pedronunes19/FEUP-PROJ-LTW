@@ -90,7 +90,7 @@
     </div>
 <?php } ?>
 
-<?php function drawReviewForm($db, $session, $object_id) {
+<?php function drawReviewForm($db, $session, $object_id, $rid) {
     if ($object_id != null) $review = Review::getReview($db, $object_id); ?>
     <div class="card modify-card">
     <?php if ($object_id != null) { 
@@ -114,6 +114,9 @@
                 <label for="name">Restaurant name *</label>
                 <div class="input-field">
                     <select name="restaurant" required>
+                        <?php if ($rid != null) { $source_restaurant = Restaurant::getRestaurant($db, $rid) ?>
+                        <option value=<?=$rid?>><?=$source_restaurant->name?> </option>
+                        <?php } ?>
                         <?php foreach($restaurants as $restaurant) { ?>
                             <option value=<?=$restaurant->id?>><?=$restaurant->name?> </option>
                         <?php } ?>
@@ -211,7 +214,8 @@
 <?php } ?>
 
 <?php function drawMenuForm($db, $session, $object_id) {
-    if ($object_id != null) $menu = Menu::getMenu($db, $object_id); $rid = $_POST['restaurant-id']; $menu_categories = Category::getMenuCategories($db, $object_id); ?> 
+    if ($object_id != null) { $menu = Menu::getMenu($db, $object_id); $rid = $_POST['restaurant-id']; $menu_categories = Category::getMenuCategories($db, $object_id); 
+    $menu_dishes = $menu->getMenuDishes($db); $dishes = Dish::getRestaurantDishes($db, intval($rid)); } ?> 
     <?php $categories = Category::getCategories($db); ?>
     <div class="card modify-card">
         <h4 class="section-title">Menu</h4>
@@ -268,6 +272,50 @@
                         <?php } }
                         else { ?>
                             <option value=<?=$category->id?>><?=$category->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="menu-dish">Menu dish 1</label>
+                <select name="menu-dish-1" required>
+                    <?php if ($object_id != null && count($menu_dishes) > 0) { ?> <option value=<?=$menu_dishes[0]->id?>><?=$menu_dishes[0]->name?></option> <?php } ?>
+                    <?php foreach($dishes as $dish) { ?> 
+                        <?php if (isset($menu_dishes) && count($menu_dishes) > 0) {
+                            if ($dish->id != $menu_dishes[0]->id) { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="menu-dish">Menu dish 2</label>
+                <select name="menu-dish-2">
+                    <?php if ($object_id != null && count($menu_dishes) > 1) { ?> <option value=<?=$menu_dishes[1]->id?>><?=$menu_dishes[1]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($dishes as $dish) { ?> 
+                        <?php if (isset($menu_dishes) && count($menu_dishes) > 1) {
+                            if ($dish->id != $menu_dishes[1]->id) { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
+                    <?php } }?>
+                </select>
+            </div>
+            <div class="input-field">
+                <label for="menu-dish">Menu dish 3</label>
+                <select name="menu-dish-3">
+                    <?php if ($object_id != null && count($menu_dishes) > 2) { ?> <option value=<?=$menu_dishes[2]->id?>><?=$menu_dishes[2]->name?></option> <?php } ?>
+                    <option value="none"></option>
+                    <?php foreach($dishes as $dish) { ?> 
+                        <?php if (isset($menu_dishes) && count($menu_dishes) > 2) {
+                            if ($dish->id != $menu_dishes[2]->id) { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
+                        <?php } }
+                        else { ?>
+                            <option value=<?=$dish->id?>><?=$dish->name?></option>
                     <?php } }?>
                 </select>
             </div>

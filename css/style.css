@@ -29,7 +29,6 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    transition: 0.3s ease;
     background-color: var(--score-red);
   }
 

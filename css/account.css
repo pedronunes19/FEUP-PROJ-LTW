@@ -82,4 +82,8 @@ h2 {
     .button {
         width: 100%;
     }
+
+    label {
+        word-wrap: break-word;
+    }
 }

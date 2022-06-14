@@ -205,7 +205,7 @@
     </form>
 <?php } ?>
 
-<?php function drawModifyDishes($db, array $dishes, $rid) { ?>
+<?php function drawModifyDishes($db, array $dishes, int $rid) { ?>
     <form action="../pages/modify.php" method="post">
         <input type="hidden" name="modify_type" value="dish">
         <input type="hidden" name="restaurant-id" value=<?=$rid?>>
@@ -236,7 +236,7 @@
     </form>
 <?php } ?>
 
-<?php function drawModifyMenus($db, array $menus, $rid) { ?>
+<?php function drawModifyMenus($db, array $menus, int $rid) { ?>
     <form action="../pages/modify.php" method="post">
         <input type="hidden" name="modify_type" value="menu">
         <input type="hidden" name="restaurant-id" value=<?=$rid?>>

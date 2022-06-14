@@ -18,15 +18,16 @@
                 <?php if ($arr['type'] == "menu") $item = Menu::getMenu($db, $arr['id']) ?>
                 <?php if ($arr['type'] == "dish") $item = Dish::getDish($db, $arr['id']) ?>
                 <a id = "dish-image-blocks">
-                    <img src="https://picsum.photos/200?<?=($item->id)?>" class = "center">
+                    <?php if ($arr['type'] == "menu") { ?> <img src="../images/menus/<?=$item->id?>.png" class = "center">
+                    <?php } else { ?> <img src="../images/dishes/<?=$item->id?>.png" class = "center"> <?php } ?>
                     <div class="middle-text">
                         <div class="label"><?=$item->name?> (x<?=$arr['amount']?>) - <?=($item->price)*($arr['amount'])?>€</div>
+                        <form class="remove-button-form" action="../actions/action.remove_from_cart.php" method="post">
+                        <input type="hidden" name="type" value=<?=$arr['type']?>>
+                        <input type="hidden" name="id" value=<?=$arr['id']?>>
+                        <button class="button remove-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
+                        </form>
                     </div>
-                    <form action="../actions/action.remove_from_cart.php" method="post">
-                    <input type="hidden" name="type" value=<?=$arr['type']?>>
-                    <input type="hidden" name="id" value=<?=$arr['id']?>>
-                    <button class="button remove-button" type="submit"><i class="fa-solid fa-xmark"></i></button>
-                    </form>
                 </a>
             <?php } ?>
             </section>

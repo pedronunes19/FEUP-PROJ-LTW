@@ -32,10 +32,20 @@
     die();
   }
 
+  if (($_POST['menu-dish-1'] == $_POST['menu-dish-2']) || (($_POST['menu-dish-3'] == $_POST['menu-dish-2']) && $_POST['menu-dish-2'] != "none") || ($_POST['menu-dish-1'] == $_POST['menu-dish-3'])) {
+    $session->addMessage('error', "A menu cannot be built with two equal dishes!");
+    header("Location: ../pages/restaurant.php?id=" . $_POST['restaurant-id']);
+    die();
+  }
+
   Menu::create($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["restaurant-id"]));
-  
   $menus = Menu::getMenus($db, 0);
   $menu =  $menus[count($menus)-1];
+
+  $menu->addMenuDishes($db, intval($_POST['menu-dish-1']));
+  if ($_POST['menu-dish-2'] != "none")  $menu->addMenuDishes($db, intval($_POST['menu-dish-2']));
+  if ($_POST['menu-dish-3'] != "none")  $menu->addMenuDishes($db, intval($_POST['menu-dish-3']));
+
   Category::addMenuCategories($db, intval($_POST['category-1']), $menu->id);
   if ($_POST['category-2'] != "none") Category::addMenuCategories($db, intval($_POST['category-2']), $menu->id);
   if ($_POST['category-3'] != "none") Category::addMenuCategories($db, intval($_POST['category-3']), $menu->id);
