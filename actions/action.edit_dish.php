@@ -33,7 +33,7 @@
   }
 
   $dish = Dish::getDish($db, intval($_POST['id']));
-  $dish->save($db, $_POST["name"], floatval($_POST["price"]), intval($_POST["id"]));
+  $dish->save($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["id"]));
 
   Category::deleteDishCategories($db, intval($_POST['id']));
   Category::addDishCategories($db, intval($_POST['category-1']), intval($_POST['id']));

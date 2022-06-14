@@ -19,7 +19,7 @@
 
 
 
-  Review::create($db, intval($_POST["score"]), $_POST["content"], intval($_POST["user-id"]), intval($_POST["restaurant"]));
+  Review::create($db, intval($_POST["score"]), htmlspecialchars($_POST["content"]), intval($_POST["user-id"]), intval($_POST["restaurant"]));
  
   $session->addMessage('success', "Review created successfully!");
   header("Location: ../pages/user.php");

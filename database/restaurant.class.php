@@ -85,7 +85,7 @@
     }
 
     static function searchRestaurants(PDO $db, array $get, array $categories, int $count) : array {
-      $search = $get['search'];
+      $search = htmlspecialchars($get['search']);
       $score = $get['score'];
       $categories_to_check = array();
       foreach($categories as $category){

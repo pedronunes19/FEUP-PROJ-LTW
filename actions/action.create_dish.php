@@ -32,7 +32,7 @@
     die();
   }
 
-  Dish::create($db, $_POST["name"], floatval($_POST["price"]), intval($_POST["restaurant-id"]));
+  Dish::create($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["restaurant-id"]));
   
   $dishes = Dish::getDishes($db, 0);
   $dish =  $dishes[count($dishes)-1];

@@ -79,7 +79,7 @@
     }
 
     static function searchDishes(PDO $db, array $get, array $categories, int $count) : array {
-      $search = $get['search'];
+      $search = htmlspecialchars($get['search']);
       $categories_to_check = array();
       foreach($categories as $category){
         if ($get[$category->id]){

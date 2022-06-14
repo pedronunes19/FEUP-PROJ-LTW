@@ -33,7 +33,7 @@
   }
 
   $menu = Menu::getMenu($db, intval($_POST['id']));
-  $menu->save($db, $_POST["name"], floatval($_POST["price"]), intval($_POST["id"]));
+  $menu->save($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["id"]));
 
   Category::deleteMenuCategories($db, intval($_POST['id']));
   Category::addMenuCategories($db, intval($_POST['category-1']), intval($_POST['id']));

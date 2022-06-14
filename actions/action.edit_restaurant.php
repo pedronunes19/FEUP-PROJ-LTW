@@ -33,7 +33,7 @@
   }
 
   $restaurant = Restaurant::getRestaurant($db, intval($_POST['id']));
-  $restaurant->save($db, $_POST["name"], $_POST["address"], intval($_POST["id"]));
+  $restaurant->save($db, htmlspecialchars($_POST["name"]), htmlspecialchars($_POST["address"]), intval($_POST["id"]));
 
   Category::deleteRestaurantCategories($db, intval($_POST['id']));
   Category::addRestaurantCategories($db, intval($_POST['category-1']), intval($_POST['id']));

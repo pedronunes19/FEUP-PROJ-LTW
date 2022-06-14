@@ -12,7 +12,7 @@
 
   $review = Review::getReview($db, intval($_POST["id"]));
 
-  $review->save($db, intval($_POST["score"]), $_POST["content"], intval($_POST["id"]));
+  $review->save($db, intval($_POST["score"]), htmlspecialchars($_POST["content"]), intval($_POST["id"]));
  
   $session->addMessage('success', "Review edited successfully!");
   header("Location: ../pages/user.php");

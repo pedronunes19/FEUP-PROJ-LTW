@@ -32,7 +32,7 @@
   }
 
 
-  $user->save($db, $_POST["first-name"], $_POST["last-name"], $_POST["address"], $_POST["city"], $_POST["country"], $_POST["postal-code"], $_POST["phone-number"], $_POST["email"], $_POST["password"], $session->getId());
+  $user->save($db, htmlspecialchars($_POST["first-name"]), htmlspecialchars($_POST["last-name"]), htmlspecialchars($_POST["address"]), htmlspecialchars($_POST["city"]), htmlspecialchars($_POST["country"]), htmlspecialchars($_POST["postal-code"]), htmlspecialchars($_POST["phone-number"]), htmlspecialchars($_POST["email"]), $_POST["password"], $session->getId());
  
   $session->setName($user->name());
   $session->addMessage('success', "Profile edited successfully!");

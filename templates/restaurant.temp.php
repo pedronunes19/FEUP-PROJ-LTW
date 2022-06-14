@@ -30,7 +30,7 @@
     <div id="search-menu" class="search-menu">
       <div class="filter-search-container">
           <form action="search.php"  class="search-form">
-              <input type="hidden" name="search" value=<?=$_GET['search']?>>
+              <input type="hidden" name="search" value=<?=htmlspecialchars($_GET['search'])?>>
               <input type="range" min=0 max=5 step=0.1 value="0" name="score" class="score-range" oninput="this.nextElementSibling.children[0].value = this.value">
               <p class="min-score-display">Min. Average: <output>0</output></p>
               <section class="categories">
@@ -45,7 +45,7 @@
     </div>
     <button class="openbtn" onclick="clickNav()"><i class="fas fa-bars"></i></button>
 
-    <h2 class="sub-header">Search results for "<?=$search?>"</h2>
+    <h2 class="sub-header">Search results for "<?=htmlspecialchars($search)?>"</h2>
     <section class="restaurants">
         <?php foreach($restaurants as $restaurant) { ?> 
             <a id="restaurant-image-blocks" href="restaurant.php?id=<?=$restaurant->id?>">

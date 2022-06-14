@@ -32,7 +32,7 @@
     die();
   }
 
-  Menu::create($db, $_POST["name"], floatval($_POST["price"]), intval($_POST["restaurant-id"]));
+  Menu::create($db, htmlspecialchars($_POST["name"]), floatval($_POST["price"]), intval($_POST["restaurant-id"]));
   
   $menus = Menu::getMenus($db, 0);
   $menu =  $menus[count($menus)-1];

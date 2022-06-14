@@ -3,7 +3,8 @@
     private array $messages;
     public array $items;
 
-    public function __construct() {
+    public function __construct() { 
+      session_set_cookie_params(0, '../pages/', true, true);
       session_start();
 
       $this->items = isset($_SESSION['items']) ? $_SESSION['items'] : array();
