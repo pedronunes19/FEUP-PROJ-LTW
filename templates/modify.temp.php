@@ -141,8 +141,8 @@
     }
     $review = Review::getReview($db, $object_id); ?>
     <div class="card modify-card">
-        <h4 class="section-title">Response for <?=$review->context?></h4>
-        <form action="../actions/action.answer_review.php">
+        <h4 class="section-title">Response for <?=$review->content?></h4>
+        <form action="../actions/action.answer_review.php" method="post">
             <input type="hidden" name="id" value=<?=$object_id?>>
             <input type="hidden" name="user-id" value=<?=$session->getID()?>>
             <div class="input-field">
