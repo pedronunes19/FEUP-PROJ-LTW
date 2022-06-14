@@ -31,13 +31,34 @@ VALUES
     (8, "Menu 8", 8.00, 3),
     (9, "Menu 9", 9.00, 3);
 
-INSERT INTO Dish (DishId, Name, Price, RestaurantId) 
+INSERT INTO Dish (Name, Price, RestaurantId) 
 VALUES 
-    (1, "Prato 1", 1.00, 1),
-    (2, "Prato 2", 2.00, 1),
-    (3, "Prato 3", 3.00, 1),
-    (4, "Prato 4", 4.00, 2),
-    (5, "Prato 5", 5.00, 3);
+    ("Prato 1", 1.00, 1),
+    ("Prato 2", 2.00, 1),
+    ("Prato 3", 3.00, 1),
+    ("Prato 4", 4.00, 2),
+    ("Prato 5", 5.00, 3),
+    ("Prato 6", 1.00, 3),
+    ("Prato 7", 2.00, 3),
+    ("Prato 8", 3.00, 4),
+    ("Prato 9", 4.00, 4),
+    ("Prato 10", 5.00, 5),
+    ("Prato 11", 1.00, 5),
+    ("Prato 12", 2.00, 5),
+    ("Prato 13", 3.00, 6),
+    ("Prato 14", 4.00, 7),
+    ("Prato 15", 5.00, 7),
+    ("Prato 16", 4.00, 8),
+    ("Prato 17", 2.00, 8),
+    ("Prato 18", 3.00, 9),
+    ("Prato 19", 4.00, 9),
+    ("Prato 20", 5.00, 10),
+    ("Prato 21", 1.00, 11),
+    ("Prato 22", 2.00, 12),
+    ("Prato 23", 3.00, 12),
+    ("Prato 24", 4.00, 12),
+    ("Prato 25", 5.00, 13);
+
 
 INSERT INTO Customer (CustomerId, FirstName, LastName, Email, Address, Password) 
 VALUES 
@@ -66,10 +87,10 @@ VALUES
     (1, 3, "Review 1", 1, 1),
     (2, 5, "Review 2", 1, 1),
     (3, 2, "Review 3", 1, 1),
-    (4, 5, "Review text", 1, 1),
-    (5, 4, "Review text", 1, 4),
-    (6, 1, "Review text", 1, 2),
-    (7, 3, "Review text", 1, 6);
+    (4, 5, "Review 4", 1, 1),
+    (5, 4, "Review 5", 1, 4),
+    (6, 1, "Review 6", 1, 2),
+    (7, 3, "Review 7", 1, 6);
 
 INSERT INTO Review (ReviewId, ReviewScore, ReviewContent, ReviewResponse, CustomerId, RestaurantId) 
 VALUES 
@@ -108,7 +129,7 @@ VALUES
 ('Salads'), ('Seafood'), ('Pastry'), ('Burritos'), ('American'), ('European'),
 ('Fish and Chips'), ('Ice Cream'), ('Coffee and Tea'), ('Middle Eastern'),
 ('Halal'), ('Japanese'), ('Turkish'), ('Pub'), ('Spanish'), ('Hawaiian'),
-('South American'), ('Greek'), ('Mediterranean'), ('Falafel');
+('South American'), ('Greek'), ('Mediterranean'), ('Falafel'), ('Variety');
 
 INSERT INTO CategoryRestaurant (CategoryId, RestaurantId)
 VALUES

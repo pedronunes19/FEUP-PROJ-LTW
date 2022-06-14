@@ -244,8 +244,10 @@
 <?php } ?>
 
 <?php function drawMenuForm($db, $session, $object_id) {
-    if ($object_id != null) { $menu = Menu::getMenu($db, $object_id); $rid = $_POST['restaurant-id']; $menu_categories = Category::getMenuCategories($db, $object_id); 
-    $menu_dishes = $menu->getMenuDishes($db); $dishes = Dish::getRestaurantDishes($db, intval($rid)); } ?> 
+    if ($object_id != null) { $menu = Menu::getMenu($db, $object_id); $menu_categories = Category::getMenuCategories($db, $object_id); 
+    $menu_dishes = $menu->getMenuDishes($db);} 
+    $rid = $_POST['restaurant-id'];
+    $dishes = Dish::getRestaurantDishes($db, intval($rid)); ?> 
     <?php $categories = Category::getCategories($db); ?>
     <div class="card modify-card">
         <h4 class="section-title">Menu</h4>

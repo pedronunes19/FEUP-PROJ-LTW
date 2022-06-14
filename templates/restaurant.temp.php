@@ -124,7 +124,11 @@
     <?php foreach ($dishes as $dish) { 
       $dish_categories = Category::getDishCategories($db, $dish->id)?>
     <a id = "dish-image-blocks">
-      <img src="../images/dishes/<?=$dish->id?>.png" class = "center">
+      <?php if (file_exists("../images/dishes/$dish->id.png")) { ?>
+        <img src="../images/dishes/<?=$dish->id?>.png" class = "center">
+        <?php } else { ?>
+        <img src="../images/default.png" class="center">
+      <?php } ?>
       <div class="middle-text">
         <div class="label"><?=$dish->name?> - <?=$dish->price?>€</div>
         <?php foreach ($dish_categories as $category) { ?>
@@ -232,7 +236,11 @@
 <?php function drawMenu(PDO $db, Menu $menu, Session $session, int $rid) { 
   $menu_dishes = $menu->getMenuDishes($db) ?>
     <a id = "menu-image-blocks">
-      <img src="../images/menus/<?=$menu->id?>.png" class = "center">
+      <?php if (file_exists("../images/menus/$menu->id.png")) { ?>
+        <img src="../images/menus/<?=$menu->id?>.png" class = "center">
+        <?php } else { ?>
+        <img src="../images/default.png" class="center">
+      <?php } ?>
       <div class="middle-text">
         <div class="label"><?=$menu->name?> - <?=$menu->price?>€</div>
         <?php foreach($menu_dishes as $dish) {?>
