@@ -21,4 +21,10 @@
 
 ## Credentials
 
-joaogenerico@gmail.com / passwordgenerica (login as customer or owner, there are two accounts with the same credentials)
+joaogenerico@gmail.com / passwordgenerica (login as customer or owner, there are two accounts with the same credentials)  
+
+## Contributors
+
+- [Pedro Silva](https://github.com/pedrosilva17)  
+- [Pedro Nunes](https://github.com/pedronunes19)
+
