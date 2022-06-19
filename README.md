@@ -1,4 +1,4 @@
-# ltw-t09-g06  
+# FEUP-PROJ-LTW
 
 ## Features
 
